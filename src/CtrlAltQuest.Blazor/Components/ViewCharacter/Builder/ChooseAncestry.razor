@@ -1,0 +1,137 @@
+@using System.Collections.Immutable
+@using CtrlAltQuest.Pathfinder2e.Ancestry
+@inject ILogger<BuilderIndex> _logger;
+@* @page "/character/builder/ancestry" *@
+
+<MudText class="text-center pa-6 full-width" Typo="Typo.h3">Choose an Ancestry</MudText>
+<MudGrid>
+    @foreach (var keyPair in AllAncestries)
+    {
+        var v = keyPair;
+        <MudItem xs="12" sm="3" class="d-inline-flex">
+            <MudButton Color="Color.Primary" Variant="Variant.Filled" OnClick="@(_ => OnClickTriggered(v))">@v.Name</MudButton>
+            <MudTooltip style="width:240px" Class="tooltipBS" ShowOnClick="true" ShowOnHover="true" Text="@v.ShortDescription">
+                <MudIconButton Color="Color.Secondary" Icon="@Icons.Material.Outlined.Info"></MudIconButton>
+            </MudTooltip>
+        </MudItem>
+    }
+</MudGrid>
+
+<MudDialog VisibleChanged="VisibilityChanged" Options="_dialogOptions" Visible="_showDialog">
+    <TitleContent>
+        <MudText Typo="Typo.h3">@_chosenAncestry!.Name</MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudTabs Rounded="true" Color="Color.Primary" PanelClass="pa-6">
+            <MudTabPanel Text="Summary">
+                <div class="ma-6">
+                    <MudText Typo="Typo.h6">Known For</MudText>
+                    <MudText Typo="Typo.body1">@_chosenAncestry!.KnownFor</MudText>
+                </div>
+                <div class="ma-6">
+                    <MudText Typo="Typo.h6">Good Class Pairs</MudText>
+                    <MudText Typo="Typo.body1">@_chosenAncestry!.PairWellWith</MudText>
+                </div>
+                <div class="ma-6">
+                    <MudText Typo="Typo.h6">KeyAttributes</MudText>
+                    <MudText Typo="Typo.body1">@_chosenAncestry!.KeyAttributes</MudText>
+                </div>
+                <MudLink Href="@_chosenAncestry!.InfoLink" Target="_blank">More Information</MudLink>
+            </MudTabPanel>
+            <MudTabPanel Text="Details">
+                <div class="ma-6">
+                    <MudText Typo="Typo.body1">@_chosenAncestry!.Description1</MudText>
+                    <MudText Typo="Typo.body1" class="mt-6">@_chosenAncestry!.Description2</MudText>
+                </div>
+                <div class="ma-6">
+                    <MudText Typo="Typo.h6">You Might...</MudText>
+                    <ul class="list-circle ma-6">
+                        @foreach(var youMight in _chosenAncestry!.YouMight)
+                        {
+                            <li><MudText Typo="Typo.body1">@youMight</MudText></li>
+                        }
+                    </ul>
+                </div>
+                <div class="ma-6">
+                    <MudText Typo="Typo.h6">Others Probably...</MudText>
+                    <ul class="list-circle ma-6">
+                        @foreach(var othersProbably in _chosenAncestry!.OthersProbably)
+                        {
+                            <li><MudText Typo="Typo.body1">@othersProbably</MudText></li>
+                        }
+                    </ul>
+                </div>
+                <MudLink Href="@_chosenAncestry!.InfoLink" Target="_blank">More Information</MudLink>
+            </MudTabPanel>
+            <MudTabPanel Text="Mechanics">
+                <MudGrid>
+                    <MudItem Class="ma-2">
+                        <MudText Typo="Typo.h6">Hit Points</MudText>
+                        <MudText Typo="Typo.body1">@_chosenAncestry!.BaseHitPoints</MudText>
+                    </MudItem>
+                    <MudItem Class="ma-2">
+                        <MudText Typo="Typo.h6">Size</MudText>
+                        <MudText Typo="Typo.body1">@_chosenAncestry!.Size.ToString()</MudText>
+                    </MudItem>
+                    <MudItem Class="ma-2">
+                        <MudText Typo="Typo.h6">Speed</MudText>
+                        <MudText Typo="Typo.body1">@_chosenAncestry!.BaseSpeed</MudText>
+                    </MudItem>
+                    <MudItem Class="ma-2">
+                        <MudText Typo="Typo.h6">Attribute Boosts</MudText>
+                        <MudText Typo="Typo.body1">@string.Join(", ", _chosenAncestry!.AttributeBoosts)</MudText>
+                    </MudItem>
+                    <MudItem Class="ma-2">
+                        <MudText Typo="Typo.h6">Languages</MudText>
+                        <MudText Typo="Typo.body1">@(string.Join(", ", _chosenAncestry!.BaseLanguages) + ", Additional languages equal to your Intelligence modifier if positive.")</MudText>
+                    </MudItem>
+                    
+                        @foreach (var a in _chosenAncestry!.Abilities)
+                        {
+                            <MudItem Class="ma-2">
+                            <MudText Typo="Typo.h6">@a.Name</MudText>
+                            <MudText Typo="Typo.body1">@a.Description</MudText>
+
+                            </MudItem>
+                        }
+                </MudGrid>
+            </MudTabPanel>
+        </MudTabs>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Secondary" Variant="Variant.Text" OnClick="CloseDialog">Close</MudButton>
+        <MudButton Color="Color.Primary" Variant="Variant.Filled" OnClick="SubmitChoice">Select</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    public List<IAncestry> AllAncestries => AncestryReferences.CommonAncestries;
+    [Parameter] public EventCallback<string> AncestryChanged { get; set; }
+    private bool _showDialog = true;
+    private IAncestry? _chosenAncestry = new Dwarf();
+    private readonly DialogOptions _dialogOptions = new(){ CloseButton = true, CloseOnEscapeKey = true, BackdropClick = true};
+    
+    private void OnClickTriggered(IAncestry chosenAncestry)
+    {
+        _chosenAncestry = chosenAncestry;
+        _showDialog = true;
+    }
+
+    private void CloseDialog()
+    {
+        _showDialog = false;
+        _chosenAncestry = null;
+    }
+
+    private async Task SubmitChoice()
+    {
+        _showDialog = false;
+        await AncestryChanged.InvokeAsync(_chosenAncestry!.Name);
+        // do other things like show a spinner, disable buttons, and submit to backend
+    }
+
+    private void VisibilityChanged(bool input)
+    {
+        CloseDialog();
+    }
+}

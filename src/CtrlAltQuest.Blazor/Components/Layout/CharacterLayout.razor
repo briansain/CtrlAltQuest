@@ -1,0 +1,35 @@
+@page "/character"
+@inherits MainLayout
+@rendermode InteractiveServer
+<div style="overflow:hidden; position:relative;">
+<MudDrawerContainer Class="mud-height-full">
+    <MudDrawer style="position:fixed" @bind-Open="@_open" Anchor="Anchor.Right" ClipMode="DrawerClipMode.Always" Overlay="false" Variant="@DrawerVariant.Persistent">
+        <MudDrawerHeader>
+            <MudText Typo="Typo.h6">More Info:</MudText>
+        </MudDrawerHeader>
+        <MudNavMenu>
+            This is where more info will be placed. Could do a dynamic component as the body: https://learn.microsoft.com/en-us/aspnet/core/blazor/components/dynamiccomponent?view=aspnetcore-8.0
+            For cross state, could have one of these 3 options: https://chrissainty.com/3-ways-to-communicate-between-components-in-blazor/ 
+        </MudNavMenu>
+    </MudDrawer>
+<MudTabs Elevation="3" Rounded="true">
+    <MudTabPanel Text="Character Sheet">
+        <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="@ToggleDrawer">Persistent drawer</MudButton>
+        <CharacterSheetIndex />
+    </MudTabPanel>
+    <MudTabPanel Text="Builder">
+        <BuilderIndex />
+    </MudTabPanel>
+</MudTabs>
+
+</MudDrawerContainer>
+
+</div>
+@code
+{
+    private bool _open = false;
+    private void ToggleDrawer()
+    {
+        _open = !_open;
+    }
+}

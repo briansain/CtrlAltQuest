@@ -1,0 +1,1 @@
+1. Character is controlled and belongs to the community

@@ -1,0 +1,58 @@
+﻿<MudPaper Elevation="3" class="ma-6 pa-6">
+    <MudGrid Justify="Justify.Center">
+        <MudItem xs="8" sm="4">
+            <MudText Typo="Typo.overline">Name</MudText>
+            <MudText Typo="Typo.h5">Bonesaw</MudText>
+        </MudItem>
+        <MudItem xs="4" sm="4">
+            <MudText Typo="Typo.overline">Level</MudText>
+            <MudText Typo="Typo.h5">1</MudText>
+        </MudItem>
+        <MudItem xs="12" sm="4">
+            <MudText Typo="Typo.overline">HP</MudText>
+            <MudText Typo="Typo.h5" class="heart">20</MudText>
+        </MudItem>
+        
+
+        <AttributeStats />
+
+        <MudItem xs="6" sm="4" class="text-center">
+            <MudText Typo="Typo.overline">Ancestry</MudText>
+            <MudText Typo="Typo.h5">Human</MudText>
+        </MudItem>
+        <MudItem xs="6" sm="4" class="text-center">
+            <MudText Typo="Typo.overline">Background</MudText>
+            <MudText Typo="Typo.h5">Butcher</MudText>
+        </MudItem>
+        <MudItem xs="12" sm="4" class="text-center">
+            <MudText Typo="Typo.overline">Class</MudText>
+            <MudText Typo="Typo.h5">Fighter</MudText>
+        </MudItem>
+        
+        <DefenseStats />
+        <SkillsStats />
+
+        <MudItem>
+            Languages
+        </MudItem>
+        <MudItem>Perception</MudItem>
+        <MudItem>Speed</MudItem>
+        <MudItem>Melee Strikes</MudItem>
+        <MudItem>Ranged Strikes</MudItem>
+        <MudItem>Class DC</MudItem>
+    </MudGrid>
+</MudPaper>
+
+
+@inject ILogger<CharacterSheetIndex> _logger
+@code {
+    protected override void OnInitialized()
+    {
+        _logger.LogDebug("OnInitialized");
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        _logger.LogDebug($"OnAfterRender; firstRender: {firstRender}");
+    }
+}

@@ -1,0 +1,38 @@
+# Versions
+
+- [X] Skeleton site
+- [X] Homepage
+- [ ] Character page
+  - [ ] Stats
+    - [ ] Manage buttons
+    - [ ] Long Rest
+    - [ ] Start different "type" voting (battle/skill/flat check)
+  - [ ] History
+  - [ ] Voting Booth/Section for voting
+- [ ] User Accounts
+  - [ ] anyone can read a character
+  - [ ] only logged in can vote
+  - [ ] only narrators can manage
+- [ ] Character Sheet
+  - [ ] Defenses
+  - [ ] Hit Points
+  - [X] Skills
+  - [ ] Languages
+  - [ ] Perception
+  - [ ] Speed
+  - [ ] Strikes
+  - [ ] Abilities
+  - [ ] Spells
+- [ ] Character Builder
+  - [ ] Ancestry (Common)
+  - [ ] Background (Common)
+  - [ ] Class (Common)
+  - [ ] Misc.
+- [ ] Input raw data
+- [ ] Metrics
+- [ ] Beta test
+- [ ] Super admin
+  - [ ] ???
+- [ ] Projections
+  - [ ] DistPubSub for Actor
+  - [ ] Subscription for ProjectorManager

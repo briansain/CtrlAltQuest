@@ -1,0 +1,65 @@
+.flex-basis-100 {
+    flex-basis: 100%;
+}
+.flex-25 {
+    flex: 0 0 25%;
+}
+.text-center {
+    text-align: center;
+}
+.normal-case {
+    text-transform: none;
+}
+.full-height {
+    height: 100vh;
+}
+.half-screen {
+    width: 50%;
+}
+.full-width {
+    width: 100%;
+}
+
+.background-filled-primary {
+    background-color: var(--mud-palette-appbar-background);
+    border-radius: 6px;
+}
+
+.list-circle {
+    list-style: circle;
+}
+
+.stat-block {
+    background-color: var(--mud-palette-gray-darker);
+    width: 50px;
+    height: 50px;
+    align-content: center;
+    text-align: center;
+    border-radius: 10px
+}
+
+/*https://css-shape.com/heart/*/
+.heart {
+    height: 70px; /* adjust to control the size */
+    aspect-ratio: 1;
+    --_m: radial-gradient(#000 69%,#0000 70%) 84.5%/50%;
+    -webkit-mask-box-image: var(--_m);
+                mask-border: var(--_m);
+    clip-path: polygon(-41% 0,50% 91%, 141% 0);
+    background: #cc333f;
+    align-content: center;
+    text-align: center;
+    padding-bottom: 8px;
+}
+
+/*https://css-generators.com/custom-corners/*/
+.scooped-box {
+
+    background: #cc333f;
+    --mask: radial-gradient(5px at 5px 5px,#0000 98%,#000) -5px -5px;
+    -webkit-mask: var(--mask);
+    mask: var(--mask);
+    align-content:center;
+    text-align: center;
+    Width: 50px;
+}
