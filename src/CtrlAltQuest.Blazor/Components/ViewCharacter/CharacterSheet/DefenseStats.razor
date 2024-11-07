@@ -1,57 +1,59 @@
-<MudItem xs="6">
-    <MudButton StartIcon="@(_defenseExpanded ? Icons.Material.Filled.KeyboardArrowDown : @Icons.Material.Filled.KeyboardArrowRight)" OnClick="@(_ => _defenseExpanded = !_defenseExpanded)">
-        Defense
-    </MudButton>
-    <MudCollapse Expanded="_defenseExpanded">
+<MudItem xs="12" sm="6">
+    <MudButton Variant="Variant.Text" 
+        StartIcon="@(_savingThrowsExpanded ? Icons.Material.Filled.KeyboardArrowDown : @Icons.Material.Filled.KeyboardArrowRight)"
+        OnClick="@(_ => _savingThrowsExpanded = !_savingThrowsExpanded)">Saving Throws</MudButton>
+    <MudCollapse Expanded="_savingThrowsExpanded">
         <MudGrid>
             <MudItem xs="6">
-                <MudText Typo="Typo.overline">Armor Class</MudText>
-                <MudText Typo="Typo.h5">13</MudText>
+                <MudText Typo="Typo.overline">Fortitude</MudText>
+                <MudText Typo="Typo.h5">T</MudText>
                 <!-- tooltip shows calculation -->
             </MudItem>
             <MudItem xs="6">
-                <MudText Typo="Typo.overline">Shield</MudText>
-                <MudText Typo="Typo.h5">+2</MudText>
-            </MudItem>
-            <MudItem xs="4">
-                <MudText Typo="Typo.overline">Fortitude</MudText>
-                <MudText Typo="Typo.h5">Trained</MudText>
-                <!-- tooltip shows calculation -->
-            </MudItem>
-            <MudItem xs="4">
                 <MudText Typo="Typo.overline">Reflex</MudText>
-                <MudText Typo="Typo.h5">Trained</MudText>
+                <MudText Typo="Typo.h5">T</MudText>
                 <!-- tooltip shows calculation -->
             </MudItem>
-            <MudItem xs="4">
+            <MudItem xs="6">
                 <MudText Typo="Typo.overline">Will</MudText>
-                <MudText Typo="Typo.h5">Trained</MudText>
+                <MudText Typo="Typo.h5">T</MudText>
                 <!-- tooltip shows calculation -->
-            </MudItem>
-            <MudItem xs="3">
-                <MudText Typo="Typo.overline">Unarmored Proficiency</MudText>
-                <MudText Typo="Typo.h5">Trained</MudText>
-            </MudItem>
-            <MudItem xs="3">
-                <MudText Typo="Typo.overline">Light Proficiency</MudText>
-                <MudText Typo="Typo.h5">Trained</MudText>
-            </MudItem>
-            <MudItem xs="3">
-                <MudText Typo="Typo.overline">Medium Proficiency</MudText>
-                <MudText Typo="Typo.h5">Trained</MudText>
-            </MudItem>
-            <MudItem xs="3">
-                <MudText Typo="Typo.overline">Heavy Proficiency</MudText>
-                <MudText Typo="Typo.h5">Trained</MudText>
-            </MudItem>
-            <MudItem xs="12">
-                <MudText Typo="Typo.overline">Defenses Notes</MudText>
-                <MudText Typo="Typo.h5">n/a</MudText>
             </MudItem>
         </MudGrid>
     </MudCollapse>
 </MudItem>
+<MudItem xs="12" sm="6">
+    <MudButton Variant="Variant.Text" 
+        StartIcon="@(_skillsExpanded ? Icons.Material.Filled.KeyboardArrowDown : @Icons.Material.Filled.KeyboardArrowRight)"
+        OnClick="@(_ => _skillsExpanded = !_skillsExpanded)">Armor Proficiency</MudButton>
+    <MudCollapse Expanded="_skillsExpanded">
+        <MudGrid>
+            <MudItem xs="6">
+                <MudText Typo="Typo.overline">Unarmored</MudText>
+                <MudText Typo="Typo.h5">T</MudText>
+            </MudItem>
+            <MudItem xs="6">
+                <MudText Typo="Typo.overline">Light</MudText>
+                <MudText Typo="Typo.h5">T</MudText>
+            </MudItem>
+            <MudItem xs="6">
+                <MudText Typo="Typo.overline">Medium</MudText>
+                <MudText Typo="Typo.h5">T</MudText>
+            </MudItem>
+            <MudItem xs="6">
+                <MudText Typo="Typo.overline">Heavy</MudText>
+                <MudText Typo="Typo.h5">T</MudText>
+            </MudItem>
+        </MudGrid>
+    </MudCollapse>
+</MudItem>
+<MudItem xs="12">
+    <MudText Typo="Typo.overline">Defenses Notes</MudText>
+    <MudText Typo="Typo.h5">n/a</MudText>
+</MudItem>
 
 @code {
-    private bool _defenseExpanded = false;
+    private bool _skillsExpanded = false;
+
+    private bool _savingThrowsExpanded = false;
 }

@@ -1,54 +1,96 @@
-﻿<MudPaper Elevation="3" class="ma-6 pa-6">
-    <MudGrid Justify="Justify.Center">
-        <MudItem xs="8" sm="4">
-            <MudText Typo="Typo.overline">Name</MudText>
-            <MudText Typo="Typo.h5">Bonesaw</MudText>
-        </MudItem>
-        <MudItem xs="4" sm="4">
-            <MudText Typo="Typo.overline">Level</MudText>
-            <MudText Typo="Typo.h5">1</MudText>
-        </MudItem>
-        <MudItem xs="12" sm="4">
-            <MudText Typo="Typo.overline">HP</MudText>
-            <MudText Typo="Typo.h5" class="heart">20</MudText>
-        </MudItem>
+﻿@using CtrlAltQuest.Pathfinder2e.Actors
+@using CtrlAltQuest.Pathfinder2e.Ancestry
+<MudPaper Elevation="3" class="ma-6 pa-6">
+    <MudContainer MaxWidth="MaxWidth.Medium" Gutters="false">
+        <MudGrid Justify="Justify.Center">
+            <MudItem xs="8" sm="3">
+                <MudText Typo="Typo.overline">Name</MudText>
+                <MudText Typo="Typo.h5">@_state.Name</MudText>
+            </MudItem>
+            <MudItem xs="4" sm="1">
+                <MudText Typo="Typo.overline">Level</MudText>
+                <MudText Typo="Typo.h5">@_state.Level</MudText>
+            </MudItem>
+            <MudItem xs="12" sm="2">
+                <MudText Typo="Typo.overline">HP</MudText>
+                <MudText Typo="Typo.h5" class="heart">20</MudText>
+            </MudItem>
+            <MudItem xs="6" sm="2">
+                <MudText Typo="Typo.overline">Ancestry</MudText>
+                <MudText Typo="Typo.h5">@_state.AncestryName</MudText>
+            </MudItem>
+            <MudItem xs="6" sm="2">
+                <MudText Typo="Typo.overline">Background</MudText>
+                <MudText Typo="Typo.h5">@_state.BackgroundName</MudText>
+            </MudItem>
+            <MudItem xs="12" sm="2">
+                <MudText Typo="Typo.overline">Class</MudText>
+                <MudText Typo="Typo.h5">@_state.ClassName</MudText>
+            </MudItem>
+
+
+            <MudItem xs="8" sm="2">
+                <MudText Typo="Typo.overline">Armor Class</MudText>
+                <MudText Typo="Typo.h5">18</MudText>
+            </MudItem>
+            <MudItem xs="4" sm="2">
+                <MudText Typo="Typo.overline">Shield</MudText>
+                <MudText Typo="Typo.h5">+2</MudText>
+            </MudItem>
+            <MudItem xs="12" sm="2">
+                <MudText Typo="Typo.overline">Size</MudText>
+                <MudText Typo="Typo.h5">Medium</MudText>
+            </MudItem>
+            <MudItem xs="6" sm="2">
+                <MudText Typo="Typo.overline">Speed</MudText>
+                <MudText Typo="Typo.h5">25</MudText>
+            </MudItem>
+            <MudItem xs="6" sm="2">
+                <MudText Typo="Typo.overline">Perception</MudText>
+                <MudText Typo="Typo.h5">6</MudText>
+            </MudItem>
+            <MudItem xs="6" sm="2">
+                <MudText Typo="Typo.overline">Class DC</MudText>
+                <MudText Typo="Typo.h5">17</MudText>
+            </MudItem>
+            <MudItem xs="12" sm="6">
+                <MudGrid>
+                    <AttributeStats />
+                    <DefenseStats />
+                </MudGrid>
+            </MudItem>
+            <MudItem xs="12" sm="6">
+                <MudGrid>
+                    <SkillsStats />
+                </MudGrid>
+            </MudItem>
+
+            <MudItem xs="12" sm="6">
+                <MudGrid>
+                </MudGrid>
+            </MudItem>
         
 
-        <AttributeStats />
-
-        <MudItem xs="6" sm="4" class="text-center">
-            <MudText Typo="Typo.overline">Ancestry</MudText>
-            <MudText Typo="Typo.h5">Human</MudText>
-        </MudItem>
-        <MudItem xs="6" sm="4" class="text-center">
-            <MudText Typo="Typo.overline">Background</MudText>
-            <MudText Typo="Typo.h5">Butcher</MudText>
-        </MudItem>
-        <MudItem xs="12" sm="4" class="text-center">
-            <MudText Typo="Typo.overline">Class</MudText>
-            <MudText Typo="Typo.h5">Fighter</MudText>
-        </MudItem>
-        
-        <DefenseStats />
-        <SkillsStats />
-
-        <MudItem>
-            Languages
-        </MudItem>
-        <MudItem>Perception</MudItem>
-        <MudItem>Speed</MudItem>
-        <MudItem>Melee Strikes</MudItem>
-        <MudItem>Ranged Strikes</MudItem>
-        <MudItem>Class DC</MudItem>
-    </MudGrid>
+            <MudItem>
+                Languages
+            </MudItem>
+            <MudItem>Perception</MudItem>
+            <MudItem>Speed</MudItem>
+            <MudItem>Melee Strikes</MudItem>
+            <MudItem>Ranged Strikes</MudItem>
+            <MudItem>Class DC</MudItem>
+        </MudGrid>
+    </MudContainer>
 </MudPaper>
 
 
 @inject ILogger<CharacterSheetIndex> _logger
 @code {
+    public CharacterState _state = new CharacterState("character-id");
     protected override void OnInitialized()
     {
         _logger.LogDebug("OnInitialized");
+        
     }
 
     protected override void OnAfterRender(bool firstRender)

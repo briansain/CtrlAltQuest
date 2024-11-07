@@ -54,12 +54,11 @@
 
 /*https://css-generators.com/custom-corners/*/
 .scooped-box {
-
-    background: #cc333f;
+    background: var(--mud-palette-primary-lighten);
     --mask: radial-gradient(5px at 5px 5px,#0000 98%,#000) -5px -5px;
     -webkit-mask: var(--mask);
     mask: var(--mask);
-    align-content:center;
+    align-content: center;
     text-align: center;
     Width: 50px;
 }

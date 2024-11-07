@@ -1,24 +1,33 @@
+@inherits CharacterSheetIndex;
+
 <MudItem xs="6" sm="4" class="d-flex flex-column align-center">
     <MudText Typo="Typo.overline">Strength</MudText>
-    <MudText Typo="Typo.h5" class="stat-block">+4</MudText>
+    <MudText Typo="Typo.h5" class="stat-block">@GetModifier(_state.Strength)</MudText>
 </MudItem>
 <MudItem xs="6" sm="4" class="d-flex flex-column align-center">
     <MudText Typo="Typo.overline">Dexterity</MudText>
-    <MudText Typo="Typo.h5" class="stat-block">+2</MudText>
+    <MudText Typo="Typo.h5" class="stat-block">@GetModifier(_state.Dexterity)</MudText>
 </MudItem>
 <MudItem xs="6" sm="4" class="d-flex flex-column align-center">
     <MudText Typo="Typo.overline">Constitution</MudText>
-    <MudText Typo="Typo.h5" class="stat-block">+3</MudText>
+    <MudText Typo="Typo.h5" class="stat-block">@GetModifier(_state.Constitution)</MudText>
 </MudItem>
 <MudItem xs="6" sm="4" class="d-flex flex-column align-center">
     <MudText Typo="Typo.overline">Intelligence</MudText>
-    <MudText Typo="Typo.h5" class="stat-block">+0</MudText>
+    <MudText Typo="Typo.h5" class="stat-block">@GetModifier(_state.Intelligence)</MudText>
 </MudItem>
 <MudItem xs="6" sm="4" class="d-flex flex-column align-center">
     <MudText Typo="Typo.overline">Wisdom</MudText>
-    <MudText Typo="Typo.h5" class="stat-block">+1</MudText>
+    <MudText Typo="Typo.h5" class="stat-block">@GetModifier(_state.Wisdom)</MudText>
 </MudItem>
 <MudItem xs="6" sm="4" class="d-flex flex-column align-center">
     <MudText Typo="Typo.overline">Charisma</MudText>
-    <MudText Typo="Typo.h5" class="stat-block">+2</MudText>
+    <MudText Typo="Typo.h5" class="stat-block">@GetModifier(_state.Charisma)</MudText>
 </MudItem>
+
+@code {
+    private string GetModifier(int attributeModifier)
+    {
+        return $"{(_state.Strength >= 0 ? "+" : "-")} {attributeModifier}";
+    }
+}

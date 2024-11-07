@@ -1,87 +1,72 @@
-<MudItem xs="6">
-    <MudButton 
-    StartIcon="@(_skillsExpanded ? Icons.Material.Filled.KeyboardArrowDown : @Icons.Material.Filled.KeyboardArrowRight)"
-    OnClick="@(_ => _skillsExpanded = !_skillsExpanded)">
-        Skills
-    </MudButton>
-    <MudCollapse Expanded="_skillsExpanded">
-        <MudGrid>
-            <MudItem xs="6" md="2">
-                <MudText Typo="Typo.overline">Acrobatics</MudText>
-                <MudText Typo="Typo.h5" class="scooped-box">3</MudText>
-            </MudItem>
-            <MudItem xs="6" md="2">
-                <MudText Typo="Typo.overline">Arcana</MudText>
-                <MudText Typo="Typo.h5" class="scooped-box">4</MudText>
-            </MudItem>
-            <MudItem xs="6" md="2">
-                <MudText Typo="Typo.overline">Athletics</MudText>
-                <MudText Typo="Typo.h5" class="scooped-box">4</MudText>
-            </MudItem>
-            <MudItem xs="6" md="2">
-                <MudText Typo="Typo.overline">Crafting</MudText>
-                <MudText Typo="Typo.h5" class="scooped-box">3</MudText>
-            </MudItem>
-            <MudItem xs="6" md="2">
-                <MudText Typo="Typo.overline">Deception</MudText>
-                <MudText Typo="Typo.h5" class="scooped-box">4</MudText>
-            </MudItem>
-            <MudItem xs="6" md="2">
-                <MudText Typo="Typo.overline">Diplomacy</MudText>
-                <MudText Typo="Typo.h5" class="scooped-box">4</MudText>
-            </MudItem>
-            <MudItem xs="6" md="2">
-                <MudText Typo="Typo.overline">Intimidation</MudText>
-                <MudText Typo="Typo.h5" class="scooped-box">3</MudText>
-            </MudItem>
-            <MudItem xs="6" md="2">
-                <MudText Typo="Typo.overline">____ Lore</MudText>
-                <MudText Typo="Typo.h5" class="scooped-box">4</MudText>
-            </MudItem>
-            <MudItem xs="6" md="2">
-                <MudText Typo="Typo.overline">____ Lore</MudText>
-                <MudText Typo="Typo.h5" class="scooped-box">4</MudText>
-            </MudItem>
-            <MudItem xs="6" md="2">
-                <MudText Typo="Typo.overline">Medicine</MudText>
-                <MudText Typo="Typo.h5" class="scooped-box">3</MudText>
-            </MudItem>
-            <MudItem xs="6" md="2">
-                <MudText Typo="Typo.overline">Nature</MudText>
-                <MudText Typo="Typo.h5" class="scooped-box">4</MudText>
-            </MudItem>
-            <MudItem xs="6" md="2">
-                <MudText Typo="Typo.overline">Occultism</MudText>
-                <MudText Typo="Typo.h5" class="scooped-box">4</MudText>
-            </MudItem>
-            <MudItem xs="6" md="2">
-                <MudText Typo="Typo.overline">Performance</MudText>
-                <MudText Typo="Typo.h5" class="scooped-box">3</MudText>
-            </MudItem>
-            <MudItem xs="6" md="2">
-                <MudText Typo="Typo.overline">Religion</MudText>
-                <MudText Typo="Typo.h5" class="scooped-box">4</MudText>
-            </MudItem>
-            <MudItem xs="6" md="2">
-                <MudText Typo="Typo.overline">Society</MudText>
-                <MudText Typo="Typo.h5" class="scooped-box">4</MudText>
-            </MudItem>
-            <MudItem xs="6" md="2">
-                <MudText Typo="Typo.overline">Stealth</MudText>
-                <MudText Typo="Typo.h5" class="scooped-box">3</MudText>
-            </MudItem>
-            <MudItem xs="6" md="2">
-                <MudText Typo="Typo.overline">Survival</MudText>
-                <MudText Typo="Typo.h5" class="scooped-box">4</MudText>
-            </MudItem>
-            <MudItem xs="6" md="2">
-                <MudText Typo="Typo.overline">Thievery</MudText>
-                <MudText Typo="Typo.h5" class="scooped-box">4</MudText>
-            </MudItem>
-        </MudGrid>
-    </MudCollapse>
+<MudItem xs="6" md="3">
+    <MudText Typo="Typo.overline">Acrobatics</MudText>
+    <MudText Typo="Typo.h5" class="scooped-box">3</MudText>
 </MudItem>
-
-@code {
-    public bool _skillsExpanded = false;
-}
+<MudItem xs="6" md="3">
+    <MudText Typo="Typo.overline">Arcana</MudText>
+    <MudText Typo="Typo.h5" class="scooped-box">4</MudText>
+</MudItem>
+<MudItem xs="6" md="3">
+    <MudText Typo="Typo.overline">Athletics</MudText>
+    <MudText Typo="Typo.h5" class="scooped-box">4</MudText>
+</MudItem>
+<MudItem xs="6" md="3">
+    <MudText Typo="Typo.overline">Crafting</MudText>
+    <MudText Typo="Typo.h5" class="scooped-box">3</MudText>
+</MudItem>
+<MudItem xs="6" md="3">
+    <MudText Typo="Typo.overline">Deception</MudText>
+    <MudText Typo="Typo.h5" class="scooped-box">4</MudText>
+</MudItem>
+<MudItem xs="6" md="3">
+    <MudText Typo="Typo.overline">Diplomacy</MudText>
+    <MudText Typo="Typo.h5" class="scooped-box">4</MudText>
+</MudItem>
+<MudItem xs="6" md="3">
+    <MudText Typo="Typo.overline">Intimidation</MudText>
+    <MudText Typo="Typo.h5" class="scooped-box">3</MudText>
+</MudItem>
+<MudItem xs="6" md="3"> @* Need to adjust overflow *@
+    <MudText Typo="Typo.overline">Lore</MudText>
+    <MudText Typo="Typo.h5" class="scooped-box">4</MudText>
+</MudItem>
+<MudItem xs="6" md="3">
+    <MudText Typo="Typo.overline">Lore</MudText>
+    <MudText Typo="Typo.h5" class="scooped-box">4</MudText>
+</MudItem>
+<MudItem xs="6" md="3">
+    <MudText Typo="Typo.overline">Medicine</MudText>
+    <MudText Typo="Typo.h5" class="scooped-box">3</MudText>
+</MudItem>
+<MudItem xs="6" md="3">
+    <MudText Typo="Typo.overline">Nature</MudText>
+    <MudText Typo="Typo.h5" class="scooped-box">4</MudText>
+</MudItem>
+<MudItem xs="6" md="3">
+    <MudText Typo="Typo.overline">Occultism</MudText>
+    <MudText Typo="Typo.h5" class="scooped-box">4</MudText>
+</MudItem>
+<MudItem xs="6" md="3">
+    <MudText Typo="Typo.overline">Performance</MudText>
+    <MudText Typo="Typo.h5" class="scooped-box">3</MudText>
+</MudItem>
+<MudItem xs="6" md="3">
+    <MudText Typo="Typo.overline">Religion</MudText>
+    <MudText Typo="Typo.h5" class="scooped-box">4</MudText>
+</MudItem>
+<MudItem xs="6" md="3">
+    <MudText Typo="Typo.overline">Society</MudText>
+    <MudText Typo="Typo.h5" class="scooped-box">4</MudText>
+</MudItem>
+<MudItem xs="6" md="3">
+    <MudText Typo="Typo.overline">Stealth</MudText>
+    <MudText Typo="Typo.h5" class="scooped-box">3</MudText>
+</MudItem>
+<MudItem xs="6" md="3">
+    <MudText Typo="Typo.overline">Survival</MudText>
+    <MudText Typo="Typo.h5" class="scooped-box">4</MudText>
+</MudItem>
+<MudItem xs="6" md="3">
+    <MudText Typo="Typo.overline">Thievery</MudText>
+    <MudText Typo="Typo.h5" class="scooped-box">4</MudText>
+</MudItem>
