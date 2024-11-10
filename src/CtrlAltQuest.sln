@@ -3,9 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34616.47
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CtrlAltQuest.Blazor", "CtrlAltQuest.Blazor\CtrlAltQuest.Blazor.csproj", "{1BE633B8-711B-4960-9C3D-62AC4BEA5451}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CtrlAltQuest.Blazor", "CtrlAltQuest.Blazor\CtrlAltQuest.Blazor.csproj", "{1BE633B8-711B-4960-9C3D-62AC4BEA5451}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CtrlAltQuest.Pathfinder2e", "CtrlAltQuest.Pathfinder2e\CtrlAltQuest.Pathfinder2e.csproj", "{1BEA7F7E-7FCD-41C0-8CA0-A37DB4ECE5B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CtrlAltQuest.Pathfinder2e", "CtrlAltQuest.Pathfinder2e\CtrlAltQuest.Pathfinder2e.csproj", "{1BEA7F7E-7FCD-41C0-8CA0-A37DB4ECE5B9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{89424A41-B04B-4EF4-B331-6B5D13F1C777}"
+	ProjectSection(SolutionItems) = preProject
+		ATTRIBUTION = ATTRIBUTION
+		..\communitPlayerRules.md = ..\communitPlayerRules.md
+		..\LICENSE = ..\LICENSE
+		..\tasks.md = ..\tasks.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

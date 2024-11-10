@@ -1,3 +1,6 @@
+body {
+    --mudcolors-red-default: #F44336;
+}
 .flex-basis-100 {
     flex-basis: 100%;
 }
@@ -38,27 +41,38 @@
     border-radius: 10px
 }
 
-/*https://css-shape.com/heart/*/
-.heart {
-    height: 70px; /* adjust to control the size */
-    aspect-ratio: 1;
-    --_m: radial-gradient(#000 69%,#0000 70%) 84.5%/50%;
-    -webkit-mask-box-image: var(--_m);
-                mask-border: var(--_m);
-    clip-path: polygon(-41% 0,50% 91%, 141% 0);
-    background: #cc333f;
-    align-content: center;
-    text-align: center;
-    padding-bottom: 8px;
+.svg-stat-heading {
+    display: block;
 }
 
-/*https://css-generators.com/custom-corners/*/
-.scooped-box {
-    background: var(--mud-palette-primary-lighten);
-    --mask: radial-gradient(5px at 5px 5px,#0000 98%,#000) -5px -5px;
-    -webkit-mask: var(--mask);
-    mask: var(--mask);
-    align-content: center;
-    text-align: center;
-    Width: 50px;
+.svg-stat {
+    width: 75px;
+    fill-opacity: 0;
+    stroke-opacity: 1;
+    stroke-width: 1.5%;
+}
+.svg-proficiency {
+    width: 25px;
+}
+
+.svg-proficiency path {
+    fill-opacity: 1;
+    stroke-opacity: 0;
+    fill: var(--mud-palette-primary);
+    ;
+}
+
+svg.svg-stat path {
+    stroke: var(--mud-palette-primary);
+}
+
+.svg-stat text {
+    fill-opacity: 1;
+    fill: var(--mud-palette-text-primary);
+    font-size: 10px;
+
+}
+
+svg.heart path{
+    stroke: var(--mudcolors-red-default);
 }

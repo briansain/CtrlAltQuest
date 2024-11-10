@@ -1,5 +1,8 @@
-﻿@using CtrlAltQuest.Pathfinder2e.Actors
+﻿@using CtrlAltQuest.Blazor.Components.SVGs
+@using CtrlAltQuest.Pathfinder2e.Actors
 @using CtrlAltQuest.Pathfinder2e.Ancestry
+
+
 <MudPaper Elevation="3" class="ma-6 pa-6">
     <MudContainer MaxWidth="MaxWidth.Medium" Gutters="false">
         <MudGrid Justify="Justify.Center">
@@ -11,9 +14,17 @@
                 <MudText Typo="Typo.overline">Level</MudText>
                 <MudText Typo="Typo.h5">@_state.Level</MudText>
             </MudItem>
-            <MudItem xs="12" sm="2">
-                <MudText Typo="Typo.overline">HP</MudText>
-                <MudText Typo="Typo.h5" class="heart">20</MudText>
+            <MudItem xs="6" sm="2">
+                <MudText class="svg-stat-heading" Typo="Typo.overline">HP</MudText>
+                <Heart_SVG Value="@_state.MaxHitPoints"/>
+            </MudItem>
+            <MudItem xs="6" sm="2">
+                <MudText Typo="Typo.overline" Class="svg-stat">Armor Class</MudText>
+                <Armor_SVG Value="@_state.ArmorClass" />
+            </MudItem>
+            <MudItem xs="6" sm="2">
+                <MudText Typo="Typo.overline" Class="svg-stat-heading">Shield</MudText>
+                <Shield_SVG Value="@_state.Shield" />
             </MudItem>
             <MudItem xs="6" sm="2">
                 <MudText Typo="Typo.overline">Ancestry</MudText>
@@ -27,27 +38,18 @@
                 <MudText Typo="Typo.overline">Class</MudText>
                 <MudText Typo="Typo.h5">@_state.ClassName</MudText>
             </MudItem>
-
-
-            <MudItem xs="8" sm="2">
-                <MudText Typo="Typo.overline">Armor Class</MudText>
-                <MudText Typo="Typo.h5">18</MudText>
-            </MudItem>
-            <MudItem xs="4" sm="2">
-                <MudText Typo="Typo.overline">Shield</MudText>
-                <MudText Typo="Typo.h5">+2</MudText>
-            </MudItem>
+            
             <MudItem xs="12" sm="2">
                 <MudText Typo="Typo.overline">Size</MudText>
-                <MudText Typo="Typo.h5">Medium</MudText>
+                <MudText Typo="Typo.h5">@Enum.GetName(typeof(Pathfinder2e.Ancestry.Size), _state.Size)</MudText>
             </MudItem>
             <MudItem xs="6" sm="2">
                 <MudText Typo="Typo.overline">Speed</MudText>
-                <MudText Typo="Typo.h5">25</MudText>
+                <MudText Typo="Typo.h5">@_state.Speed</MudText>
             </MudItem>
             <MudItem xs="6" sm="2">
                 <MudText Typo="Typo.overline">Perception</MudText>
-                <MudText Typo="Typo.h5">6</MudText>
+                <MudText Typo="Typo.h5">@_state.Perception</MudText>
             </MudItem>
             <MudItem xs="6" sm="2">
                 <MudText Typo="Typo.overline">Class DC</MudText>
@@ -69,16 +71,6 @@
                 <MudGrid>
                 </MudGrid>
             </MudItem>
-        
-
-            <MudItem>
-                Languages
-            </MudItem>
-            <MudItem>Perception</MudItem>
-            <MudItem>Speed</MudItem>
-            <MudItem>Melee Strikes</MudItem>
-            <MudItem>Ranged Strikes</MudItem>
-            <MudItem>Class DC</MudItem>
         </MudGrid>
     </MudContainer>
 </MudPaper>

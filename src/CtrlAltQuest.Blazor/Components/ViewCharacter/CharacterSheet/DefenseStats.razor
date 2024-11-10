@@ -1,3 +1,5 @@
+@inherits CharacterSheetIndex
+
 <MudItem xs="12" sm="6">
     <MudButton Variant="Variant.Text" 
         StartIcon="@(_savingThrowsExpanded ? Icons.Material.Filled.KeyboardArrowDown : @Icons.Material.Filled.KeyboardArrowRight)"
@@ -24,25 +26,25 @@
 </MudItem>
 <MudItem xs="12" sm="6">
     <MudButton Variant="Variant.Text" 
-        StartIcon="@(_skillsExpanded ? Icons.Material.Filled.KeyboardArrowDown : @Icons.Material.Filled.KeyboardArrowRight)"
-        OnClick="@(_ => _skillsExpanded = !_skillsExpanded)">Armor Proficiency</MudButton>
-    <MudCollapse Expanded="_skillsExpanded">
+        StartIcon="@(_armorProficiency ? Icons.Material.Filled.KeyboardArrowDown : @Icons.Material.Filled.KeyboardArrowRight)"
+        OnClick="@(_ => _armorProficiency = !_armorProficiency)">Armor Proficiency</MudButton>
+    <MudCollapse Expanded="_armorProficiency">
         <MudGrid>
             <MudItem xs="6">
-                <MudText Typo="Typo.overline">Unarmored</MudText>
-                <MudText Typo="Typo.h5">T</MudText>
+                <MudText Typo="Typo.overline" Class="svg-stat-heading">Unarmored</MudText>
+                <Proficiency_SVG Value="_state.UnarmoredProficiency" />
             </MudItem>
             <MudItem xs="6">
-                <MudText Typo="Typo.overline">Light</MudText>
-                <MudText Typo="Typo.h5">T</MudText>
+                <MudText Typo="Typo.overline" Class="svg-stat-heading">Light</MudText>
+                <Proficiency_SVG Value="_state.LightArmorProficiency" />
             </MudItem>
             <MudItem xs="6">
-                <MudText Typo="Typo.overline">Medium</MudText>
-                <MudText Typo="Typo.h5">T</MudText>
+                <MudText Typo="Typo.overline" Class="svg-stat-heading">Medium</MudText>
+                <Proficiency_SVG Value="_state.MediumArmorProficiency" />
             </MudItem>
             <MudItem xs="6">
-                <MudText Typo="Typo.overline">Heavy</MudText>
-                <MudText Typo="Typo.h5">T</MudText>
+                <MudText Typo="Typo.overline" Class="svg-stat-heading">Heavy</MudText>
+                <Proficiency_SVG Value="_state.HeavyArmorProficiency" />
             </MudItem>
         </MudGrid>
     </MudCollapse>
@@ -51,9 +53,8 @@
     <MudText Typo="Typo.overline">Defenses Notes</MudText>
     <MudText Typo="Typo.h5">n/a</MudText>
 </MudItem>
-
 @code {
-    private bool _skillsExpanded = false;
+    private bool _armorProficiency = true;
 
-    private bool _savingThrowsExpanded = false;
+    private bool _savingThrowsExpanded = true;
 }
