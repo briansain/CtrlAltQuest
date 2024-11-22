@@ -7,11 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Akka" Version="1.5.30" />
-    <PackageReference Include="Akka.Cluster" Version="1.5.30" />
-    <PackageReference Include="Akka.Cluster.Hosting" Version="1.5.30.1" />
-    <PackageReference Include="Akka.Persistence" Version="1.5.30" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
+    <PackageReference Include="Akka" Version="1.5.31" />
+    <PackageReference Include="Akka.Cluster" Version="1.5.31" />
+    <PackageReference Include="Akka.Cluster.Hosting" Version="1.5.31.1" />
+    <PackageReference Include="Akka.Persistence" Version="1.5.31" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0" />
+    <PackageReference Include="NRedisStack" Version="0.13.0" />
+    <PackageReference Include="Redis.OM" Version="0.7.6" />
   </ItemGroup>
 
 </Project>

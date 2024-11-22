@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{89424A41
 		..\tasks.md = ..\tasks.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CtrlAltQuest.CLI", "CtrlAltQuest.CLI\CtrlAltQuest.CLI.csproj", "{5DADF6BA-AB03-4837-AC68-692BA679545D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{1BEA7F7E-7FCD-41C0-8CA0-A37DB4ECE5B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BEA7F7E-7FCD-41C0-8CA0-A37DB4ECE5B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BEA7F7E-7FCD-41C0-8CA0-A37DB4ECE5B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DADF6BA-AB03-4837-AC68-692BA679545D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DADF6BA-AB03-4837-AC68-692BA679545D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DADF6BA-AB03-4837-AC68-692BA679545D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DADF6BA-AB03-4837-AC68-692BA679545D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
