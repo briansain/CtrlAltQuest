@@ -1,0 +1,60 @@
+﻿@inherits CharacterSheetIndex;
+
+<MudItem xs="12" sm="6">
+    <MudButton Variant="Variant.Text"
+            StartIcon="@(_armorProficiencyExpanded ? Icons.Material.Filled.KeyboardArrowDown : @Icons.Material.Filled.KeyboardArrowRight)"
+            OnClick="@(_ => _armorProficiencyExpanded = !_armorProficiencyExpanded)">Armor Proficiency</MudButton>
+    <MudCollapse Expanded="_armorProficiencyExpanded">
+        <MudGrid>
+            <MudItem xs="3">
+                <MudText Typo="Typo.overline" Class="svg-stat-heading d-inline">Unarmored</MudText>
+                <Proficiency_SVG Value="_state.UnarmoredProficiency" />
+            </MudItem>
+            <MudItem xs="3">
+                <MudText Typo="Typo.overline" Class="svg-stat-heading d-inline">Light</MudText>
+                <Proficiency_SVG Value="_state.LightArmorProficiency" />
+            </MudItem>
+            <MudItem xs="3">
+                <MudText Typo="Typo.overline" Class="svg-stat-heading d-inline">Medium</MudText>
+                <Proficiency_SVG Value="_state.MediumArmorProficiency" />
+            </MudItem>
+            <MudItem xs="3">
+                <MudText Typo="Typo.overline" Class="svg-stat-heading d-inline">Heavy</MudText>
+                <Proficiency_SVG Value="_state.HeavyArmorProficiency" />
+                
+            </MudItem>
+        </MudGrid>
+    </MudCollapse>
+    <MudButton Variant="Variant.Text"
+                StartIcon="@(_weaponProficiencyExpanded ? Icons.Material.Filled.KeyboardArrowDown : @Icons.Material.Filled.KeyboardArrowRight)"
+                OnClick="@(_ => _weaponProficiencyExpanded = !_weaponProficiencyExpanded)">Weapon Proficiency</MudButton>
+    <MudCollapse Expanded="_weaponProficiencyExpanded">
+        <MudGrid>
+            <MudItem xs="3">
+                <MudText Typo="Typo.overline" Class="svg-stat-heading d-inline">Unarmed</MudText>
+                <Proficiency_SVG Value="_state.UnarmedWeaponProficiency" />
+            </MudItem>
+            <MudItem xs="3">
+                <MudText Typo="Typo.overline" Class="svg-stat-heading d-inline">Simple</MudText>
+                <Proficiency_SVG Value="_state.SimpleWeaponProficiency" />
+            </MudItem>
+            <MudItem xs="3">
+                <MudText Typo="Typo.overline" Class="svg-stat-heading d-inline">Martial</MudText>
+                <Proficiency_SVG Value="_state.MartialWeaponProficiency" />
+            </MudItem>
+            <MudItem xs="3">
+                <MudText Typo="Typo.overline" Class="svg-stat-heading d-inline">Advanced</MudText>
+                <Proficiency_SVG Value="_state.AdvancedWeaponProficiency" />
+            </MudItem>
+            <MudItem xs="2">
+                <MudText Typo="Typo.overline" Class="svg-stat-heading d-inline">Other</MudText>
+                <Proficiency_SVG Value="_state.OtherWeaponProficiency" />
+            </MudItem>
+        </MudGrid>
+    </MudCollapse>
+</MudItem>
+
+@code {
+    private bool _armorProficiencyExpanded = false;
+    private bool _weaponProficiencyExpanded = false;
+}

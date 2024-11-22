@@ -5,72 +5,78 @@
 
 <MudPaper Elevation="3" class="ma-6 pa-6">
     <MudContainer MaxWidth="MaxWidth.Medium" Gutters="false">
-        <MudGrid Justify="Justify.Center">
-            <MudItem xs="8" sm="3">
+        <MudGrid>
+            <MudItem xs="6" md="5">
                 <MudText Typo="Typo.overline">Name</MudText>
                 <MudText Typo="Typo.h5">@_state.Name</MudText>
             </MudItem>
-            <MudItem xs="4" sm="1">
+            <MudItem xs="6" md="1">
                 <MudText Typo="Typo.overline">Level</MudText>
                 <MudText Typo="Typo.h5">@_state.Level</MudText>
             </MudItem>
-            <MudItem xs="6" sm="2">
-                <MudText class="svg-stat-heading" Typo="Typo.overline">HP</MudText>
-                <Heart_SVG Value="@_state.MaxHitPoints"/>
-            </MudItem>
-            <MudItem xs="6" sm="2">
-                <MudText Typo="Typo.overline" Class="svg-stat">Armor Class</MudText>
-                <Armor_SVG Value="@_state.ArmorClass" />
-            </MudItem>
-            <MudItem xs="6" sm="2">
-                <MudText Typo="Typo.overline" Class="svg-stat-heading">Shield</MudText>
-                <Shield_SVG Value="@_state.Shield" />
-            </MudItem>
-            <MudItem xs="6" sm="2">
+
+            <HealthPoints />
+
+            <MudItem xs="6" sm="3">
                 <MudText Typo="Typo.overline">Ancestry</MudText>
                 <MudText Typo="Typo.h5">@_state.AncestryName</MudText>
             </MudItem>
-            <MudItem xs="6" sm="2">
+            <MudItem xs="6" sm="3">
                 <MudText Typo="Typo.overline">Background</MudText>
                 <MudText Typo="Typo.h5">@_state.BackgroundName</MudText>
             </MudItem>
-            <MudItem xs="12" sm="2">
+            <MudItem xs="6" sm="3">
                 <MudText Typo="Typo.overline">Class</MudText>
                 <MudText Typo="Typo.h5">@_state.ClassName</MudText>
             </MudItem>
             
-            <MudItem xs="12" sm="2">
+            <MudItem xs="6" sm="3">
                 <MudText Typo="Typo.overline">Size</MudText>
                 <MudText Typo="Typo.h5">@Enum.GetName(typeof(Pathfinder2e.Ancestry.Size), _state.Size)</MudText>
             </MudItem>
-            <MudItem xs="6" sm="2">
-                <MudText Typo="Typo.overline">Speed</MudText>
-                <MudText Typo="Typo.h5">@_state.Speed</MudText>
-            </MudItem>
-            <MudItem xs="6" sm="2">
+
+            <MudItem xs="4" sm="2">
                 <MudText Typo="Typo.overline">Perception</MudText>
                 <MudText Typo="Typo.h5">@_state.Perception</MudText>
             </MudItem>
-            <MudItem xs="6" sm="2">
+            <MudItem xs="4" sm="2">
                 <MudText Typo="Typo.overline">Class DC</MudText>
                 <MudText Typo="Typo.h5">17</MudText>
             </MudItem>
-            <MudItem xs="12" sm="6">
-                <MudGrid>
-                    <AttributeStats />
-                    <DefenseStats />
-                </MudGrid>
-            </MudItem>
-            <MudItem xs="12" sm="6">
-                <MudGrid>
-                    <SkillsStats />
-                </MudGrid>
+            <MudItem xs="4" sm="2">
+                <MudText Typo="Typo.overline">Speed</MudText>
+                <MudText Typo="Typo.h5">@_state.Speed</MudText>
             </MudItem>
 
-            <MudItem xs="12" sm="6">
-                <MudGrid>
-                </MudGrid>
+            <MudItem xs="6" md="2">
+                <MudText Typo="Typo.overline" Class="svg-stat">Armor Class</MudText>
+                <Armor_SVG Value="@_state.ArmorClass" />
             </MudItem>
+            <MudItem xs="6" md="2">
+                <MudText Typo="Typo.overline" Class="svg-stat-heading">Shield</MudText>
+                <Shield_SVG Value="@(_state.EquippedShield?.ShieldBonus ?? 0)" />
+            </MudItem>
+            <MudItem md="2">
+                <MudText Typo="Typo.overline">Shield Hardness</MudText>
+            </MudItem>
+            <MudItem md="2">
+                <MudText Typo="Typo.overline">Shield Health</MudText>
+            </MudItem>
+            <MudItem md="2">
+                <MudText Typo="Typo.overline">Shield Break Threshold</MudText>
+            </MudItem>
+            <MudItem md="2">
+                <MudText Typo="Typo.overline">Shield Max Health</MudText>
+            </MudItem>
+
+            <MudFlexBreak />
+            <AttributeStats />
+
+            <SkillsStats />
+            <Strikes />
+            
+            <ArmorWeaponProficiency />
+            <DefenseStats />
         </MudGrid>
     </MudContainer>
 </MudPaper>
@@ -78,6 +84,7 @@
 
 @inject ILogger<CharacterSheetIndex> _logger
 @code {
+
     public CharacterState _state = new CharacterState("character-id");
     protected override void OnInitialized()
     {

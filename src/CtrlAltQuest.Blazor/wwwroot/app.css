@@ -52,14 +52,13 @@ body {
     stroke-width: 1.5%;
 }
 .svg-proficiency {
-    width: 25px;
+    width: 12px;
 }
 
 .svg-proficiency path {
     fill-opacity: 1;
     stroke-opacity: 0;
     fill: var(--mud-palette-primary);
-    ;
 }
 
 svg.svg-stat path {
@@ -73,6 +72,10 @@ svg.svg-stat path {
 
 }
 
-svg.heart path{
+svg.heart path {
     stroke: var(--mudcolors-red-default);
+}
+
+svg.dashed-heart path {
+    stroke-dasharray: 2;
 }

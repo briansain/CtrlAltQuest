@@ -1,0 +1,20 @@
+﻿@inherits CharacterSheetIndex;
+
+<MudItem xs="6" md="3" Style="justify-items:center">
+    <MudTooltip Text="@($"Max Hit Points: {_state.MaxHitPoints}")" Placement="Placement.Top" Arrow="true" RootStyle="display:block;" >
+        <MudText class="svg-stat-heading" Typo="Typo.overline">HP</MudText>
+        <div class="d-flex align-center justify-center">
+            <MudFab IconColor="Color.Secondary" StartIcon="@Icons.Material.Filled.Remove" Size="MudBlazor.Size.Small" OnClick="_state.DecreaseHealth" />
+            <Heart_SVG Value="@_state.CurrentHitPoints" />
+            <MudFab IconColor="Color.Primary" StartIcon="@Icons.Material.Filled.Add" Size="MudBlazor.Size.Small" OnClick="_state.IncreaseHealth"/>
+        </div>
+    </MudTooltip>
+</MudItem>
+<MudItem xs="6" md="3">
+    <MudText class="svg-stat-heading" Typo="Typo.overline">Temporary HP</MudText>
+    <div class="d-flex align-center justify-center">
+        <MudFab IconColor="Color.Secondary" StartIcon="@Icons.Material.Filled.Remove" Size="MudBlazor.Size.Small" OnClick="_state.DecreaseTempHP" />
+        <Heart_SVG Value="@_state.TemporaryHitPoints" IsDashed="true" />
+        <MudFab IconColor="Color.Primary" StartIcon="@Icons.Material.Filled.Add" Size="MudBlazor.Size.Small" OnClick="_state.IncreaseTempHP" />
+    </div>
+</MudItem>

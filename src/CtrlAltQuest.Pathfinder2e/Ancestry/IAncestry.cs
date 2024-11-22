@@ -1,6 +1,4 @@
-using System;
-using System.Diagnostics;
-
+using CtrlAltQuest.Pathfinder2e.Common;
 namespace CtrlAltQuest.Pathfinder2e.Ancestry;
 
 public interface IAncestry

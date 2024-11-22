@@ -1,4 +1,5 @@
-﻿namespace CtrlAltQuest.Pathfinder2e.Ancestry;
+﻿using CtrlAltQuest.Pathfinder2e.Common;
+namespace CtrlAltQuest.Pathfinder2e.Ancestry;
 
 public static partial class AncestryReferences
 {
