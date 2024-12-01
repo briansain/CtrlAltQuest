@@ -1,4 +1,4 @@
-﻿@inherits CharacterSheetIndex;
+﻿@* @inherits CharacterSheetIndex;
 
 <MudItem xs="6" md="3" Style="justify-items:center">
     <MudTooltip Text="@($"Max Hit Points: {_state.MaxHitPoints}")" Placement="Placement.Top" Arrow="true" RootStyle="display:block;" >
@@ -17,4 +17,4 @@
         <Heart_SVG Value="@_state.TemporaryHitPoints" IsDashed="true" />
         <MudFab IconColor="Color.Primary" StartIcon="@Icons.Material.Filled.Add" Size="MudBlazor.Size.Small" OnClick="_state.IncreaseTempHP" />
     </div>
-</MudItem>
+</MudItem> *@

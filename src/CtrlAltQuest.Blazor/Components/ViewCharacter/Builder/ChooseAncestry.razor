@@ -1,7 +1,7 @@
-@using System.Collections.Immutable
+@* @using System.Collections.Immutable
 @using CtrlAltQuest.Pathfinder2e.Ancestry
 @inject ILogger<BuilderIndex> _logger;
-@* @page "/character/builder/ancestry" *@
+@* @page "/character/builder/ancestry"*@@*
 
 <MudText class="text-center pa-6 full-width" Typo="Typo.h3">Choose an Ancestry</MudText>
 <MudGrid>
@@ -105,10 +105,14 @@
 </MudDialog>
 
 @code {
-    public List<IAncestry> AllAncestries => AncestryReferences.CommonAncestries;
+
+
+
+    public List<IAncestry> AllAncestries => [];// AncestryReferences.CommonAncestries;
     [Parameter] public EventCallback<string> AncestryChanged { get; set; }
     private bool _showDialog = true;
-    private IAncestry? _chosenAncestry = new Dwarf();
+
+    private IAncestry? _chosenAncestry = null;// new Dwarf();
     private readonly DialogOptions _dialogOptions = new(){ CloseButton = true, CloseOnEscapeKey = true, BackdropClick = true};
     
     private void OnClickTriggered(IAncestry chosenAncestry)
@@ -135,3 +139,4 @@
         CloseDialog();
     }
 }
+ *@

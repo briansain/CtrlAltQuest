@@ -7,7 +7,7 @@ Parser.Default.ParseArguments<Options>(args)
     if (o.LoadData)
     {
         Console.WriteLine($"Starting to load data from {o.FileLocation}");
-        var loadData = new LoadData(o.FileLocation);
+        var loadData = new LoadData(o.FileLocation, o.UploadType);
         loadData.Start().Wait();
     }
     else
@@ -24,4 +24,6 @@ public class Options
     public bool LoadData { get; set; }
     [Option("fileLocation")]
     public string FileLocation { get; set; } = string.Empty;
+    [Option("uploadType")]
+    public string UploadType { get; set; } = string.Empty;
 }

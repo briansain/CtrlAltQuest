@@ -1,51 +1,53 @@
 ﻿using CtrlAltQuest.Pathfinder2e.Actors;
+using CtrlAltQuest.Pathfinder2e.Models;
 using Redis.OM;
 using StackExchange.Redis;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Akka.Actor.ProviderSelection;
+using System.Text.Json;
 
 namespace CtrlAltQuest.CLI
 {
     internal class LoadData
     {
         private string _fileLocation { get; set; }
-        public LoadData(string fileLocation)
+        private string _uploadType { get; set; }
+        public LoadData(string fileLocation, string uploadType)
         {
             _fileLocation = fileLocation;
+            _uploadType = uploadType;
         }
 
         public async Task Start()
         {
-            var r = ConnectionMultiplexer.Connect("localhost:6379");
-            
-            var redis = new RedisConnectionProvider(r);
-
-            var definition = redis.Connection.GetIndexInfo(typeof(CharacterState));
-            var i = redis.Connection.GetIndexInfo(typeof(CharacterState));
-            if (i == null)
-            {
-                redis.Connection.DropIndex(typeof(CharacterState));
-                redis.Connection.CreateIndex(typeof(CharacterState));
-            }
             if (!File.Exists(_fileLocation))
             {
                 throw new Exception($"Could not find file at location {_fileLocation}");
             }
 
-            var characterState = redis.RedisCollection<CharacterState>();
-            if (await characterState.AnyAsync(c => c.Id == "bonesaw3"))
+            var r = ConnectionMultiplexer.Connect("localhost:6379");
+            var redis = new RedisConnectionProvider(r);
+
+            if (redis.Connection.GetIndexInfo(typeof(CharacterState)) == null)
             {
-                Console.WriteLine("Character already exists");
+                await redis.Connection.CreateIndexAsync(typeof(CharacterState));
             }
-            else
+            if (redis.Connection.GetIndexInfo(typeof(Ancestry)) == null)
             {
-                Console.WriteLine("Character does not already exist");
-                await characterState.InsertAsync(new CharacterState("bonesaw3"));
+                await redis.Connection.CreateIndexAsync(typeof(Ancestry));
             }
+
+            string loadedData = File.ReadAllText(_fileLocation);
+            var tasks = new List<Task>();
+            switch (_uploadType.ToLower())
+            {
+                case "ancestry":
+                    var data = JsonSerializer.Deserialize<List<Ancestry>>(loadedData) ?? throw new Exception("Couldn't load data");
+                    var collection = redis.RedisCollection<Ancestry>();
+                    tasks.AddRange(from c in data
+                                   select collection.UpdateAsync(c));
+                    break;
+            }
+
+            await Task.WhenAll(tasks);
         }
     }
 }

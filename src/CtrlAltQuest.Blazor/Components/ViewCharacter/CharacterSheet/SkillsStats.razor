@@ -1,4 +1,4 @@
-@inherits CharacterSheetIndex;
+@* @inherits CharacterSheetIndex;
 <MudItem xs="12" md="6">
     <MudButton Variant="Variant.Text"
                StartIcon="@(_skillsExpanded ? Icons.Material.Filled.KeyboardArrowDown : @Icons.Material.Filled.KeyboardArrowRight)"
@@ -33,7 +33,7 @@
                 <MudText Class="svg-stat-heading" Typo="Typo.overline">Intimidation</MudText>
                 <Skills_SVG Value="_state.Intimidation" />
             </MudItem>
-            <MudItem xs="6" md="3"> @* Need to adjust overflow *@
+            <MudItem xs="6" md="3"> @* Need to adjust overflow *@@*
                 <MudText Class="svg-stat-heading" Typo="Typo.overline">Lore</MudText>
                 <Skills_SVG Value="-1" />
             </MudItem>
@@ -83,4 +83,4 @@
 
 @code {
     private bool _skillsExpanded = false;
-}
+} *@

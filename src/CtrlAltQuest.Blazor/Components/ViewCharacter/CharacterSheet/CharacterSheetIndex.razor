@@ -1,6 +1,5 @@
 ﻿@using CtrlAltQuest.Blazor.Components.SVGs
 @using CtrlAltQuest.Pathfinder2e.Actors
-@using CtrlAltQuest.Pathfinder2e.Ancestry
 
 
 <MudPaper Elevation="3" class="ma-6 pa-6">
@@ -32,7 +31,7 @@
             
             <MudItem xs="6" sm="3">
                 <MudText Typo="Typo.overline">Size</MudText>
-                <MudText Typo="Typo.h5">@Enum.GetName(typeof(Pathfinder2e.Ancestry.Size), _state.Size)</MudText>
+                <MudText Typo="Typo.h5">@Enum.GetName(typeof(Pathfinder2e.Models.Size), _state.Size)</MudText>
             </MudItem>
 
             <MudItem xs="4" sm="2">
@@ -50,7 +49,7 @@
 
             <MudItem xs="6" md="2">
                 <MudText Typo="Typo.overline" Class="svg-stat">Armor Class</MudText>
-                <Armor_SVG Value="@_state.ArmorClass" />
+                @* <Armor_SVG Value="@_state.ArmorClass" /> *@
             </MudItem>
             <MudItem xs="6" md="2">
                 <MudText Typo="Typo.overline" Class="svg-stat-heading">Shield</MudText>

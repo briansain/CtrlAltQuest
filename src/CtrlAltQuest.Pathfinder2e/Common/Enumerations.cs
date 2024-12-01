@@ -1,7 +1,6 @@
 ﻿
 namespace CtrlAltQuest.Pathfinder2e.Common
 {
-
     public enum Proficiency
     {
         Untrained = 0,
