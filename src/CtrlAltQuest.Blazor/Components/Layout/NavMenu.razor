@@ -1,9 +1,10 @@
-﻿@rendermode InteractiveServer
-
+﻿@using CtrlAltQuest.Blazor.Components.Common
+@rendermode InteractiveServer
+@inject SessionProperties _sessProps;
 
 <MudAppBar>
     <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-    <MudButton class="normal-case" Href="/" Variant="Variant.Text" Color="Color.Transparent">The Crowd Query</MudButton>
+    <MudLink Href="/" Typo="Typo.h6" Color="Color.Inherit" Underline="Underline.None">@Title</MudLink>
 </MudAppBar>
 <MudDrawer @bind-Open="@_drawerOpen" Elevation="2">
     <MudNavMenu>
@@ -14,6 +15,23 @@
 </MudDrawer>
 
 @code {
+    protected override void OnInitialized()
+    {
+        _sessProps.TitleChanged = () =>
+        {
+            if (!string.IsNullOrEmpty(_sessProps.AdditionalTitle))
+            {
+                Title = $"Ctrl Alt Quest - {_sessProps.AdditionalTitle}";
+            }
+            else
+            {
+                Title = "Ctrl Alt Quest";
+            }
+            StateHasChanged();
+        };
+        base.OnInitialized();
+    }
+    private string Title { get; set; } = "Ctrl Alt Quest";
     bool _drawerOpen = true;
     public void DrawerToggle() {
         _drawerOpen = !_drawerOpen;

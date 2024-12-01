@@ -1,9 +1,9 @@
-﻿@using CtrlAltQuest.Blazor.Components.SVGs
+﻿@using CtrlAltQuest.Blazor.Components.Layout
+@using CtrlAltQuest.Blazor.Components.SVGs
 @using CtrlAltQuest.Pathfinder2e.Actors
-
+@inherits CharacterLayout;
 
 <MudPaper Elevation="3" class="ma-6 pa-6">
-    <MudContainer MaxWidth="MaxWidth.Medium" Gutters="false">
         <MudGrid>
             <MudItem xs="6" md="5">
                 <MudText Typo="Typo.overline">Name</MudText>
@@ -77,14 +77,13 @@
             <ArmorWeaponProficiency />
             <DefenseStats />
         </MudGrid>
-    </MudContainer>
 </MudPaper>
 
 
 @inject ILogger<CharacterSheetIndex> _logger
 @code {
 
-    public CharacterState _state = new CharacterState("character-id");
+    
     protected override void OnInitialized()
     {
         _logger.LogDebug("OnInitialized");
