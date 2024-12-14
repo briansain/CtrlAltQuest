@@ -1,8 +1,7 @@
-using CtrlAltQuest.Pathfinder2e.Calculations;
 using CtrlAltQuest.Pathfinder2e.Common;
 using CtrlAltQuest.Pathfinder2e.Models;
 using Redis.OM.Modeling;
-using System.Text.Json.Serialization;
+using System.Collections.ObjectModel;
 
 namespace CtrlAltQuest.Pathfinder2e.Actors;
 
@@ -29,7 +28,7 @@ public partial record CharacterState
     public int Wisdom { get; init; }
     public int Charisma { get; init; }
 
-    public Size Size { get; init; }
+    public Models.Size Size { get; init; }
     public int Speed { get; init; }
     public int Perception { get; init; }
     
@@ -42,7 +41,7 @@ public partial record CharacterState
     public List<Equipment> Equipment { get; init; }
     public SkillProficiencies SkillProficiencies { get; init; }
     public SavingThrowProficiencies SavingThrowProficiencies { get; init; }
-
+    public MartialProficiencies MartialProficiencies { get; init; }
     public CharacterState(string id)
     {
         Id = id;
@@ -61,15 +60,89 @@ public partial record CharacterState
         Charisma = 0;
         Size = Size.Medium;
         Speed = 25;
-        SkillProficiencies = new SkillProficiencies();
-        SavingThrowProficiencies = new SavingThrowProficiencies();
+        MartialProficiencies = new MartialProficiencies() with
+        {
+            Unarmored = Proficiency.Trained,
+            LightArmor = Proficiency.Trained,
+            MediumArmor = Proficiency.Trained,
+            HeavyArmor = Proficiency.Trained,
+            UnarmedWeapon = Proficiency.Expert,
+            SimpleWeapon = Proficiency.Expert,
+            MartialWeapon = Proficiency.Expert,
+            AdvancedWeapon = Proficiency.Trained,
+            OtherWeapon = Proficiency.Untrained
+        };
+        SkillProficiencies = new SkillProficiencies() with
+        {
+            Acrobatics = Proficiency.Untrained,
+            Arcana = Proficiency.Untrained,
+            Athletics = Proficiency.Untrained,
+            Crafting = Proficiency.Untrained,
+            Deception = Proficiency.Untrained,
+            Diplomacy = Proficiency.Untrained,
+            Intimidation = Proficiency.Untrained,
+            Medicine = Proficiency.Untrained,
+            Nature = Proficiency.Untrained,
+            Occultism = Proficiency.Untrained,
+            Performance = Proficiency.Untrained,
+            Religion = Proficiency.Untrained,
+            Society = Proficiency.Untrained,
+            Stealth = Proficiency.Untrained,
+            Survival = Proficiency.Untrained,
+            Thievery = Proficiency.Untrained,
+            Lore = new Dictionary<string, Proficiency>()
+            {
+                { "Tanning", Proficiency.Trained }
+            }.AsReadOnly()
+        };
+        SavingThrowProficiencies = new SavingThrowProficiencies() with
+        {
+            FortitudeSavingThrow = Proficiency.Expert,
+            ReflexSavingThrow = Proficiency.Expert,
+            WillSavingThrow = Proficiency.Trained
+        };
 
 
 
         Equipment = new List<Equipment>()
         { 
             //new HideArmor(),
-            //new SteelShield()
+            new Shield
+            {
+                Name = "Steel Shield",
+                Rarity = "Common",
+                Traits = new List<Trait>(),
+                ItemCategory = ItemCategory.Shields,
+                ItemSubcategory = "Base Shield",
+                Description = "Like wooden shields, steel shields come in a variety of shapes and sizes. Though more expensive than wooden shields, they are much more durable.",
+                IsEquipped = true,
+                ShieldBonus = 2,
+                Hardness = 5,
+                HealthPoints = 20,
+                MaxHealthPoints = 20,
+                BreakThreshold = 10
+            }
+            /*
+             *  public record Shield : Equipment
+    {
+        public int ShieldBonus { get; init; }
+        public int Hardness { get; init; }
+        public int MaxHealthPoints { get; init; }
+        public int HealthPoints { get; init; }
+        public int BreakThreshold { get; init; }
+    }
+            
+             
+             
+             
+             
+                     public required string Name { get; init; }
+        public required string Rarity { get; init; }
+        public required List<Trait> Traits { get; init; }
+        public required ItemCategory ItemCategory { get; init; }
+        public required string ItemSubcategory { get; init; }
+        public required string Description { get; init; }
+        public required bool IsEquipped { get; init; }*/
         };
     }
 }
@@ -82,54 +155,7 @@ public record SavingThrowProficiencies
 
 //public partial class CharacterState
 //{
-//    // Will be able to simplify this with setting the property
-//    [JsonIgnore]
-//    public IArmor? EquippedArmor => (IArmor?)Equipment.FirstOrDefault(e => e.ItemCategory == ItemCategory.Armor && e.IsEquipped);
-//    [JsonIgnore]
-//    public IShield? EquippedShield => (IShield?)Equipment.FirstOrDefault(e => e.ItemCategory == ItemCategory.Shields && e.IsEquipped);
-//    [JsonIgnore]
-//    public List<IWeapon> Weapons => Equipment?.Where(e => e.ItemCategory == ItemCategory.Weapons && e.IsEquipped)?.Cast<IWeapon>().ToList() ?? new List<IWeapon>();
-//    [JsonIgnore]
-//    public int ArmorClass
-//    {
-//        get
-//        {
-//            var armorProficiencyBonus = 0;
-//            var armorItemBonus = 0;
-//            var dexterityBonus = Dexterity;
-//            if (EquippedArmor != null)
-//            {
-//                armorProficiencyBonus = ArmorProficiencyBonus(EquippedArmor.ArmorCategory);
-//                armorItemBonus = EquippedArmor.ArmorBonus;
-//                dexterityBonus = GetAbilityWithCap(Dexterity, EquippedArmor.DexterityCap);
-//            }
-//            return 10 + dexterityBonus + armorProficiencyBonus + armorItemBonus;
-//        }
-//    }
 
-//    
-
-//    public int ArmorProficiencyBonus(ArmorCategory armorCategory)
-//    {
-//        switch (armorCategory)
-//        {
-//            case ArmorCategory.Unarmored:
-//                return CalculateProficiency(Skills.Unarmored);
-//            case ArmorCategory.Light:
-//                return CalculateProficiency(Skills.LightArmor);
-//            case ArmorCategory.Medium:
-//                return CalculateProficiency(Skills.MediumArmor);
-//            case ArmorCategory.Heavy:
-//                return CalculateProficiency(Skills.HeavyArmor);
-//            default:
-//                return CalculateProficiency(Proficiency.Untrained);
-//        }
-//    }
-
-//    private int GetAbilityWithCap(int ability, int? cap)
-//    {
-//        return cap == null || ability < cap ? ability : (int)cap;
-//    }
 //    private int CalculateProficiency(Proficiency proficiency)
 //    {
 //        return proficiency == Proficiency.Untrained ? 0 : (int)proficiency + Level;
@@ -161,42 +187,21 @@ public record SavingThrowProficiencies
 
 //}
 
+public record MartialProficiencies
+{
+    public Proficiency Unarmored { get; init; }
+    public Proficiency LightArmor { get; init; }
+    public Proficiency MediumArmor { get; init; }
+    public Proficiency HeavyArmor { get; init; }
+    public Proficiency UnarmedWeapon { get; init; }
+    public Proficiency SimpleWeapon { get; init; }
+    public Proficiency MartialWeapon { get; init; }
+    public Proficiency AdvancedWeapon { get; init; }
+    public Proficiency OtherWeapon { get; init; }
+}
+
 public record SkillProficiencies
 {
-    public SkillProficiencies()
-    {
-        Acrobatics = Proficiency.Untrained;
-        Arcana = Proficiency.Untrained;
-        Athletics = Proficiency.Untrained;
-        Crafting = Proficiency.Untrained;
-        Deception = Proficiency.Untrained;
-        Diplomacy = Proficiency.Untrained;
-        Intimidation = Proficiency.Untrained;
-        Medicine = Proficiency.Untrained;
-        Nature = Proficiency.Untrained;
-        Occultism = Proficiency.Untrained;
-        Performance = Proficiency.Untrained;
-        Religion = Proficiency.Untrained;
-        Society = Proficiency.Untrained;
-        Stealth = Proficiency.Untrained;
-        Survival = Proficiency.Untrained;
-        Thievery = Proficiency.Untrained;
-
-        //Unarmored = Proficiency.Trained;
-        //LightArmor = Proficiency.Trained;
-        //MediumArmor = Proficiency.Trained;
-        //HeavyArmor = Proficiency.Trained;
-
-        //FortitudeSavingThrow = Proficiency.Expert;
-        //ReflexSavingThrow = Proficiency.Expert;
-        //WillSavingThrow = Proficiency.Trained;
-
-        //UnarmedWeapon = Proficiency.Expert;
-        //SimpleWeapon = Proficiency.Expert;
-        //MartialWeapon = Proficiency.Expert;
-        //AdvancedWeapon = Proficiency.Trained;
-        //OtherWeapon = Proficiency.Untrained;
-    }
     public Proficiency Acrobatics { get; init; }
     public Proficiency Arcana { get; init; }
     public Proficiency Athletics { get; init; }
@@ -212,5 +217,6 @@ public record SkillProficiencies
     public Proficiency Society { get; init; }
     public Proficiency Stealth { get; init; }
     public Proficiency Survival { get; init; }
-    public Proficiency Thievery { get; init; }    
+    public Proficiency Thievery { get; init; }
+    public ReadOnlyDictionary<string, Proficiency> Lore { get; init; } = ReadOnlyDictionary<string, Proficiency>.Empty;
 }

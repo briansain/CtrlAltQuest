@@ -1,0 +1,64 @@
+﻿<MudGrid>
+    <style>
+        svg.skull {
+            width: 35px;
+        }
+
+        .muditem-override {
+            padding-left: 5px !important;
+        }
+    </style>
+    <MudItem md="4"></MudItem>
+    <MudItem md="1" Class="muditem-override">
+        <MudTooltip Text="Dying 1" Placement="Placement.Top" Arrow="true">
+            <Skull_SVG Class="@dying1Class" OnClick="dyingClicked" />
+        </MudTooltip>
+    </MudItem>
+    <MudItem md="1" Class="muditem-override">
+        <MudTooltip Text="Dying 2" Placement="Placement.Top" Arrow="true">
+            <Skull_SVG Class="@dying1Class" OnClick="dyingClicked" />
+        </MudTooltip>
+    </MudItem>
+    <MudItem md="1" Class="muditem-override">
+        <MudTooltip Text="Dying 3" Placement="Placement.Top" Arrow="true">
+            <Skull_SVG Class="@dying1Class" OnClick="dyingClicked" />
+        </MudTooltip>
+    </MudItem>
+    @* <MudItem md="1" Class="muditem-override"> <!--diehard feat; need to figureout spacing better-->
+        <MudTooltip Text="Dying 4" Placement="Placement.Top" Arrow="true">
+            <Skull_SVG Class="@dying1Class" OnClick="dyingClicked" />
+        </MudTooltip>
+    </MudItem> *@
+    <MudItem md="1"></MudItem> <!--replace with dying 4 if they have diehard-->
+
+    <MudItem md="1" Class="muditem-override">
+        <MudTooltip Text="Wounded 1" Placement="Placement.Top" Arrow="true">
+            <Wounded_SVG Class="@dying1Class" OnClick="dyingClicked" />
+        </MudTooltip>
+    </MudItem>
+    <MudItem md="1" Class="muditem-override">
+        <MudTooltip Text="Wounded 2" Placement="Placement.Top" Arrow="true">
+            <Wounded_SVG Class="@dying1Class" OnClick="dyingClicked" />
+        </MudTooltip>
+    </MudItem>
+    <MudItem md="1" Class="muditem-override">
+        <MudTooltip Text="Wounded 3" Placement="Placement.Top" Arrow="true">
+            <Wounded_SVG Class="@dying1Class" OnClick="dyingClicked" />
+        </MudTooltip>
+    </MudItem>
+    <MudItem md="1"></MudItem> <!--replace with wounded 4 if they have diehard-->
+    @* <MudItem md="1" Class="muditem-override"> <!--diehard feat-->
+        <MudTooltip Text="Wounded 4" Placement="Placement.Top" Arrow="true">
+            <Wounded_SVG Class="@dying1Class" OnClick="dyingClicked" />
+        </MudTooltip>
+    </MudItem> *@
+</MudGrid>
+@code {
+    private string dying1Class = "svg-stat skull";
+    private bool isDying1 = false;
+    public void dyingClicked()
+    {
+        isDying1 = !isDying1;
+        dying1Class = isDying1 ? "svg-stat skull dying" : "svg-stat skull";
+    }
+}

@@ -1,10 +1,13 @@
 ﻿<!--https://game-icons.net/1x1/skoll/hearts.html-->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="@((IsDashed ? "dashed-heart" : "") + " svg-stat heart")">
+<svg id="@Id" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="svg-stat heart" onclick="@OnClick">
     <path d="m 21.824754,7.6136469 c 0,7.0641841 -9.824753,14.2138001 -9.824753,14.2138001 0,0 -9.8247546,-7.149616 -9.8247546,-14.2138001 0,-4.0048202 3.0944143,-5.4821477 4.7215768,-5.4821477 3.4019718,0 5.1031778,2.8792992 5.1031778,2.8792992 0,0 1.701205,-2.8797367 5.103176,-2.8797367 1.627163,4.375e-4 4.721577,1.4773275 4.721577,5.4825852 z"></path>
     <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">@Value</text>
+    @* <MudNumericField @bind-Value="Value" /> *@
 </svg>
 
 @code {
-    [Parameter] public int Value { get; set; } = 0;
+    [Parameter] public required int Value { get; set; }
     [Parameter] public bool IsDashed { get; set; } = false;
+    [Parameter] public required string Id { get; set; }
+    [Parameter] public Action OnClick { get; set; } = () => {};
 }

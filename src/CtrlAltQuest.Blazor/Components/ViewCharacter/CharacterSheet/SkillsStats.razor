@@ -1,86 +1,131 @@
-@* @inherits CharacterSheetIndex;
-<MudItem xs="12" md="6">
-    <MudButton Variant="Variant.Text"
-               StartIcon="@(_skillsExpanded ? Icons.Material.Filled.KeyboardArrowDown : @Icons.Material.Filled.KeyboardArrowRight)"
-               OnClick="@(_ => _skillsExpanded = !_skillsExpanded)">Skills</MudButton>
-    <MudCollapse Expanded="_skillsExpanded">
-        <MudGrid>
-            <MudItem xs="6" md="3">
+@using CtrlAltQuest.Pathfinder2e.Calculations
+@inherits CharacterSheetIndex;
+<MudGrid>
+    <MudItem xs="12">
+        <MudToggleIconButton @bind-Toggled="_skillsExpanded"
+                             Icon="@Icons.Material.Filled.KeyboardArrowRight"
+                             ToggledIcon="@Icons.Material.Filled.KeyboardArrowDown"
+                             Ripple="false"
+                             Size="MudBlazor.Size.Small"/>
+        <span>Skills</span>
+    </MudItem>
+    <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
+        <MudItem xs="6" md="6">
                 <MudText Class="svg-stat-heading" Typo=" Typo.overline">Acrobatics</MudText>
-                <Skills_SVG Value="_state.Acrobatics" />
-            </MudItem>
-            <MudItem xs="6" md="3">
-                <MudText Class="svg-stat-heading" Typo="Typo.overline">Arcana</MudText>
-                <Skills_SVG Value="_state.Arcana" />
-            </MudItem>
-            <MudItem xs="6" md="3">
-                <MudText Class="svg-stat-heading" Typo="Typo.overline">Athletics</MudText>
-                <Skills_SVG Value="_state.Athletics" />
-            </MudItem>
-            <MudItem xs="6" md="3">
-                <MudText Class="svg-stat-heading" Typo="Typo.overline">Crafting</MudText>
-                <Skills_SVG Value="_state.Crafting" />
-            </MudItem>
-            <MudItem xs="6" md="3">
-                <MudText Class="svg-stat-heading" Typo="Typo.overline">Deception</MudText>
-                <Skills_SVG Value="_state.Deception" />
-            </MudItem>
-            <MudItem xs="6" md="3">
-                <MudText Class="svg-stat-heading" Typo="Typo.overline">Diplomacy</MudText>
-                <Skills_SVG Value="_state.Diplomacy" />
-            </MudItem>
-            <MudItem xs="6" md="3">
-                <MudText Class="svg-stat-heading" Typo="Typo.overline">Intimidation</MudText>
-                <Skills_SVG Value="_state.Intimidation" />
-            </MudItem>
-            <MudItem xs="6" md="3"> @* Need to adjust overflow *@@*
-                <MudText Class="svg-stat-heading" Typo="Typo.overline">Lore</MudText>
-                <Skills_SVG Value="-1" />
-            </MudItem>
-            <MudItem xs="6" md="3">
-                <MudText Class="svg-stat-heading" Typo="Typo.overline">Lore</MudText>
-                <Skills_SVG Value="-1" />
-            </MudItem>
-            <MudItem xs="6" md="3">
-                <MudText Class="svg-stat-heading" Typo="Typo.overline">Medicine</MudText>
-                <Skills_SVG Value="_state.Medicine" />
-            </MudItem>
-            <MudItem xs="6" md="3">
-                <MudText Class="svg-stat-heading" Typo="Typo.overline">Nature</MudText>
-                <Skills_SVG Value="_state.Nature" />
-            </MudItem>
-            <MudItem xs="6" md="3">
-                <MudText Class="svg-stat-heading" Typo="Typo.overline">Occultism</MudText>
-                <Skills_SVG Value="_state.Occultism" />
-            </MudItem>
-            <MudItem xs="6" md="3">
-                <MudText Class="svg-stat-heading" Typo="Typo.overline">Performance</MudText>
-                <Skills_SVG Value="_state.Performance" />
-            </MudItem>
-            <MudItem xs="6" md="3">
-                <MudText Class="svg-stat-heading" Typo="Typo.overline">Religion</MudText>
-                <Skills_SVG Value="_state.Religion" />
-            </MudItem>
-            <MudItem xs="6" md="3">
-                <MudText Class="svg-stat-heading" Typo="Typo.overline">Society</MudText>
-                <Skills_SVG Value="_state.Society" />
-            </MudItem>
-            <MudItem xs="6" md="3">
-                <MudText Class="svg-stat-heading" Typo="Typo.overline">Stealth</MudText>
-                <Skills_SVG Value="_state.Stealth" />
-            </MudItem>
-            <MudItem xs="6" md="3">
-                <MudText Class="svg-stat-heading" Typo="Typo.overline">Survival</MudText>
-                <Skills_SVG Value="_state.Survival" />
-            </MudItem>
-            <MudItem xs="6" md="3">
-                <MudText Class="svg-stat-heading" Typo="Typo.overline">Thievery</MudText>
-                <Skills_SVG Value="_state.Thievery" />
-            </MudItem>
-        </MudGrid>
+                <Skills_SVG Value="SkillHelper.CalculateAcrobatics(_state)" />
+        </MudItem>
     </MudCollapse>
-</MudItem>
+    <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
+        <MudItem xs="6" md="6">
+            <MudText Class="svg-stat-heading" Typo="Typo.overline">Arcana</MudText>
+            <Skills_SVG Value="SkillHelper.CalculateArcana(_state)" />
+        </MudItem>
+    </MudCollapse>
+    <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
+        <MudItem xs="6" md="6">
+            <MudText Class="svg-stat-heading" Typo="Typo.overline">Athletics</MudText>
+            <Skills_SVG Value="SkillHelper.CalculateAthletics(_state)" />
+        </MudItem>
+    </MudCollapse>
+    <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
+        <MudItem xs="6" md="6">
+            <MudText Class="svg-stat-heading" Typo="Typo.overline">Crafting</MudText>
+            <Skills_SVG Value="SkillHelper.CalculateCrafting(_state)" />
+        </MudItem>
+    </MudCollapse>
+    <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
+        <MudItem xs="6" md="6">
+            <MudText Class="svg-stat-heading" Typo="Typo.overline">Deception</MudText>
+            <Skills_SVG Value="SkillHelper.CalculateDeception(_state)" />
+        </MudItem>
+    </MudCollapse>
+    <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
+        <MudItem xs="6" md="6">
+            <MudText Class="svg-stat-heading" Typo="Typo.overline">Diplomacy</MudText>
+            <Skills_SVG Value="SkillHelper.CalculateDiplomacy(_state)" />
+        </MudItem>
+    </MudCollapse>
+    <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
+        <MudItem xs="6" md="6">
+            <MudText Class="svg-stat-heading" Typo="Typo.overline">Intimidation</MudText>
+            <Skills_SVG Value="SkillHelper.CalculateIntimidation(_state)" />
+        </MudItem>
+    </MudCollapse>
+    <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
+        <MudItem xs="6" md="6">
+            <MudText Class="svg-stat-heading" Typo="Typo.overline">Medicine</MudText>
+            <Skills_SVG Value="SkillHelper.CalculateMedicine(_state)" />
+        </MudItem>
+    </MudCollapse>
+    <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
+        <MudItem xs="6" md="6">
+            <MudText Class="svg-stat-heading" Typo="Typo.overline">Nature</MudText>
+            <Skills_SVG Value="SkillHelper.CalculateNature(_state)" />
+        </MudItem>
+    </MudCollapse>
+    <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
+        <MudItem xs="6" md="6">
+            <MudText Class="svg-stat-heading" Typo="Typo.overline">Occultism</MudText>
+            <Skills_SVG Value="SkillHelper.CalculateOccultism(_state)" />
+        </MudItem>
+    </MudCollapse>
+    <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
+        <MudItem xs="6" md="6">
+            <MudText Class="svg-stat-heading" Typo="Typo.overline">Performance</MudText>
+            <Skills_SVG Value="SkillHelper.CalculatePerformance(_state)" />
+        </MudItem>
+    </MudCollapse>
+    <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
+        <MudItem xs="6" md="6">
+            <MudText Class="svg-stat-heading" Typo="Typo.overline">Religion</MudText>
+            <Skills_SVG Value="SkillHelper.CalculateReligion(_state)" />
+        </MudItem>
+    </MudCollapse>
+    <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
+        <MudItem xs="6" md="6">
+            <MudText Class="svg-stat-heading" Typo="Typo.overline">Society</MudText>
+            <Skills_SVG Value="SkillHelper.CalculateSociety(_state)" />
+        </MudItem>
+    </MudCollapse>
+    <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
+        <MudItem xs="6" md="6">
+            <MudText Class="svg-stat-heading" Typo="Typo.overline">Stealth</MudText>
+            <Skills_SVG Value="SkillHelper.CalculateStealth(_state)" />
+        </MudItem>
+    </MudCollapse>
+    <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
+        <MudItem xs="6" md="6">
+            <MudText Class="svg-stat-heading" Typo="Typo.overline">Survival</MudText>
+            <Skills_SVG Value="SkillHelper.CalculateSurvival(_state)" />
+        </MudItem>
+    </MudCollapse>
+    <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
+        <MudItem xs="6" md="6">
+            <MudText Class="svg-stat-heading" Typo="Typo.overline">Thievery</MudText>
+            <Skills_SVG Value="SkillHelper.CalculateThievery(_state)" />
+        </MudItem>
+    </MudCollapse>
+    @foreach (var l in _state.SkillProficiencies.Lore)
+    {
+        
+            <MudItem xs="6" md="6">
+                <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
+                <MudText Class="svg-stat-heading" Typo="Typo.overline">@($"Lore: {l.Key}")</MudText>
+                <Skills_SVG Value="SkillHelper.CalculateLore(_state, l.Value)" />
+                </MudCollapse>
+            </MudItem>
+    }
+</MudGrid>
+
 
 @code {
-    private bool _skillsExpanded = false;
-} *@
+    private bool _skillsExpanded = true;
+    private readonly string _classValue = "mud-grid-item mud-grid-item-xs-6 mud-grid-item-md-2";
+    private Func<string> classAction = () => "";
+
+    protected override void OnInitialized()
+    {
+        classAction = () => (_skillsExpanded ? _classValue : "");
+        base.OnInitialized();
+    }
+}

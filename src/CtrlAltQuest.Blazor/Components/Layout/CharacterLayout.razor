@@ -16,15 +16,15 @@
             </MudTabPanel>
         </MudTabs>
     </MudItem>
-    @* <MudItem>
+    <MudItem>
         <MudTabs Elevation="3" Rounded="true">
             <MudTabPanel Text="Notes">
                 <h1>NOTES</h1>
             </MudTabPanel>
         </MudTabs>
-    </MudItem> *@
+    </MudItem>
 </MudGrid>
-@* </div> *@
+
 @code
 {
     public CharacterState _state = new CharacterState("character-id");
@@ -32,7 +32,7 @@
     {
         if (firstRender && _state != null)
         {
-            _sessProps2.AdditionalTitle = $"{_state.Name} - Lvl {_state.Level} {_state.ClassName}";
+            _sessProps2.AdditionalTitle = $"{_state.Name}";
             _sessProps2.TitleChanged();
         }
         base.OnAfterRender(firstRender);
