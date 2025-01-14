@@ -43,6 +43,7 @@ body {
 
 .svg-stat-heading {
     display: block;
+    caret-color: transparent;
 }
 
 .svg-stat {
@@ -50,29 +51,36 @@ body {
     fill-opacity: 0;
     stroke-opacity: 1;
     stroke-width: 1.5%;
-}
-.svg-proficiency {
-    width: 25px;
-}
-
-.svg-proficiency path {
-    fill-opacity: 1;
-    stroke-opacity: 0;
-    fill: var(--mud-palette-primary);
-    ;
+    caret-color: transparent;
 }
 
 svg.svg-stat path {
     stroke: var(--mud-palette-primary);
 }
 
+svg.svg-secondary path {
+    stroke: var(--mud-palette-secondary);
+}
+
+.svg-proficiency {
+    width: 12px;
+}
+
+.svg-proficiency path {
+    fill-opacity: 1;
+    stroke-opacity: 0;
+    fill: var(--mud-palette-primary);
+}
+
 .svg-stat text {
     fill-opacity: 1;
     fill: var(--mud-palette-text-primary);
     font-size: 10px;
-
 }
 
-svg.heart path{
+svg.heart path {
     stroke: var(--mudcolors-red-default);
+}
+svg.dying path {
+    stroke: var(--mud-palette-error);
 }

@@ -1,32 +1,49 @@
 @page "/character"
+@using CtrlAltQuest.Blazor.Components.Common
+@using CtrlAltQuest.Pathfinder2e.Actors
 @inherits MainLayout
 @rendermode InteractiveServer
-<div style="overflow:hidden; position:relative;">
-<MudDrawerContainer Class="mud-height-full">
-    <MudDrawer style="position:fixed" @bind-Open="@_open" Anchor="Anchor.Right" ClipMode="DrawerClipMode.Always" Overlay="false" Variant="@DrawerVariant.Persistent">
-        <MudDrawerHeader>
-            <MudText Typo="Typo.h6">More Info:</MudText>
-        </MudDrawerHeader>
-        <MudNavMenu>
-            This is where more info will be placed. Could do a dynamic component as the body: https://learn.microsoft.com/en-us/aspnet/core/blazor/components/dynamiccomponent?view=aspnetcore-8.0
-            For cross state, could have one of these 3 options: https://chrissainty.com/3-ways-to-communicate-between-components-in-blazor/ 
-        </MudNavMenu>
-    </MudDrawer>
-<MudTabs Elevation="3" Rounded="true">
-    <MudTabPanel Text="Character Sheet">
-        <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="@ToggleDrawer">Persistent drawer</MudButton>
-        <CharacterSheetIndex />
-    </MudTabPanel>
-    <MudTabPanel Text="Builder">
-        <BuilderIndex />
-    </MudTabPanel>
-</MudTabs>
+@inject SessionProperties _sessProps2;
+@implements IDisposable
+<MudGrid>
+    <MudItem lg="6" xs="12">
+        <MudTabs Elevation="3" Rounded="true">
+            <MudTabPanel Text="Character Sheet">
+                <CharacterSheetIndex />
+            </MudTabPanel>
+            <MudTabPanel Text="Builder">
+                @* <BuilderIndex /> *@
+            </MudTabPanel>
+        </MudTabs>
+    </MudItem>
+    <MudItem>
+        <MudTabs Elevation="3" Rounded="true">
+            <MudTabPanel Text="Notes">
+                <h1>NOTES</h1>
+            </MudTabPanel>
+        </MudTabs>
+    </MudItem>
+</MudGrid>
 
-</MudDrawerContainer>
-
-</div>
 @code
 {
+    public CharacterState _state = new CharacterState("character-id");
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender && _state != null)
+        {
+            _sessProps2.AdditionalTitle = $"{_state.Name}";
+            _sessProps2.TitleChanged();
+        }
+        base.OnAfterRender(firstRender);
+    }
+
+    public void Dispose()
+    {
+        _sessProps2.AdditionalTitle = string.Empty;
+        _sessProps2.TitleChanged();
+    }
+
     private bool _open = false;
     private void ToggleDrawer()
     {

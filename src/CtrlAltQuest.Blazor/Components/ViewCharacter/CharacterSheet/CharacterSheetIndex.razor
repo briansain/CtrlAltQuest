@@ -1,92 +1,140 @@
-﻿@using CtrlAltQuest.Blazor.Components.SVGs
+﻿@using CtrlAltQuest.Blazor.Components.Layout
+@using CtrlAltQuest.Blazor.Components.SVGs
 @using CtrlAltQuest.Pathfinder2e.Actors
-@using CtrlAltQuest.Pathfinder2e.Ancestry
-
+@using CtrlAltQuest.Pathfinder2e.Calculations
+@inherits CharacterLayout;
 
 <MudPaper Elevation="3" class="ma-6 pa-6">
-    <MudContainer MaxWidth="MaxWidth.Medium" Gutters="false">
-        <MudGrid Justify="Justify.Center">
-            <MudItem xs="8" sm="3">
-                <MudText Typo="Typo.overline">Name</MudText>
-                <MudText Typo="Typo.h5">@_state.Name</MudText>
-            </MudItem>
-            <MudItem xs="4" sm="1">
-                <MudText Typo="Typo.overline">Level</MudText>
-                <MudText Typo="Typo.h5">@_state.Level</MudText>
-            </MudItem>
-            <MudItem xs="6" sm="2">
-                <MudText class="svg-stat-heading" Typo="Typo.overline">HP</MudText>
-                <Heart_SVG Value="@_state.MaxHitPoints"/>
-            </MudItem>
-            <MudItem xs="6" sm="2">
-                <MudText Typo="Typo.overline" Class="svg-stat">Armor Class</MudText>
-                <Armor_SVG Value="@_state.ArmorClass" />
-            </MudItem>
-            <MudItem xs="6" sm="2">
-                <MudText Typo="Typo.overline" Class="svg-stat-heading">Shield</MudText>
-                <Shield_SVG Value="@_state.Shield" />
-            </MudItem>
-            <MudItem xs="6" sm="2">
-                <MudText Typo="Typo.overline">Ancestry</MudText>
-                <MudText Typo="Typo.h5">@_state.AncestryName</MudText>
-            </MudItem>
-            <MudItem xs="6" sm="2">
-                <MudText Typo="Typo.overline">Background</MudText>
-                <MudText Typo="Typo.h5">@_state.BackgroundName</MudText>
-            </MudItem>
-            <MudItem xs="12" sm="2">
-                <MudText Typo="Typo.overline">Class</MudText>
-                <MudText Typo="Typo.h5">@_state.ClassName</MudText>
-            </MudItem>
-            
-            <MudItem xs="12" sm="2">
-                <MudText Typo="Typo.overline">Size</MudText>
-                <MudText Typo="Typo.h5">@Enum.GetName(typeof(Pathfinder2e.Ancestry.Size), _state.Size)</MudText>
-            </MudItem>
-            <MudItem xs="6" sm="2">
-                <MudText Typo="Typo.overline">Speed</MudText>
-                <MudText Typo="Typo.h5">@_state.Speed</MudText>
-            </MudItem>
-            <MudItem xs="6" sm="2">
-                <MudText Typo="Typo.overline">Perception</MudText>
-                <MudText Typo="Typo.h5">@_state.Perception</MudText>
-            </MudItem>
-            <MudItem xs="6" sm="2">
-                <MudText Typo="Typo.overline">Class DC</MudText>
-                <MudText Typo="Typo.h5">17</MudText>
-            </MudItem>
-            <MudItem xs="12" sm="6">
-                <MudGrid>
-                    <AttributeStats />
-                    <DefenseStats />
-                </MudGrid>
-            </MudItem>
-            <MudItem xs="12" sm="6">
-                <MudGrid>
-                    <SkillsStats />
-                </MudGrid>
-            </MudItem>
+    <style>
+        /* .mud-grid {
+            border:red dashed 2px;
+        } */        
+    </style>
+    <MudGrid>
+        <MudItem xs="12" md="6">
+            <MudGrid>
+                <MudItem xs="6" sm="3">
+                    <MudText Typo="Typo.overline">Name</MudText>
+                    <MudText Typo="Typo.h5">@_state.Name</MudText>
+                </MudItem>
+                <MudItem xs="6" sm="3">
+                    <MudText Typo="Typo.overline">Ancestry</MudText>
+                    <MudText Typo="Typo.h5">@_state.AncestryName</MudText>
+                </MudItem>
+                <MudItem xs="6" sm="3">
+                    <MudText Typo="Typo.overline">Background</MudText>
+                    <MudText Typo="Typo.h5">@_state.BackgroundName</MudText>
+                </MudItem>
+                <MudItem xs="6" sm="3">
+                    <MudText Typo="Typo.overline">Class</MudText>
+                    <MudText Typo="Typo.h5">@_state.ClassName</MudText>
+                </MudItem>
 
-            <MudItem xs="12" sm="6">
-                <MudGrid>
-                </MudGrid>
-            </MudItem>
-        </MudGrid>
-    </MudContainer>
+                <MudItem xs="6" sm="3">
+                    <MudText Typo="Typo.overline">Level</MudText>
+                    <MudText Typo="Typo.h5">@_state.Level</MudText>
+                </MudItem>
+                <MudItem xs="6" sm="3">
+                    <MudText Typo="Typo.overline">Speed</MudText>
+                    <MudText Typo="Typo.h5">@_state.Speed</MudText>
+                </MudItem>
+                <MudItem xs="6" sm="3">
+                    <MudText Typo="Typo.overline">Size</MudText>
+                    <MudText Typo="Typo.h5">@Enum.GetName(typeof(Pathfinder2e.Models.Size), _state.Size)</MudText>
+                </MudItem>
+                <MudItem xs="6" sm="3">
+                    <MudText Typo="Typo.overline">Class DC</MudText>
+                    <MudText Typo="Typo.h5">17</MudText>
+                </MudItem>
+            </MudGrid>
+        </MudItem>
+        <MudItem md="6">
+            <MudGrid>
+                <MudItem md="4">
+                    <MudText Typo="Typo.overline" Class="svg-stat-heading">Perception</MudText>
+                    <MagnifyingGlass_SVG Value="@_state.Perception" />
+                </MudItem>
+                <MudItem md="8">
+                    <HealthPoints />
+                </MudItem>
+                <MudItem md="12">
+                    <DyingAndWounded />
+                </MudItem>
+            </MudGrid>
+        </MudItem>
+
+        @* <MudItem md="9"></MudItem>
+        <MudItem md="1">
+            <MudText Class="svg-stat-heading"Typo="Typo.overline">
+                Dying 1
+            </MudText>
+            <Skull_SVG Class="@dying1Class" OnClick="dying1Clicked" />
+        </MudItem>
+        <MudItem md="1">
+            <MudText Class="svg-stat-heading" Typo="Typo.overline">
+                Dying 2
+            </MudText>
+            <Skull_SVG Class="@dying1Class" OnClick="dying1Clicked" />
+        </MudItem>
+        <MudItem md="1">
+            <MudText Class="svg-stat-heading" Typo="Typo.overline">
+                Dying 3
+            </MudText>
+            <Skull_SVG Class="@dying1Class" OnClick="dying1Clicked" />
+        </MudItem>
+
+        <MudFlexBreak />
+        <MudItem md="6"></MudItem>
+        <MudItem md="2">
+            <MudText Class="svg-stat-heading" Typo="Typo.overline">
+                Wounded 1
+            </MudText>
+            <Skull_SVG Class="@dying1Class" OnClick="dying1Clicked" />
+        </MudItem>
+        <MudItem md="2">
+            <MudText Class="svg-stat-heading" Typo="Typo.overline">
+                Wounded 2
+            </MudText>
+            <Skull_SVG Class="@dying1Class" OnClick="dying1Clicked" />
+        </MudItem>
+        <MudItem md="2">
+            <MudText Class="svg-stat-heading" Typo="Typo.overline">
+                Wounded 3
+            </MudText>
+            <Skull_SVG Class="@dying1Class" OnClick="dying1Clicked" />
+        </MudItem> *@
+
+
+        <MudItem md="12">
+            <AttributeStats />
+        </MudItem>
+        <MudItem xs="8" md="6">
+            <ArmorAndShield />
+        </MudItem>
+
+        <MudItem xs="4" md="4">
+            SavingThrows
+        </MudItem>
+        <MudItem xs="4" md="4">
+            Conditions
+        </MudItem>        
+        <MudItem xs="4" md="4">
+            Resistence and Immunities
+        </MudItem>
+        <MudItem xs="12">
+            <SkillsStats />
+        </MudItem>
+        @* <MudFlexBreak />
+
+        
+        <Strikes />
+            
+        <ArmorWeaponProficiency />
+        <DefenseStats /> *@
+
+        
+    </MudGrid>
 </MudPaper>
 
 
 @inject ILogger<CharacterSheetIndex> _logger
-@code {
-    public CharacterState _state = new CharacterState("character-id");
-    protected override void OnInitialized()
-    {
-        _logger.LogDebug("OnInitialized");
-        
-    }
-
-    protected override void OnAfterRender(bool firstRender)
-    {
-        _logger.LogDebug($"OnAfterRender; firstRender: {firstRender}");
-    }
-}

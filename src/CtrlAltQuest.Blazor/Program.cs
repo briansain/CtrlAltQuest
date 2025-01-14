@@ -1,4 +1,5 @@
 using CtrlAltQuest.Blazor.Components;
+using CtrlAltQuest.Blazor.Components.Common;
 using CtrlAltQuest.Pathfinder2e;
 using MudBlazor.Services;
 using Serilog;
@@ -12,11 +13,11 @@ builder.Host.ConfigureServices((context, services) => {
     services
         .AddMudServices()
         .AddRazorComponents()
-        .AddInteractiveServerComponents();;
+        .AddInteractiveServerComponents();
+
+    services.AddScoped<SessionProperties>();
 });
-
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
