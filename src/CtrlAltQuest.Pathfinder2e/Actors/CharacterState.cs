@@ -1,6 +1,8 @@
 using CtrlAltQuest.Pathfinder2e.Common;
 using CtrlAltQuest.Pathfinder2e.Models;
 using Redis.OM.Modeling;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 
 namespace CtrlAltQuest.Pathfinder2e.Actors;
@@ -42,6 +44,7 @@ public partial record CharacterState
     public SkillProficiencies SkillProficiencies { get; init; }
     public SavingThrowProficiencies SavingThrowProficiencies { get; init; }
     public MartialProficiencies MartialProficiencies { get; init; }
+    public ImmutableList<string> Resistances { get; init; }
     public CharacterState(string id)
     {
         Id = id;
@@ -101,9 +104,6 @@ public partial record CharacterState
             ReflexSavingThrow = Proficiency.Expert,
             WillSavingThrow = Proficiency.Trained
         };
-
-
-
         Equipment = new List<Equipment>()
         { 
             //new HideArmor(),
@@ -122,28 +122,8 @@ public partial record CharacterState
                 MaxHealthPoints = 20,
                 BreakThreshold = 10
             }
-            /*
-             *  public record Shield : Equipment
-    {
-        public int ShieldBonus { get; init; }
-        public int Hardness { get; init; }
-        public int MaxHealthPoints { get; init; }
-        public int HealthPoints { get; init; }
-        public int BreakThreshold { get; init; }
-    }
-            
-             
-             
-             
-             
-                     public required string Name { get; init; }
-        public required string Rarity { get; init; }
-        public required List<Trait> Traits { get; init; }
-        public required ItemCategory ItemCategory { get; init; }
-        public required string ItemSubcategory { get; init; }
-        public required string Description { get; init; }
-        public required bool IsEquipped { get; init; }*/
         };
+        Resistances = ImmutableList<string>.Empty.AddRange(["Fire 1/2 Lvl", "Cold 5", "Acid 15"]);
     }
 }
 public record SavingThrowProficiencies

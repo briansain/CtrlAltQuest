@@ -4,8 +4,16 @@
             width: 35px;
         }
 
+        svg.alive path {
+            stroke: var(--mud-palette-text-primary);
+        }
+
+        svg.dying path {
+            stroke: var(--mudcolors-red-default);
+        }
         .muditem-override {
             padding-left: 5px !important;
+            padding-top: 5px !important;
         }
     </style>
     <MudItem md="4"></MudItem>
@@ -24,7 +32,7 @@
             <Skull_SVG Class="@dying1Class" OnClick="dyingClicked" />
         </MudTooltip>
     </MudItem>
-    @* <MudItem md="1" Class="muditem-override"> <!--diehard feat; need to figureout spacing better-->
+    @* <MudItem md="1" Class="muditem-override">
         <MudTooltip Text="Dying 4" Placement="Placement.Top" Arrow="true">
             <Skull_SVG Class="@dying1Class" OnClick="dyingClicked" />
         </MudTooltip>
@@ -54,11 +62,11 @@
     </MudItem> *@
 </MudGrid>
 @code {
-    private string dying1Class = "svg-stat skull";
+    private string dying1Class = "svg-stat skull alive";
     private bool isDying1 = false;
     public void dyingClicked()
     {
         isDying1 = !isDying1;
-        dying1Class = isDying1 ? "svg-stat skull dying" : "svg-stat skull";
+        dying1Class = isDying1 ? "svg-stat skull dying" : "svg-stat skull alive";
     }
 }
