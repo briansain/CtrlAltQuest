@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{89424A41
 		ATTRIBUTION = ATTRIBUTION
 		..\communitPlayerRules.md = ..\communitPlayerRules.md
 		..\LICENSE = ..\LICENSE
+		README.md = README.md
 		..\tasks.md = ..\tasks.md
 	EndProjectSection
 EndProject

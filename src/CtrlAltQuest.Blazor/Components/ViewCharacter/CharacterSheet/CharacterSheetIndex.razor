@@ -8,7 +8,7 @@
     <style>
         /* .mud-grid {
             border:red dashed 2px;
-        } */        
+        }  */    
     </style>
     <MudGrid>
         <MudItem xs="12" md="6">
@@ -63,66 +63,28 @@
             </MudGrid>
         </MudItem>
 
-        @* <MudItem md="9"></MudItem>
-        <MudItem md="1">
-            <MudText Class="svg-stat-heading"Typo="Typo.overline">
-                Dying 1
-            </MudText>
-            <Skull_SVG Class="@dying1Class" OnClick="dying1Clicked" />
-        </MudItem>
-        <MudItem md="1">
-            <MudText Class="svg-stat-heading" Typo="Typo.overline">
-                Dying 2
-            </MudText>
-            <Skull_SVG Class="@dying1Class" OnClick="dying1Clicked" />
-        </MudItem>
-        <MudItem md="1">
-            <MudText Class="svg-stat-heading" Typo="Typo.overline">
-                Dying 3
-            </MudText>
-            <Skull_SVG Class="@dying1Class" OnClick="dying1Clicked" />
-        </MudItem>
-
-        <MudFlexBreak />
-        <MudItem md="6"></MudItem>
-        <MudItem md="2">
-            <MudText Class="svg-stat-heading" Typo="Typo.overline">
-                Wounded 1
-            </MudText>
-            <Skull_SVG Class="@dying1Class" OnClick="dying1Clicked" />
-        </MudItem>
-        <MudItem md="2">
-            <MudText Class="svg-stat-heading" Typo="Typo.overline">
-                Wounded 2
-            </MudText>
-            <Skull_SVG Class="@dying1Class" OnClick="dying1Clicked" />
-        </MudItem>
-        <MudItem md="2">
-            <MudText Class="svg-stat-heading" Typo="Typo.overline">
-                Wounded 3
-            </MudText>
-            <Skull_SVG Class="@dying1Class" OnClick="dying1Clicked" />
-        </MudItem> *@
-
-
         <MudItem md="12">
             <AttributeStats />
         </MudItem>
+
         <MudItem xs="8" md="6">
             <ArmorAndShield />
         </MudItem>
-
-        <MudItem xs="4" md="4">
-            SavingThrows
-        </MudItem>
-        <MudItem xs="4" md="4">
-            Conditions
-        </MudItem>        
-        <MudItem xs="4" md="4">
-            Resistence and Immunities
+        <MudItem md="6">
+            <MudGrid>
+                <MudItem md="12">
+                    <SavingThrows />
+                </MudItem>
+                <MudItem md="12">
+                    <Resistances />
+                </MudItem>
+            </MudGrid>
         </MudItem>
         <MudItem xs="12">
             <SkillsStats />
+        </MudItem>
+        <MudItem xs="4" md="4">
+            Conditions
         </MudItem>
         @* <MudFlexBreak />
 

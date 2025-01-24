@@ -1,5 +1,6 @@
 @page "/character"
 @using CtrlAltQuest.Blazor.Components.Common
+@using CtrlAltQuest.Blazor.Components.ViewCharacter.AvailableActions
 @using CtrlAltQuest.Pathfinder2e.Actors
 @inherits MainLayout
 @rendermode InteractiveServer
@@ -20,6 +21,9 @@
         <MudTabs Elevation="3" Rounded="true">
             <MudTabPanel Text="Notes">
                 <h1>NOTES</h1>
+            </MudTabPanel>
+            <MudTabPanel Text="Available Actions">
+                <AvailableActionsIndex />
             </MudTabPanel>
         </MudTabs>
     </MudItem>

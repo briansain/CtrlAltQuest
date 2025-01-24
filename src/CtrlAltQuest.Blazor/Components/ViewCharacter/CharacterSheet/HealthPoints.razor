@@ -20,7 +20,7 @@
             <MudButton Class="ma-2 pa-2" Variant="Variant.Filled" Color="Color.Primary" OnClick="onSave">Save</MudButton>
         </div>
         @code {
-        protected int health;
+            protected int health;
         private bool isHealthOpen = false;
         private void openHealth()
         {
@@ -30,6 +30,8 @@
         private void onSave()
         {
             isHealthOpen = false;
+            _state = _state with { CurrentHitPoints = health };
+            health = 0;
             //update it
         }
         private void onCancel()
@@ -55,7 +57,7 @@
             <MudButton Class="ma-2 pa-2" Variant="Variant.Filled" Color="Color.Primary" OnClick="onTempSave">Save</MudButton>
         </div>
         @code {
-        protected int tempHealth;
+            protected int tempHealth;
         private bool isTempHealthOpen = false;
         private void openTempHealth()
         {
@@ -65,6 +67,8 @@
         private void onTempSave()
         {
             isTempHealthOpen = false;
+            _state = _state with { TemporaryHitPoints = tempHealth };
+            tempHealth = 0;
             //update it
         }
         private void onTempCancel()
