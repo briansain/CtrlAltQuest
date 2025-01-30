@@ -1,0 +1,68 @@
+﻿<MudCard Elevation="3">
+    <MudCardHeader>
+        <CardHeaderContent>
+        <MudText Inline="true" Typo="Typo.h4">@CharacterAction.Title</MudText>
+        <MudIconButton 
+            Target="_blank" 
+            Rel="noopener noreferrer" 
+            Href="@CharacterAction.Link"
+            Icon="@Icons.Material.Filled.Link"
+            Size="@Size.Medium" />
+        <MudIconButton 
+            Icon="@_pushPin"
+            aria-label="delete" 
+            OnClick="async _ => await FlipPinned.InvokeAsync(CharacterAction)"
+            Ripple="false" 
+            Size="@Size.Medium" />
+        </CardHeaderContent>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudGrid>
+            @if (CharacterAction.Traits.Count > 0)
+            {
+                <MudItem xs="12">
+                    <MudText Typo="Typo.h6">Traits:</MudText>
+                    @foreach (var trait in CharacterAction.Traits)
+                    {
+                        <MudChip T="string" Color="Color.Primary">@trait</MudChip>
+                    }
+                </MudItem>
+            }
+            @if (!string.IsNullOrWhiteSpace(CharacterAction.Requirements))
+            {
+                <MudItem xs = "12">
+                    <MudText Inline = "true" Typo = "Typo.h6"> Requirements:</MudText>
+                    <MudText Typo = "Typo.body1"> @CharacterAction.Requirements </MudText>
+                </MudItem>
+            }
+            @if (!string.IsNullOrWhiteSpace(CharacterAction.Trigger))
+            {
+                <MudItem xs="12">
+                    <MudText Inline="true" Typo="Typo.h6">
+                        Trigger:
+                    </MudText>
+                <MudText Typo="Typo.body1">@CharacterAction.Trigger</MudText>
+                </MudItem>
+            }
+        <MudItem xs="12">
+            <MudText Inline="true" Typo="Typo.h6">
+                Description:
+            </MudText>
+            <MudText Typo="Typo.body1">@CharacterAction.Description</MudText>
+        </MudItem>
+        </MudGrid>
+    </MudCardContent>
+    <MudCardActions>
+            
+    </MudCardActions>
+</MudCard>
+@code {
+    [Parameter] public required Pathfinder2e.Common.CharacterAction CharacterAction { get; set; }
+    [Parameter] public required EventCallback<Pathfinder2e.Common.CharacterAction> FlipPinned { get; set; }
+    private string _pushPin = Icons.Material.Outlined.PushPin;
+    protected override void OnParametersSet()
+    {
+        _pushPin = (CharacterAction.IsPinned ? Icons.Material.Filled.PushPin : Icons.Material.Outlined.PushPin);
+        base.OnParametersSet();
+    }
+}

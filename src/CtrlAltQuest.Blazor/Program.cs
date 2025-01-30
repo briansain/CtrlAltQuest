@@ -1,6 +1,5 @@
 using CtrlAltQuest.Blazor.Components;
 using CtrlAltQuest.Blazor.Components.Common;
-using CtrlAltQuest.Pathfinder2e;
 using MudBlazor.Services;
 using Serilog;
 
@@ -9,7 +8,8 @@ builder.Host.UseSerilog((hostingContext, loggerConfiguration) => loggerConfigura
     .ReadFrom.Configuration(hostingContext.Configuration)
     .Enrich.FromLogContext());
 
-builder.Host.ConfigureServices((context, services) => {
+builder.Host.ConfigureServices((context, services) =>
+{
     services
         .AddMudServices()
         .AddRazorComponents()

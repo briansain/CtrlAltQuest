@@ -1,10 +1,4 @@
-﻿using CtrlAltQuest.Pathfinder2e.Actors;
-using CtrlAltQuest.Pathfinder2e.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CtrlAltQuest.Pathfinder2e.Models;
 
 namespace CtrlAltQuest.Pathfinder2e.Calculations
 {

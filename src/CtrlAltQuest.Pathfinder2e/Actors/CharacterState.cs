@@ -1,7 +1,6 @@
 using CtrlAltQuest.Pathfinder2e.Common;
 using CtrlAltQuest.Pathfinder2e.Models;
 using Redis.OM.Modeling;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 
@@ -33,7 +32,7 @@ public partial record CharacterState
     public Models.Size Size { get; init; }
     public int Speed { get; init; }
     public int Perception { get; init; }
-    
+
 
 
     public List<Ability> Abilities { get; init; } = new List<Ability>();

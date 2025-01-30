@@ -2,37 +2,36 @@
 
 - [X] Skeleton site
 - [X] Homepage
-- [ ] Character page
-  - [ ] Stats
-    - [ ] Manage buttons
-    - [ ] Long Rest
-    - [ ] Start different "type" voting (battle/skill/flat check)
-  - [ ] History
-  - [ ] Voting Booth/Section for voting
-- [ ] User Accounts
-  - [ ] anyone can read a character
-  - [ ] only logged in can vote
-  - [ ] only narrators can manage
-- [ ] Character Sheet
-  - [ ] Defenses
-  - [ ] Hit Points
-  - [X] Skills
-  - [ ] Languages
-  - [ ] Perception
-  - [ ] Speed
-  - [ ] Strikes
-  - [ ] Abilities
-  - [ ] Spells
+- [ ] About Us
+- [ ] Contribute
+- [ ] Licenses
+- [ ] Character Sheet UI
+	- [X] Defenses
+	- [X] Hit Points
+	- [X] Skills
+	- [ ] Languages
+	- [X] Perception
+	- [X] Speed
+	- [ ] Strikes
+	- [ ] Abilities
+	- [ ] Spells
+	- [ ] Equipment
+	- [ ] Available Action
 - [ ] Character Builder
-  - [ ] Ancestry (Common)
-  - [ ] Background (Common)
-  - [ ] Class (Common)
-  - [ ] Misc.
-- [ ] Input raw data
-- [ ] Metrics
-- [ ] Beta test
+	- [ ] Ancestry (Common)
+	- [ ] Background (Common)
+	- [ ] Class (Common)
+	- [ ] Equipment
+- [ ] User Accounts
+	- [ ] Email Account
+	- [ ] Google Account
+	- [ ] Twitch Account
+	- [ ] view created characters
+	- [ ] create new character
+	- [ ] anyone can read any character (with link)
+	- [ ] only user can edit their own character
+- [ ] Beta test with docker containers
 - [ ] Super admin
-  - [ ] ???
-- [ ] Projections
-  - [ ] DistPubSub for Actor
-  - [ ] Subscription for ProjectorManager
+	- [ ] ???
+- [ ] 
+- [ ] Community Character

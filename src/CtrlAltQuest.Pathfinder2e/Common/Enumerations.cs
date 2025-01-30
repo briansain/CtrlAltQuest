@@ -20,6 +20,11 @@ namespace CtrlAltQuest.Pathfinder2e.Common
         Humanoid,
         Leshy,
         Orc,
-        Plant
+        Plant,
+        Move,
+        Attack,
+        Manipulate,
+        Concentrate,
+        Secret
     }
 }

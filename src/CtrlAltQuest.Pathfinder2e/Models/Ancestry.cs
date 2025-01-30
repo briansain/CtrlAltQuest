@@ -3,7 +3,7 @@ using Redis.OM.Modeling;
 namespace CtrlAltQuest.Pathfinder2e.Models;
 
 [Document(StorageType = StorageType.Json, Prefixes = ["Pathfinder.Ancestry"])]
-public record Ancestry ()
+public record Ancestry()
 {
     [Indexed]
     [RedisIdField]

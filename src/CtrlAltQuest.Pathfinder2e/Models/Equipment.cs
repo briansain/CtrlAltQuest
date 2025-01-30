@@ -1,5 +1,4 @@
 ﻿using CtrlAltQuest.Pathfinder2e.Common;
-using System.Collections.Generic;
 
 namespace CtrlAltQuest.Pathfinder2e.Models
 {
