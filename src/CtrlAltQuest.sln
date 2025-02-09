@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{89424A41
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CtrlAltQuest.CLI", "CtrlAltQuest.CLI\CtrlAltQuest.CLI.csproj", "{5DADF6BA-AB03-4837-AC68-692BA679545D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CtrlAltQuest.Common", "CtrlAltQuest.Common\CtrlAltQuest.Common.csproj", "{425C6CF7-5DA2-471E-890D-62E4C6F2C9A7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,10 @@ Global
 		{5DADF6BA-AB03-4837-AC68-692BA679545D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5DADF6BA-AB03-4837-AC68-692BA679545D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5DADF6BA-AB03-4837-AC68-692BA679545D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{425C6CF7-5DA2-471E-890D-62E4C6F2C9A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{425C6CF7-5DA2-471E-890D-62E4C6F2C9A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{425C6CF7-5DA2-471E-890D-62E4C6F2C9A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{425C6CF7-5DA2-471E-890D-62E4C6F2C9A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,7 +1,7 @@
 using Akka.Actor;
 using Akka.Event;
 
-namespace CtrlAltQuest.Pathfinder2e.Actors;
+namespace CtrlAltQuest.Pathfinder2e.Actors.Character;
 
 public class CharacterActor : ReceiveActor
 {
@@ -13,7 +13,7 @@ public class CharacterActor : ReceiveActor
     {
         log = Context.GetLogger();
         _state = new CharacterActorState
-        { 
+        {
             Id = persistenceId
         };
         Receive<CreateCharacter>(msg =>
@@ -23,11 +23,11 @@ public class CharacterActor : ReceiveActor
         });
     }
 
-	protected override bool AroundReceive(Receive receive, object message)
-	{
+    protected override bool AroundReceive(Receive receive, object message)
+    {
         log.Info($"CharacterActor {_state.Id} received message type {message.GetType()}");
-		return base.AroundReceive(receive, message);
-	}
+        return base.AroundReceive(receive, message);
+    }
 
     public static Props PropsFor(string persistenceId)
     {

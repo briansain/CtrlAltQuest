@@ -1,18 +1,13 @@
 using CtrlAltQuest.Pathfinder2e.Common;
 using CtrlAltQuest.Pathfinder2e.Models;
-using Redis.OM.Modeling;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 
-namespace CtrlAltQuest.Pathfinder2e.Actors;
+namespace CtrlAltQuest.Pathfinder2e.Actors.Character;
 
-[Document(StorageType = StorageType.Json)]
 public partial record CharacterState
 {
-    [RedisIdField]
-    [Indexed]
     public string Id { get; init; }
-    [Indexed]
     public string Name { get; init; }
     public int Level { get; init; }
     public string AncestryName { get; init; }
@@ -29,11 +24,8 @@ public partial record CharacterState
     public int Wisdom { get; init; }
     public int Charisma { get; init; }
 
-    public Models.Size Size { get; init; }
+    public Size Size { get; init; }
     public int Speed { get; init; }
-    public int Perception { get; init; }
-
-
 
     public List<Ability> Abilities { get; init; } = new List<Ability>();
     public List<Trait> Traits { get; init; } = new List<Trait>();
@@ -132,40 +124,6 @@ public record SavingThrowProficiencies
     public Proficiency WillSavingThrow { get; init; }
 }
 
-//public partial class CharacterState
-//{
-
-//    private int CalculateProficiency(Proficiency proficiency)
-//    {
-//        return proficiency == Proficiency.Untrained ? 0 : (int)proficiency + Level;
-//    }
-//    [JsonIgnore]
-//    public int FortitudeSavingThrow
-//    {
-//        get
-//        {
-//            return CalculateProficiency(Skills.FortitudeSavingThrow) + Constitution;
-//        }
-//    }
-//    [JsonIgnore]
-//    public int ReflexSavingThrow
-//    {
-//        get
-//        {
-//            return CalculateProficiency(Skills.ReflexSavingThrow) + Dexterity;
-//        }
-//    }
-//    [JsonIgnore]
-//    public int WillSavingThrow
-//    {
-//        get
-//        {
-//            return CalculateProficiency(Skills.WillSavingThrow) + Wisdom;
-//        }
-//    }
-
-//}
-
 public record MartialProficiencies
 {
     public Proficiency Unarmored { get; init; }
@@ -181,6 +139,7 @@ public record MartialProficiencies
 
 public record SkillProficiencies
 {
+    public Proficiency Perception { get; init; }
     public Proficiency Acrobatics { get; init; }
     public Proficiency Arcana { get; init; }
     public Proficiency Athletics { get; init; }

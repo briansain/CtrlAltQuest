@@ -6,16 +6,32 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+    <ItemGroup>
+	    <Content Include="_pf2e_data\**">
+		    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	    </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="_pf2e_data\homebrew\Bonesaw.json" />
+    </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Akka" Version="1.5.37" />
     <PackageReference Include="Akka.Cluster" Version="1.5.37" />
-    <PackageReference Include="Akka.Cluster.Hosting" Version="1.5.37" />
+    <PackageReference Include="Akka.Cluster.Hosting" Version="1.5.37.2" />
     <PackageReference Include="Akka.Logger.Serilog" Version="1.5.25" />
     <PackageReference Include="Akka.Persistence" Version="1.5.37" />
-    <PackageReference Include="Akka.Persistence.Hosting" Version="1.5.37" />
+    <PackageReference Include="Akka.Persistence.Hosting" Version="1.5.37.2" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.1" />
-    <PackageReference Include="NRedisStack" Version="0.13.1" />
-    <PackageReference Include="Redis.OM" Version="0.7.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="_pf2e_data\Homebrew\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CtrlAltQuest.Common\CtrlAltQuest.Common.csproj" />
   </ItemGroup>
 
 </Project>

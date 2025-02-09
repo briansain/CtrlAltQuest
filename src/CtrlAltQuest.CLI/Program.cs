@@ -1,10 +1,7 @@
 ﻿using Akka.Actor;
-using Akka.Remote;
 using CommandLine;
 using CtrlAltQuest.CLI;
-using CtrlAltQuest.Pathfinder2e;
-using CtrlAltQuest.Pathfinder2e.Actors;
-using Microsoft.Extensions.Configuration;
+using CtrlAltQuest.Pathfinder2e.Actors.Character;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
@@ -12,49 +9,49 @@ using Serilog;
 
 internal class Program
 {
-	private async static Task Main(string[] args)
-	{
-		await Parser.Default.ParseArguments<Options>(args)
-		.WithParsedAsync(async o =>
-		{
-			if (o.LoadData)
-			{
-				Console.WriteLine($"Starting to load data from {o.FileLocation}");
-				var loadData = new LoadData(o.FileLocation, o.UploadType);
-				loadData.Start().Wait();
-			}
-			else if (o.CreateCharacter)
-			{
+    private async static Task Main(string[] args)
+    {
+        await Parser.Default.ParseArguments<Options>(args)
+        .WithParsedAsync(async o =>
+        {
+            if (o.LoadData)
+            {
+                Console.WriteLine($"Starting to load data from {o.FileLocation}");
+                var loadData = new LoadData(o.FileLocation, o.UploadType);
+                loadData.Start().Wait();
+            }
+            else if (o.CreateCharacter)
+            {
 
-				var host = Host.CreateApplicationBuilder();
-				host.Services.AddSerilog((services, loggerConfiguration) => loggerConfiguration
-					.ReadFrom.Configuration(host.Configuration)
-					.Enrich.FromLogContext()
-					.WriteTo.Console());
+                var host = Host.CreateApplicationBuilder();
+                host.Services.AddSerilog((services, loggerConfiguration) => loggerConfiguration
+                    .ReadFrom.Configuration(host.Configuration)
+                    .Enrich.FromLogContext()
+                    .WriteTo.Console());
 
 
-				host.Services.AddPathfinder2e(host.Configuration);
-				var b = host.Build();
-				var task = Task.Run(() =>
-				{
-					Thread.Sleep(1000);
-					var actorSystem = b.Services.GetService<ActorSystem>();
+                //host.Services.AddPathfinder2e(host.Configuration);
+                var b = host.Build();
+                var task = Task.Run(() =>
+                {
+                    Thread.Sleep(1000);
+                    var actorSystem = b.Services.GetService<ActorSystem>();
 
-					var persistenceId = Guid.NewGuid().ToString();
-					var characterActor = actorSystem!.ActorOf(CharacterActor.PropsFor(persistenceId));
-					characterActor.Tell(new CreateCharacter(persistenceId, o.CharacterName));
-					Thread.Sleep(2000);
-				});
-				await task;
-			}
-			else
-			{
-				Console.WriteLine($"Current Arguments: -l {o.LoadData}");
-				Console.WriteLine("Quick Start Example!");
-			}
-			Console.WriteLine("END");
-		});
-	}
+                    var persistenceId = Guid.NewGuid().ToString();
+                    var characterActor = actorSystem!.ActorOf(CharacterActor.PropsFor(persistenceId));
+                    characterActor.Tell(new CreateCharacter(persistenceId, o.CharacterName));
+                    Thread.Sleep(2000);
+                });
+                await task;
+            }
+            else
+            {
+                Console.WriteLine($"Current Arguments: -l {o.LoadData}");
+                Console.WriteLine("Quick Start Example!");
+            }
+            Console.WriteLine("END");
+        });
+    }
 }
 
 public class Options

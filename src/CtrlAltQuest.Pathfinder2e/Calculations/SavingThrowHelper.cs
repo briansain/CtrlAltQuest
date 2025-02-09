@@ -1,4 +1,4 @@
-﻿using CtrlAltQuest.Pathfinder2e.Actors;
+﻿using CtrlAltQuest.Pathfinder2e.Actors.Character;
 
 namespace CtrlAltQuest.Pathfinder2e.Calculations
 {
