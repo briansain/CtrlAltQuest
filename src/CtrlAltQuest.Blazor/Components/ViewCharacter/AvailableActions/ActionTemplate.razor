@@ -1,4 +1,5 @@
-﻿<MudCard Elevation="3">
+﻿@using CtrlAltQuest.Pathfinder2e.SystemData
+<MudCard Elevation="3">
     <MudCardHeader>
         <CardHeaderContent>
         <MudText Inline="true" Typo="Typo.h4">@CharacterAction.Title</MudText>
@@ -7,13 +8,13 @@
             Rel="noopener noreferrer" 
             Href="@CharacterAction.Link"
             Icon="@Icons.Material.Filled.Link"
-            Size="@Size.Medium" />
+            Size="@MudBlazor.Size.Medium" />
         <MudIconButton 
             Icon="@_pushPin"
             aria-label="delete" 
             OnClick="async _ => await FlipPinned.InvokeAsync(CharacterAction)"
             Ripple="false" 
-            Size="@Size.Medium" />
+            Size="@MudBlazor.Size.Medium" />
         </CardHeaderContent>
     </MudCardHeader>
     <MudCardContent>
@@ -57,8 +58,8 @@
     </MudCardActions>
 </MudCard>
 @code {
-    [Parameter] public required Pathfinder2e.Common.CharacterAction CharacterAction { get; set; }
-    [Parameter] public required EventCallback<Pathfinder2e.Common.CharacterAction> FlipPinned { get; set; }
+    [Parameter] public required CharacterAction CharacterAction { get; set; }
+    [Parameter] public required EventCallback<CharacterAction> FlipPinned { get; set; }
     private string _pushPin = Icons.Material.Outlined.PushPin;
     protected override void OnParametersSet()
     {

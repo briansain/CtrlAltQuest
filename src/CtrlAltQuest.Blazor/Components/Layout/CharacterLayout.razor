@@ -1,17 +1,23 @@
 @page "/character"
 @using CtrlAltQuest.Blazor.Components.Common
 @using CtrlAltQuest.Blazor.Components.ViewCharacter.AvailableActions
+@using CtrlAltQuest.Common
 @using CtrlAltQuest.Pathfinder2e.Actors;
 @using CtrlAltQuest.Pathfinder2e.Actors.Character
+@using CtrlAltQuest.Pathfinder2e.Repositories
 @inherits MainLayout
 @rendermode InteractiveServer
-@inject SessionProperties _sessProps2;
+@inject SessionProperties _sessionProperties;
+@inject ICharacterRepository<Pathfinder2eCharacter> characterRepository;
 @implements IDisposable
 <MudGrid>
     <MudItem lg="6" xs="12">
         <MudTabs Elevation="3" Rounded="true">
             <MudTabPanel Text="Character Sheet">
-                <CharacterSheetIndex />
+                @if(_state != null)
+                {
+                    <CharacterSheetIndex />
+                }
             </MudTabPanel>
             <MudTabPanel Text="Builder">
                 @* <BuilderIndex /> *@
@@ -32,21 +38,28 @@
 
 @code
 {
-    public CharacterState _state = new CharacterState("character-id");
+    public Pathfinder2eCharacter? _state;
+    protected async override Task OnInitializedAsync()
+    {
+        var fileRepo = new FileRepository();
+        _state = await fileRepo.GetCharacter(null);
+        await base.OnInitializedAsync();
+        return;
+    }
     protected override void OnAfterRender(bool firstRender)
     {
         if (firstRender && _state != null)
         {
-            _sessProps2.AdditionalTitle = $"{_state.Name}";
-            _sessProps2.TitleChanged();
+            _sessionProperties.AdditionalTitle = $"{_state.Name}";
+            _sessionProperties.TitleChanged();
         }
         base.OnAfterRender(firstRender);
     }
 
     public void Dispose()
     {
-        _sessProps2.AdditionalTitle = string.Empty;
-        _sessProps2.TitleChanged();
+        _sessionProperties.AdditionalTitle = string.Empty;
+        _sessionProperties.TitleChanged();
     }
 
     private bool _open = false;

@@ -1,7 +1,9 @@
 ﻿using Akka.Actor;
+using Akka.DependencyInjection;
 using CommandLine;
-using CtrlAltQuest.CLI;
+using CtrlAltQuest.Common;
 using CtrlAltQuest.Pathfinder2e.Actors.Character;
+using CtrlAltQuest.Pathfinder2e.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
@@ -17,8 +19,9 @@ internal class Program
             if (o.LoadData)
             {
                 Console.WriteLine($"Starting to load data from {o.FileLocation}");
-                var loadData = new LoadData(o.FileLocation, o.UploadType);
-                loadData.Start().Wait();
+                //var loadData = new LoadData(o.FileLocation, o.UploadType);
+                //loadData.Start().Wait();
+                var character = await new FileRepository().GetCharacter(CharacterId.GenerateId("hello-world"));
             }
             else if (o.CreateCharacter)
             {
@@ -36,9 +39,9 @@ internal class Program
                 {
                     Thread.Sleep(1000);
                     var actorSystem = b.Services.GetService<ActorSystem>();
-
+                    var dependencyResolver = b.Services.GetService<IDependencyResolver>();
                     var persistenceId = Guid.NewGuid().ToString();
-                    var characterActor = actorSystem!.ActorOf(CharacterActor.PropsFor(persistenceId));
+                    var characterActor = actorSystem!.ActorOf(CharacterActor.PropsFor(UserId.GenerateId("H"), CharacterId.GenerateId("I"), dependencyResolver));
                     characterActor.Tell(new CreateCharacter(persistenceId, o.CharacterName));
                     Thread.Sleep(2000);
                 });

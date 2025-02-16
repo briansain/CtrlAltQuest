@@ -1,11 +1,26 @@
 using Akka.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace CtrlAltQuest.Pathfinder2e.Startup;
 
 public static class ServicesSetup
 {
+    public static IServiceCollection AddPathfinder2eServices(this IServiceCollection services, IConfiguration configuration)
+    {
+        //services.AddScoped<ICharacterRepository>(_ => new FileRepository());
+        services.Configure<JsonSerializerOptions>(options =>
+        {
+            options.PropertyNameCaseInsensitive = true;
+            options.Converters.Add(new JsonStringEnumConverter());
+        });
+        return services;
+    }
     public static AkkaConfigurationBuilder AddPathfinder2eClustered(this AkkaConfigurationBuilder builder, PathfinderSystemConfiguration configuration)
     {
+
         //services.AddAkka("pathfinder2e", builder =>
         //{
         //	builder.ConfigureLoggers(configLoggers =>

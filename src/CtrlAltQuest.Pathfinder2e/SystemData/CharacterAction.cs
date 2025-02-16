@@ -1,4 +1,4 @@
-﻿namespace CtrlAltQuest.Pathfinder2e.Common
+﻿namespace CtrlAltQuest.Pathfinder2e.SystemData
 {
     public record CharacterAction
     {

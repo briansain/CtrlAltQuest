@@ -13,7 +13,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="_pf2e_data\homebrew\Bonesaw.json" />
+      <None Remove="_pf2e_data\ancestries\Human.json" />
+      <None Remove="_pf2e_data\Testing\characters.json" />
     </ItemGroup>
 
   <ItemGroup>
@@ -27,11 +28,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="_pf2e_data\Homebrew\" />
+    <ProjectReference Include="..\CtrlAltQuest.Common\CtrlAltQuest.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CtrlAltQuest.Common\CtrlAltQuest.Common.csproj" />
+    <Folder Include="_pf2e_data\Ancestries\" />
   </ItemGroup>
 
 </Project>

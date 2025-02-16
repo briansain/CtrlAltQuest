@@ -1,11 +1,11 @@
 ﻿using CtrlAltQuest.Pathfinder2e.Actors.Character;
-using CtrlAltQuest.Pathfinder2e.Models;
+using CtrlAltQuest.Pathfinder2e.SystemData;
 
 namespace CtrlAltQuest.Pathfinder2e.Calculations
 {
     public class MartialHelper : BaseHelper
     {
-        public static int GetArmorBonus(CharacterState characterState)
+        public static int GetArmorBonus(Pathfinder2eCharacter characterState)
         {
             var equippedArmor = EquipmentHelper.GetEquippedArmor(characterState.Equipment);
             var armorProficiencyBonus = 0;
@@ -34,7 +34,7 @@ namespace CtrlAltQuest.Pathfinder2e.Calculations
                 case ArmorCategory.Heavy:
                     return CalculateProficiency(martialProficiencies.HeavyArmor, level);
                 default:
-                    return CalculateProficiency(Common.Proficiency.Untrained, level);
+                    return CalculateProficiency(Proficiency.Untrained, level);
             }
         }
     }

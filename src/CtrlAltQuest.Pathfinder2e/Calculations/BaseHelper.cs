@@ -1,4 +1,4 @@
-﻿using CtrlAltQuest.Pathfinder2e.Common;
+﻿using CtrlAltQuest.Pathfinder2e.SystemData;
 
 namespace CtrlAltQuest.Pathfinder2e.Calculations
 {

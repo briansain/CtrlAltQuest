@@ -1,6 +1,4 @@
-﻿using CtrlAltQuest.Pathfinder2e.Common;
-
-namespace CtrlAltQuest.Pathfinder2e.Models
+﻿namespace CtrlAltQuest.Pathfinder2e.SystemData
 {
     public record Armor : Equipment
     {

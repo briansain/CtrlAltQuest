@@ -1,5 +1,5 @@
 ﻿using CtrlAltQuest.Pathfinder2e.Actors.Character;
-using CtrlAltQuest.Pathfinder2e.Models;
+using CtrlAltQuest.Pathfinder2e.SystemData;
 using Redis.OM;
 using StackExchange.Redis;
 using System.Text.Json;
@@ -26,9 +26,9 @@ namespace CtrlAltQuest.CLI
             var r = ConnectionMultiplexer.Connect("localhost:6379");
             var redis = new RedisConnectionProvider(r);
 
-            if (redis.Connection.GetIndexInfo(typeof(CharacterState)) == null)
+            if (redis.Connection.GetIndexInfo(typeof(Pathfinder2eCharacter)) == null)
             {
-                await redis.Connection.CreateIndexAsync(typeof(CharacterState));
+                await redis.Connection.CreateIndexAsync(typeof(Pathfinder2eCharacter));
             }
             if (redis.Connection.GetIndexInfo(typeof(Ancestry)) == null)
             {
