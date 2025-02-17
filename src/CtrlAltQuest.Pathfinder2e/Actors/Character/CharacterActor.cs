@@ -3,7 +3,9 @@ using Akka.Actor.Internal;
 using Akka.DependencyInjection;
 using Akka.Event;
 using CtrlAltQuest.Common;
+using CtrlAltQuest.Common.Actors;
 using CtrlAltQuest.Common.Repositories;
+using System.Runtime.Serialization;
 
 namespace CtrlAltQuest.Pathfinder2e.Actors.Character;
 
@@ -14,25 +16,27 @@ public class CharacterActor : ReceiveActor, IWithUnboundedStash
     private ICharacterRepository<Pathfinder2eCharacter> _characterRepository;
     public IStash Stash { get; set; }
 
-    public CharacterActor(UserId userId, CharacterId characterId, ICharacterRepository<Pathfinder2eCharacter> characterRepository)
+    public CharacterActor(CharacterId characterId, ICharacterRepository<Pathfinder2eCharacter> characterRepository)
     {
         Stash = new UnboundedStashImpl(Context);
         log = Context.GetLogger();
         _characterRepository = characterRepository;
         _state = new Pathfinder2eCharacter
         {
-            CharacterId = characterId,
-            UserId = userId
+            CharacterId = characterId
         };
 
-        ReceiveAsync<LoadCharacter>(async msg =>
+        Receive<LoadCharacter>(msg =>
         {
-            var character = await characterRepository.GetCharacter(_state.CharacterId);
+            characterRepository.GetCharacter(_state.CharacterId).PipeTo(Self, Self, state => new CharacterLoaded(state), exception => throw new DataLoadFailedException($"Failed to load Character {_state.CharacterId}", exception));
+        });
+        Receive<CharacterLoaded>(msg =>
+        {
+            _state = msg.State;
             Stash.UnstashAll();
             Become(ReadyToReceive);
         });
         ReceiveAny(_ => Stash.Stash());
-
         Self.Tell(new LoadCharacter());
     }
 
@@ -42,6 +46,7 @@ public class CharacterActor : ReceiveActor, IWithUnboundedStash
         {
             _state = _state with { Name = msg.CharacterName };
         });
+        Receive<GetCharacterState>(_ => Sender.Tell(new CharacterStateResponse(_state)));
     }
 
     protected override bool AroundReceive(Receive receive, object message)
@@ -50,22 +55,20 @@ public class CharacterActor : ReceiveActor, IWithUnboundedStash
         return base.AroundReceive(receive, message);
     }
 
-    public static Props PropsFor(UserId userId, CharacterId characterId, IDependencyResolver dependencyResolver)
+    public static Props PropsFor(CharacterId characterId, IDependencyResolver dependencyResolver)
     {
-        return Props.Create(() => new CharacterActor(userId, characterId, dependencyResolver.GetService<ICharacterRepository<Pathfinder2eCharacter>>()));
+        return Props.Create(() => new CharacterActor(characterId, dependencyResolver.GetService<ICharacterRepository<Pathfinder2eCharacter>>()));
     }
 }
 
-public record CreateCharacter(string PersistenceId, string CharacterName);
-
-internal record LoadCharacter;
-public record RecordAncestry(string Name);
-public record AncestryRecorded(string Name);
-
-internal record GetCharacterState(string PersistenceId);
-internal record CharacterStateResponse(Pathfinder2eCharacter State, long CurrentSequenceNumber);
-
-internal record ConfigureBuildOptions();
-internal record BuildOptionsConfigured();
-internal record BuildOptions();
-internal record StartCharacterBuilder();
+public record CreateCharacter(CharacterId CharacterId, string CharacterName) : ICharacterMessage;
+public record GetCharacterState(CharacterId CharacterId) : ICharacterMessage;
+public record CharacterStateResponse(Pathfinder2eCharacter State);
+public record LoadCharacter;
+public record CharacterLoaded(Pathfinder2eCharacter State);
+public class DataLoadFailedException : Exception
+{
+    public DataLoadFailedException() : base() { }
+    public DataLoadFailedException(string? message) : base(message) { }
+    public DataLoadFailedException(string? message, Exception? innerException) : base(message, innerException) { }
+}

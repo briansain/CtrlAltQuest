@@ -5,7 +5,7 @@ namespace CtrlAltQuest.Common
     [JsonConverter(typeof(UniqueIdConverter<UserId>))]
     public class UserId : UniqueId<UserId>
     {
-        private static new Guid NamespaceGuid => new Guid("387afa8f-a7c2-4e11-8330-6c1b11cf068c");
+        public new static Guid NamespaceGuid => new Guid("387afa8f-a7c2-4e11-8330-6c1b11cf068c");
 
         [JsonConstructor]
         public UserId(string value) : base(value) { }

@@ -1,4 +1,9 @@
+using Akka.Actor;
 using Akka.Hosting;
+using CtrlAltQuest.Common.Actors;
+using CtrlAltQuest.Common.Repositories;
+using CtrlAltQuest.Pathfinder2e.Actors.Character;
+using CtrlAltQuest.Pathfinder2e.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text.Json;
@@ -10,7 +15,7 @@ public static class ServicesSetup
 {
     public static IServiceCollection AddPathfinder2eServices(this IServiceCollection services, IConfiguration configuration)
     {
-        //services.AddScoped<ICharacterRepository>(_ => new FileRepository());
+        services.AddScoped<ICharacterRepository<Pathfinder2eCharacter>>(_ => new FileRepository());
         services.Configure<JsonSerializerOptions>(options =>
         {
             options.PropertyNameCaseInsensitive = true;
@@ -18,34 +23,13 @@ public static class ServicesSetup
         });
         return services;
     }
-    public static AkkaConfigurationBuilder AddPathfinder2eClustered(this AkkaConfigurationBuilder builder, PathfinderSystemConfiguration configuration)
+    public static AkkaConfigurationBuilder AddPathfinder2eActors(this AkkaConfigurationBuilder builder, IConfiguration configuration)
     {
-
-        //services.AddAkka("pathfinder2e", builder =>
-        //{
-        //	builder.ConfigureLoggers(configLoggers =>
-        //	{
-        //		configLoggers.LogLevel = LogLevel.DebugLevel;
-        //		configLoggers.LogConfigOnStart = true;
-        //		configLoggers.ClearLoggers();
-        //		configLoggers.AddLogger<SerilogLogger>();
-        //	})
-        //	.WithRemoting(port: 5053, hostname: "localhost")
-        //	.WithClustering(new ClusterOptions()
-        //	{
-        //		SeedNodes = ["akka.tcp://pathfinder2e@localhost:5053"],
-        //		Roles = ["main"]
-        //	})
-
-        //	//.WithDistributedPubSub("main")
-        //	.WithActors((actorSystem, registry) =>
-        //	{
-        //		//var echoActor = actorSystem.ActorOf<CharacterActor>($"character-actor");
-        //	});
-        //});
-
-        //return services;
-
+        builder.WithActors((sys, registry, dependencyResolver) =>
+        {
+            var actorManager = sys.ActorOf(Props.Create(() => new ActorManager<CharacterActor>()), "characteractor-manager");
+            registry.Register<ActorManager<CharacterActor>>(actorManager);
+        });
         return builder;
     }
 }

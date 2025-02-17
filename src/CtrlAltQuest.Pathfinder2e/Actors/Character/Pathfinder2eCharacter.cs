@@ -6,7 +6,7 @@ namespace CtrlAltQuest.Pathfinder2e.Actors.Character;
 public record Pathfinder2eCharacter : ICharacter
 {
     public required CharacterId CharacterId { get; init; }
-    public required UserId UserId { get; init; }
+    public UserId UserId { get; init; }
     public string Name { get; init; } = string.Empty;
     public int Level { get; init; }
     public string AncestryName { get; init; } = string.Empty;

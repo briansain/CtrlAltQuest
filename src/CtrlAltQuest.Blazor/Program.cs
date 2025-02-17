@@ -1,3 +1,4 @@
+using Akka.Hosting;
 using CtrlAltQuest.Blazor.Components;
 using CtrlAltQuest.Blazor.Components.Common;
 using CtrlAltQuest.Pathfinder2e.Startup;
@@ -17,6 +18,10 @@ builder.Host.ConfigureServices((context, services) =>
         .AddRazorComponents()
         .AddInteractiveServerComponents();
 
+    services.AddAkka("ctrlaltquest", builder =>
+    {
+        builder.AddPathfinder2eActors(context.Configuration);
+    });
     services.AddScoped<SessionProperties>();
 });
 var app = builder.Build();

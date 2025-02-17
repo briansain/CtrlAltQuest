@@ -7,10 +7,10 @@ namespace CtrlAltQuest.Common
 {
     public abstract class UniqueId<T> where T : UniqueId<T>
     {
-        public static Guid NamespaceGuid => throw new ArgumentNullException("NamespaceGuid must be overridden");
+        public static Guid NamespaceGuid => throw new NotImplementedException();
         public Guid Value { get; }
         private static readonly string TypeName = typeof(T).Name.ToLower();
-
+        private static Guid? TypedNamespaceGuid { get; set; }
         public UniqueId(string value)
         {
             if (string.IsNullOrEmpty(value) || !value.StartsWith($"{TypeName}-", StringComparison.Ordinal))
@@ -38,7 +38,12 @@ namespace CtrlAltQuest.Common
 
         public static T GenerateId(string value)
         {
-            var guid = Deterministic.Create(NamespaceGuid, value);
+            if (!TypedNamespaceGuid.HasValue)
+            {
+                var propertyInfo = typeof(T).GetMethod("get_NamespaceGuid", BindingFlags.Public | BindingFlags.Static);
+                TypedNamespaceGuid = (Guid?)propertyInfo!.Invoke(null, null);
+            }
+            var guid = Deterministic.Create(TypedNamespaceGuid!.Value, value);
             return Activator.CreateInstance(typeof(T), guid) as T ?? throw new ArgumentException($"Failed to create {TypeName} in GenerateId method");
         }
     }

@@ -41,8 +41,8 @@ internal class Program
                     var actorSystem = b.Services.GetService<ActorSystem>();
                     var dependencyResolver = b.Services.GetService<IDependencyResolver>();
                     var persistenceId = Guid.NewGuid().ToString();
-                    var characterActor = actorSystem!.ActorOf(CharacterActor.PropsFor(UserId.GenerateId("H"), CharacterId.GenerateId("I"), dependencyResolver));
-                    characterActor.Tell(new CreateCharacter(persistenceId, o.CharacterName));
+                    var characterActor = actorSystem!.ActorOf(CharacterActor.PropsFor(CharacterId.GenerateId("I"), dependencyResolver));
+                    characterActor.Tell(new CreateCharacter(CharacterId.GenerateId("I"), o.CharacterName));
                     Thread.Sleep(2000);
                 });
                 await task;
