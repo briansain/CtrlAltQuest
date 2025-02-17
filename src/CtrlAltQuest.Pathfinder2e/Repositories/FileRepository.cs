@@ -1,16 +1,18 @@
 ﻿using CtrlAltQuest.Common;
+using CtrlAltQuest.Common.Repositories;
 using CtrlAltQuest.Pathfinder2e.Actors.Character;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace CtrlAltQuest.Pathfinder2e.Repositories
 {
-    public class FileRepository// : ICharacterRepository
+    public class FileRepository : ICharacterRepository<Pathfinder2eCharacter>
     {
         public async Task<Pathfinder2eCharacter> GetCharacter(CharacterId characterId)
         {
-            var path = $"{Directory.GetCurrentDirectory()}/_pf2e_data/Testing/characters.json";
-            if (File.Exists(path))
+            var directory = $"{Directory.GetCurrentDirectory()}\\_pf2e_data\\Testing";
+            var path = $"{directory}\\{characterId.ToString()}.json";
+            if (Directory.Exists(directory) && File.Exists(path))
             {
                 var jsonOptions = new JsonSerializerOptions
                 {

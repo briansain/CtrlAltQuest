@@ -3,6 +3,7 @@ using Akka.Actor.Internal;
 using Akka.DependencyInjection;
 using Akka.Event;
 using CtrlAltQuest.Common;
+using CtrlAltQuest.Common.Repositories;
 
 namespace CtrlAltQuest.Pathfinder2e.Actors.Character;
 

@@ -14,7 +14,7 @@
 
     <ItemGroup>
       <None Remove="_pf2e_data\ancestries\Human.json" />
-      <None Remove="_pf2e_data\Testing\characters.json" />
+      <None Remove="_pf2e_data\Testing\characterid-889400f6-03a7-42b4-a95c-4e717b02257c.json" />
     </ItemGroup>
 
   <ItemGroup>

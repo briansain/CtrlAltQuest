@@ -5,8 +5,9 @@ using System.Text.Json.Serialization;
 
 namespace CtrlAltQuest.Common
 {
-    public record UniqueId<T> where T : UniqueId<T>
+    public abstract class UniqueId<T> where T : UniqueId<T>
     {
+        public static Guid NamespaceGuid => throw new ArgumentNullException("NamespaceGuid must be overridden");
         public Guid Value { get; }
         private static readonly string TypeName = typeof(T).Name.ToLower();
 
@@ -35,9 +36,9 @@ namespace CtrlAltQuest.Common
                 state.Value.TryFormat(span.Slice(len + 1), out _);
             });
 
-        protected static T GenerateId(Guid namespaceGuid, string value)
+        public static T GenerateId(string value)
         {
-            var guid = Deterministic.Create(namespaceGuid, value);
+            var guid = Deterministic.Create(NamespaceGuid, value);
             return Activator.CreateInstance(typeof(T), guid) as T ?? throw new ArgumentException($"Failed to create {TypeName} in GenerateId method");
         }
     }
@@ -78,7 +79,7 @@ namespace CtrlAltQuest.Common
 
             public override void Write(Utf8JsonWriter writer, TUniqueId value, JsonSerializerOptions options)
             {
-                writer.WriteStringValue(value.ToString());
+                writer.WriteStringValue(value?.ToString() ?? throw new ArgumentNullException($"{nameof(value)} is null in UniqueIdConverterInner.Write", nameof(value)));
             }
         }
     }

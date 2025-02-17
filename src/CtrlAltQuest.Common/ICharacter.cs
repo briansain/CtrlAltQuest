@@ -5,6 +5,5 @@
         CharacterId CharacterId { get; init; }
         UserId UserId { get; init; }
         string Name { get; init; }
-
     }
 }

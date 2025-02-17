@@ -1,0 +1,61 @@
+{
+  "CharacterId": "characterid-889400f6-03a7-42b4-a95c-4e717b02257c",
+  "userId": "userid-db4d30f6-9848-48a5-b32e-93bf25caa080",
+  "Name": "Bonesaw",
+  "level": 1,
+  "ancestryName": "Human",
+  "backgroundName": "Hunter",
+  "characterClassName": "Fighter",
+  "maxHitPoints": 20,
+  "currentHitPoints": 20,
+  "temporaryHitPoints": 0,
+  "strength": 4,
+  "dexterity": 2,
+  "constitution": 2,
+  "intelligence": 0,
+  "wisdom": 1,
+  "charisma": 0,
+  "size": "Medium",
+  "speed": 25,
+  "skillProficiencies": {
+    "perception": "Expert",
+    "acrobatics": "Trained",
+    "arcana": "Untrained",
+    "athletics": "Trained",
+    "crafting": "Untrained",
+    "deception": "Untrained",
+    "diplomacy": "Untrained",
+    "intimidation": "Untrained",
+    "medicine": "Untrained",
+    "nature": "Trained",
+    "occultism": "Untrained",
+    "performance": "Untrained",
+    "religion": "Untrained",
+    "society": "Untrained",
+    "stealth": "Trained",
+    "survival": "Trained",
+    "thievery": "Untrained",
+    "lore":{
+        "Tanning": "Trained"
+    }
+  },
+  "martialProficiencies": {
+    "unarmored": "Trained",
+    "lightArmor": "Trained",
+    "mediumArmor": "Trained",
+    "heavyArmor": "Trained",
+    "unarmedWeapon": "Expert",
+    "simpleWeapon": "Expert",
+    "martialWeapon": "Expert",
+    "advancedWeapon": "Trained",
+    "otherWeapon": "Untrained"
+  },
+  "savingThrowProficiencies": {
+    "fortitude": "Expert",
+    "reflex": "Expert",
+    "will": "Trained"
+  },
+  "resistances": [],
+  "equipment": [],
+  "languages": [ "Common" ]
+}

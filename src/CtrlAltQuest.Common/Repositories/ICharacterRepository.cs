@@ -1,4 +1,4 @@
-﻿namespace CtrlAltQuest.Common
+﻿namespace CtrlAltQuest.Common.Repositories
 {
     public interface ICharacterRepository<TCharacterState> where TCharacterState : ICharacter
     {
