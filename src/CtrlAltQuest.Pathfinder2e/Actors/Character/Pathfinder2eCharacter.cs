@@ -12,6 +12,7 @@ public record Pathfinder2eCharacter : ICharacter
     public string AncestryName { get; init; } = string.Empty;
     public string BackgroundName { get; init; } = string.Empty;
     public string ClassName { get; init; } = string.Empty;
+
     public int MaxHitPoints { get; init; }
     public int CurrentHitPoints { get; init; }
     public int TemporaryHitPoints { get; init; }
@@ -26,7 +27,6 @@ public record Pathfinder2eCharacter : ICharacter
     public Size Size { get; init; }
     public int Speed { get; init; }
 
-    //public List<Ability> Abilities { get; init; } = new List<Ability>();
     public List<Trait> Traits { get; init; } = new List<Trait>();
     public List<string> Languages { get; init; } = new List<string>();
 
@@ -36,7 +36,6 @@ public record Pathfinder2eCharacter : ICharacter
     public MartialProficiencies MartialProficiencies { get; init; } = new MartialProficiencies();
     public List<string> Resistances { get; init; } = new List<string>();
 }
-
 
 public record SavingThrowProficiencies
 {

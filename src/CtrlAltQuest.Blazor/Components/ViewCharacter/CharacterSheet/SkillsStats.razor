@@ -1,4 +1,3 @@
-@using CtrlAltQuest.Pathfinder2e.Calculations
 @inherits CharacterSheetIndex;
 <MudGrid>
     <MudItem xs="12">
@@ -12,97 +11,97 @@
     <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
         <MudItem xs="6" md="6">
                 <MudText Class="svg-stat-heading" Typo=" Typo.overline">Acrobatics</MudText>
-                <PolarStar_SVG Value="SkillHelper.CalculateAcrobatics(_state)" />
+                <PolarStar_SVG Value="SkillsAggregator.CalculateAcrobatics(_state)" />
         </MudItem>
     </MudCollapse>
     <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
         <MudItem xs="6" md="6">
             <MudText Class="svg-stat-heading" Typo="Typo.overline">Arcana</MudText>
-            <PolarStar_SVG Value="SkillHelper.CalculateArcana(_state)" />
+            <PolarStar_SVG Value="SkillsAggregator.CalculateArcana(_state)" />
         </MudItem>
     </MudCollapse>
     <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
         <MudItem xs="6" md="6">
             <MudText Class="svg-stat-heading" Typo="Typo.overline">Athletics</MudText>
-            <PolarStar_SVG Value="SkillHelper.CalculateAthletics(_state)" />
+            <PolarStar_SVG Value="SkillsAggregator.CalculateAthletics(_state)" />
         </MudItem>
     </MudCollapse>
     <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
         <MudItem xs="6" md="6">
             <MudText Class="svg-stat-heading" Typo="Typo.overline">Crafting</MudText>
-            <PolarStar_SVG Value="SkillHelper.CalculateCrafting(_state)" />
+            <PolarStar_SVG Value="SkillsAggregator.CalculateCrafting(_state)" />
         </MudItem>
     </MudCollapse>
     <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
         <MudItem xs="6" md="6">
             <MudText Class="svg-stat-heading" Typo="Typo.overline">Deception</MudText>
-            <PolarStar_SVG Value="SkillHelper.CalculateDeception(_state)" />
+            <PolarStar_SVG Value="SkillsAggregator.CalculateDeception(_state)" />
         </MudItem>
     </MudCollapse>
     <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
         <MudItem xs="6" md="6">
             <MudText Class="svg-stat-heading" Typo="Typo.overline">Diplomacy</MudText>
-            <PolarStar_SVG Value="SkillHelper.CalculateDiplomacy(_state)" />
+            <PolarStar_SVG Value="SkillsAggregator.CalculateDiplomacy(_state)" />
         </MudItem>
     </MudCollapse>
     <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
         <MudItem xs="6" md="6">
             <MudText Class="svg-stat-heading" Typo="Typo.overline">Intimidation</MudText>
-            <PolarStar_SVG Value="SkillHelper.CalculateIntimidation(_state)" />
+            <PolarStar_SVG Value="SkillsAggregator.CalculateIntimidation(_state)" />
         </MudItem>
     </MudCollapse>
     <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
         <MudItem xs="6" md="6">
             <MudText Class="svg-stat-heading" Typo="Typo.overline">Medicine</MudText>
-            <PolarStar_SVG Value="SkillHelper.CalculateMedicine(_state)" />
+            <PolarStar_SVG Value="SkillsAggregator.CalculateMedicine(_state)" />
         </MudItem>
     </MudCollapse>
     <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
         <MudItem xs="6" md="6">
             <MudText Class="svg-stat-heading" Typo="Typo.overline">Nature</MudText>
-            <PolarStar_SVG Value="SkillHelper.CalculateNature(_state)" />
+            <PolarStar_SVG Value="SkillsAggregator.CalculateNature(_state)" />
         </MudItem>
     </MudCollapse>
     <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
         <MudItem xs="6" md="6">
             <MudText Class="svg-stat-heading" Typo="Typo.overline">Occultism</MudText>
-            <PolarStar_SVG Value="SkillHelper.CalculateOccultism(_state)" />
+            <PolarStar_SVG Value="SkillsAggregator.CalculateOccultism(_state)" />
         </MudItem>
     </MudCollapse>
     <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
         <MudItem xs="6" md="6">
             <MudText Class="svg-stat-heading" Typo="Typo.overline">Performance</MudText>
-            <PolarStar_SVG Value="SkillHelper.CalculatePerformance(_state)" />
+            <PolarStar_SVG Value="SkillsAggregator.CalculatePerformance(_state)" />
         </MudItem>
     </MudCollapse>
     <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
         <MudItem xs="6" md="6">
             <MudText Class="svg-stat-heading" Typo="Typo.overline">Religion</MudText>
-            <PolarStar_SVG Value="SkillHelper.CalculateReligion(_state)" />
+            <PolarStar_SVG Value="SkillsAggregator.CalculateReligion(_state)" />
         </MudItem>
     </MudCollapse>
     <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
         <MudItem xs="6" md="6">
             <MudText Class="svg-stat-heading" Typo="Typo.overline">Society</MudText>
-            <PolarStar_SVG Value="SkillHelper.CalculateSociety(_state)" />
+            <PolarStar_SVG Value="SkillsAggregator.CalculateSociety(_state)" />
         </MudItem>
     </MudCollapse>
     <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
         <MudItem xs="6" md="6">
             <MudText Class="svg-stat-heading" Typo="Typo.overline">Stealth</MudText>
-            <PolarStar_SVG Value="SkillHelper.CalculateStealth(_state)" />
+            <PolarStar_SVG Value="SkillsAggregator.CalculateStealth(_state)" />
         </MudItem>
     </MudCollapse>
     <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
         <MudItem xs="6" md="6">
             <MudText Class="svg-stat-heading" Typo="Typo.overline">Survival</MudText>
-            <PolarStar_SVG Value="SkillHelper.CalculateSurvival(_state)" />
+            <PolarStar_SVG Value="SkillsAggregator.CalculateSurvival(_state)" />
         </MudItem>
     </MudCollapse>
     <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
         <MudItem xs="6" md="6">
             <MudText Class="svg-stat-heading" Typo="Typo.overline">Thievery</MudText>
-            <PolarStar_SVG Value="SkillHelper.CalculateThievery(_state)" />
+            <PolarStar_SVG Value="SkillsAggregator.CalculateThievery(_state)" />
         </MudItem>
     </MudCollapse>
     @foreach (var l in _state.SkillProficiencies.Lore)
@@ -110,7 +109,7 @@
         <MudCollapse Expanded="_skillsExpanded" Class=@classAction()>
             <MudItem xs="6" md="6">
                 <MudText Class="svg-stat-heading" Typo="Typo.overline">@($"Lore: {l.Key}")</MudText>
-                <PolarStar_SVG Value="SkillHelper.CalculateLore(_state, l.Value)" />
+                <PolarStar_SVG Value="SkillsAggregator.CalculateLore(_state, l.Value)" />
             </MudItem>
         </MudCollapse>
     }

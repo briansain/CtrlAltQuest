@@ -1,19 +1,17 @@
-﻿@using CtrlAltQuest.Blazor.Components.Layout
-@using CtrlAltQuest.Pathfinder2e.Calculations
-@inherits CharacterLayout;
+﻿@inherits CharacterLayout;
 
 <MudGrid>
     <MudItem xs="6" sm="4">
         <MudText Class="svg-stat-heading" Typo="Typo.overline">Fortitude</MudText>
-        <InnieSquare_SVG Value="@SavingThrowHelper.GetFortitudeSavingThrow(_state)" />
+        <InnieSquare_SVG Value="@SavingThrowAggregator.GetFortitudeSavingThrow(_state)" />
     </MudItem>
     <MudItem xs="6" sm="4">
         <MudText Class="svg-stat-heading" Typo="Typo.overline">Reflex</MudText>
-        <InnieSquare_SVG Value="@SavingThrowHelper.GetReflexSavingThrow(_state)" />
+        <InnieSquare_SVG Value="@SavingThrowAggregator.GetReflexSavingThrow(_state)" />
     </MudItem>
     <MudItem xs="6" sm="4">
         <MudText Class="svg-stat-heading" Typo="Typo.overline">Will</MudText>
-        <InnieSquare_SVG Value="@SavingThrowHelper.GetWillSavingThrow(_state)" />
+        <InnieSquare_SVG Value="@SavingThrowAggregator.GetWillSavingThrow(_state)" />
     </MudItem>
 </MudGrid>
 @code {

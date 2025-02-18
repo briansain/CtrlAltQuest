@@ -1,19 +1,19 @@
 ﻿using CtrlAltQuest.Pathfinder2e.Actors.Character;
 using CtrlAltQuest.Pathfinder2e.SystemData;
 
-namespace CtrlAltQuest.Pathfinder2e.Calculations
+namespace CtrlAltQuest.Pathfinder2e.Aggregators
 {
-    public class MartialHelper : BaseHelper
+    public class MartialAggregator : BaseAggregator
     {
         public static int GetArmorBonus(Pathfinder2eCharacter characterState)
         {
-            var equippedArmor = EquipmentHelper.GetEquippedArmor(characterState.Equipment);
+            var equippedArmor = EquipmentAggregator.GetEquippedArmor(characterState);
             var armorProficiencyBonus = 0;
             var armorItemBonus = 0;
             var dexterityBonus = characterState.Dexterity;
             if (equippedArmor != null)
             {
-                armorProficiencyBonus = GetArmorProficiencyBonus(characterState.MartialProficiencies, characterState.Level, equippedArmor.ArmorCategory);
+                armorProficiencyBonus = GetArmorProficiencyBonus(characterState, equippedArmor.ArmorCategory);
                 armorItemBonus = equippedArmor.ArmorBonus;
                 dexterityBonus = GetAbilityWithCap(characterState.Dexterity, equippedArmor.DexterityCap);
             }
@@ -21,20 +21,20 @@ namespace CtrlAltQuest.Pathfinder2e.Calculations
         }
 
 
-        public static int GetArmorProficiencyBonus(MartialProficiencies martialProficiencies, int level, ArmorCategory armorCategory)
+        public static int GetArmorProficiencyBonus(Pathfinder2eCharacter character, ArmorCategory armorCategory)
         {
             switch (armorCategory)
             {
                 case ArmorCategory.Unarmored:
-                    return CalculateProficiency(martialProficiencies.Unarmored, level);
+                    return CalculateProficiency(character.MartialProficiencies.Unarmored, character.Level);
                 case ArmorCategory.Light:
-                    return CalculateProficiency(martialProficiencies.LightArmor, level);
+                    return CalculateProficiency(character.MartialProficiencies.LightArmor, character.Level);
                 case ArmorCategory.Medium:
-                    return CalculateProficiency(martialProficiencies.MediumArmor, level);
+                    return CalculateProficiency(character.MartialProficiencies.MediumArmor, character.Level);
                 case ArmorCategory.Heavy:
-                    return CalculateProficiency(martialProficiencies.HeavyArmor, level);
+                    return CalculateProficiency(character.MartialProficiencies.HeavyArmor, character.Level);
                 default:
-                    return CalculateProficiency(Proficiency.Untrained, level);
+                    return CalculateProficiency(Proficiency.Untrained, character.Level);
             }
         }
     }

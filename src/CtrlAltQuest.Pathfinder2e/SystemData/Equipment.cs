@@ -2,13 +2,11 @@
 {
     public record Armor : Equipment
     {
-        public int ArmorBonus { get; init; }
-        public ArmorCategory ArmorCategory { get; init; }
+        public required int ArmorBonus { get; init; }
+        public required ArmorCategory ArmorCategory { get; init; }
         public int? DexterityCap { get; init; }
     }
 
-    //public record Shield(string Name, string Rarity, List<Trait> Traits, ItemCategory ItemCategory, string ItemSubcategory, string Description, bool IsEquipped) 
-    //    : Equipment(Name, Rarity, Traits, ItemCategory, ItemSubcategory, Description, IsEquipped)
     public record Shield : Equipment
     {
         public int ShieldBonus { get; init; }
@@ -20,22 +18,22 @@
 
     public record Weapon : Equipment
     {
-        public required string WeaponType { get; init; }
-        public required string WeaponGroup { get; init; }
-        public required string WeaponCategory { get; init; }
-        public required string Damage { get; init; }
-        public required List<string> DamageTypes { get; init; }
-        public required int RequiredHands { get; init; }
+        public string WeaponType { get; init; } = string.Empty;
+        public string WeaponGroup { get; init; } = string.Empty;
+        public string WeaponCategory { get; init; } = string.Empty;
+        public string Damage { get; init; } = string.Empty;
+        public List<string> DamageTypes { get; init; } = new List<string>();
+        public int RequiredHands { get; init; }
     }
 
     public record Equipment
     {
-        public required string Name { get; init; }
-        public required string Rarity { get; init; }
-        public required List<Trait> Traits { get; init; }
+        public string Name { get; init; } = string.Empty;
+        public string Rarity { get; init; } = string.Empty;
+        public List<Trait> Traits { get; init; } = new List<Trait>();
         public required ItemCategory ItemCategory { get; init; }
-        public required string ItemSubcategory { get; init; }
-        public required string Description { get; init; }
+        public string ItemSubcategory { get; init; } = string.Empty;
+        public string Description { get; init; } = string.Empty;
         public required bool IsEquipped { get; init; }
     }
 

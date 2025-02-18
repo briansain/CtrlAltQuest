@@ -1,9 +1,14 @@
 ﻿using CtrlAltQuest.Pathfinder2e.Actors.Character;
 using CtrlAltQuest.Pathfinder2e.SystemData;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace CtrlAltQuest.Pathfinder2e.Calculations
+namespace CtrlAltQuest.Pathfinder2e.Aggregators
 {
-    public class SkillHelper : BaseHelper
+    public class SkillsAggregator : BaseAggregator
     {
         public static int CalculateAcrobatics(Pathfinder2eCharacter characterState)
         {

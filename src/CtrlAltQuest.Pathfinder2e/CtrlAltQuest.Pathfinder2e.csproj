@@ -1,39 +1,28 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
-
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
     <ItemGroup>
-	    <Content Include="_pf2e_data\**">
-		    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	    </Content>
+	    <SupportedPlatform Include="browser" />
+        <PackageReference Include="Akka" Version="1.5.37" />
+        <PackageReference Include="Akka.Cluster" Version="1.5.37" />
+        <PackageReference Include="Akka.Cluster.Hosting" Version="1.5.37.2" />
+        <PackageReference Include="Akka.Hosting" Version="1.5.37.2" />
+        <PackageReference Include="Akka.Logger.Serilog" Version="1.5.25" />
+        <PackageReference Include="Akka.Persistence" Version="1.5.37" />
+        <PackageReference Include="Akka.Persistence.Hosting" Version="1.5.37.2" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.10" />
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="_pf2e_data\ancestries\Human.json" />
-      <None Remove="_pf2e_data\Testing\characterid-58a9015c-8df0-5262-9a4c-5f129948d176.json" />
+        <ProjectReference Include="..\CtrlAltQuest.Common\CtrlAltQuest.Common.csproj" />
     </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Akka" Version="1.5.37" />
-    <PackageReference Include="Akka.Cluster" Version="1.5.37" />
-    <PackageReference Include="Akka.Cluster.Hosting" Version="1.5.37.2" />
-    <PackageReference Include="Akka.Hosting" Version="1.5.37.2" />
-    <PackageReference Include="Akka.Logger.Serilog" Version="1.5.25" />
-    <PackageReference Include="Akka.Persistence" Version="1.5.37" />
-    <PackageReference Include="Akka.Persistence.Hosting" Version="1.5.37.2" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\CtrlAltQuest.Common\CtrlAltQuest.Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="_pf2e_data\Ancestries\" />
-  </ItemGroup>
-
+    <ItemGroup>
+      <Folder Include="UI\" />
+    </ItemGroup>
 </Project>

@@ -20,7 +20,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CtrlAltQuest.CLI", "CtrlAlt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CtrlAltQuest.Common", "CtrlAltQuest.Common\CtrlAltQuest.Common.csproj", "{425C6CF7-5DA2-471E-890D-62E4C6F2C9A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CtrlAltQuest.Pathfinder2e.Tests", "CtrlAltQuest.Pathfinder2e.Tests\CtrlAltQuest.Pathfinder2e.Tests.csproj", "{1A9259CA-B7AA-4A9A-9996-EDF013E85C64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CtrlAltQuest.Pathfinder2e.Tests", "CtrlAltQuest.Pathfinder2e.Tests\CtrlAltQuest.Pathfinder2e.Tests.csproj", "{1A9259CA-B7AA-4A9A-9996-EDF013E85C64}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
