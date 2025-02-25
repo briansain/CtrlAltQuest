@@ -1,15 +1,18 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+
   <ItemGroup>
-    <PackageReference Include="Akka" Version="1.5.37" />
-    <PackageReference Include="Akka.Hosting" Version="1.5.37.2" />
+    <PackageReference Include="Akka" Version="1.5.38" />
+    <PackageReference Include="Akka.Hosting" Version="1.5.38" />
     <PackageReference Include="Be.Vlaanderen.Basisregisters.Generators.Guid.Deterministic" Version="4.0.0" />
+    <PackageReference Include="MudBlazor" Version="8.3.0" />
+    <PackageReference Include="MudBlazor.ThemeManager" Version="3.0.0" />
   </ItemGroup>
 
 </Project>

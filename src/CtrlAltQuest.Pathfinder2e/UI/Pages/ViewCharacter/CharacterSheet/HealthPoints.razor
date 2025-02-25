@@ -1,0 +1,84 @@
+﻿@* @inherits CharacterSheetIndex;
+<style>
+    svg#temp-health path {
+        stroke-dasharray: 2;
+    }    
+</style>
+<MudGrid>
+    <MudItem Class="hide-caret" xs="6" md="6">
+        <MudTooltip Text="@($"Max Hit Points: {_state.MaxHitPoints}")" Placement="Placement.Top" Arrow="true" RootStyle="display:block;" >
+            <MudText class="svg-stat-heading" Typo="Typo.overline">HP</MudText>
+            <Heart_SVG Id="player-health" Value="@_state.CurrentHitPoints" OnClick="@openHealth" />
+        </MudTooltip>
+    </MudItem>
+    <MudPopover Style="width: 180px" Elevation="24" Open="@isHealthOpen" Fixed="true"
+                AnchorOrigin="Origin.CenterLeft" TransformOrigin="Origin.CenterLeft">
+        <div style="border: dashed var(--mudcolors-red-default) 1px"> <!--Need to fix mobile view-->
+            <MudText Class="ma-2 pa-2" Typo="Typo.body1">Update Hit Points</MudText>
+            <MudNumericField Min="0" Max="_state.MaxHitPoints" @bind-Value="health" Variant="Variant.Outlined" InputMode="InputMode.numeric"/>
+            <MudButton Class="ma-2 pa-2" Variant="Variant.Text" Color="Color.Error" OnClick="onCancel">Cancel</MudButton>
+            <MudButton Class="ma-2 pa-2" Variant="Variant.Filled" Color="Color.Primary" OnClick="onSave">Save</MudButton>
+        </div>
+        @code {
+            protected int health;
+        private bool isHealthOpen = false;
+        private void openHealth()
+        {
+            health = _state.CurrentHitPoints;
+            isHealthOpen = true;
+        }
+        private void onSave()
+        {
+            isHealthOpen = false;
+            _state = _state with { CurrentHitPoints = health };
+            health = 0;
+            //update it
+        }
+        private void onCancel()
+        {
+            isHealthOpen = false;
+        }
+        }
+    </MudPopover>
+
+
+    <MudItem md="6">
+        <MudText Class="svg-stat-heading" Typo="Typo.overline">Temporary HP</MudText>
+        <Heart_SVG Id="temp-health" Value="@_state.TemporaryHitPoints" IsDashed="true" OnClick="@openTempHealth" />
+    </MudItem>
+
+    <MudPopover Style="width: 180px" Elevation="24" Open="@isTempHealthOpen" Fixed="true"
+                AnchorOrigin="Origin.CenterRight" TransformOrigin="Origin.CenterRight">
+        <div style="border: dashed var(--mudcolors-red-default) 1px">
+            <!--Need to fix mobile view-->
+            <MudText Class="ma-2 pa-2" Typo="Typo.body1">Update Temp HP</MudText>
+            <MudNumericField Min="0" @bind-Value="tempHealth" Variant="Variant.Outlined" InputMode="InputMode.numeric" />
+            <MudButton Class="ma-2 pa-2" Variant="Variant.Text" Color="Color.Error" OnClick="onTempCancel">Cancel</MudButton>
+            <MudButton Class="ma-2 pa-2" Variant="Variant.Filled" Color="Color.Primary" OnClick="onTempSave">Save</MudButton>
+        </div>
+        @code {
+            protected int tempHealth;
+        private bool isTempHealthOpen = false;
+        private void openTempHealth()
+        {
+            tempHealth = _state.TemporaryHitPoints;
+            isTempHealthOpen = true;
+        }
+        private void onTempSave()
+        {
+            isTempHealthOpen = false;
+            _state = _state with { TemporaryHitPoints = tempHealth };
+            tempHealth = 0;
+            //update it
+        }
+        private void onTempCancel()
+        {
+            isTempHealthOpen = false;
+        }
+        }
+    </MudPopover>
+
+    
+</MudGrid>
+
+ *@

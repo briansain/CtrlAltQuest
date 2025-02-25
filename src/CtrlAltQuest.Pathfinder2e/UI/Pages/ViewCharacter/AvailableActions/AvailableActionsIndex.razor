@@ -1,0 +1,81 @@
+﻿@* @using CtrlAltQuest.Pathfinder2e
+@using CtrlAltQuest.Pathfinder2e.SystemData
+@inherits Layout.CharacterLayout;
+<MudPaper Class="ma-6 pa-6">
+    <MudGrid>
+        @foreach (var action in availableActions.Where(a => a.IsPinned).OrderBy(a => a.Title))
+        {
+            <MudItem xs="4"><ActionTemplate CharacterAction="@action" FlipPinned="FlipPinned" /></MudItem>
+        }
+    </MudGrid>
+    <MudTabs Position="Position.Left" Rounded="true" Border="true"
+             ApplyEffectsToContainer="true" Class="mt-8" PanelClass="pa-6">
+        <MudTabPanel Icon="@SVG.OneAction" Text="Single Action">
+            <MudGrid>
+                @foreach(var action in availableActions.Where(b => b.ActionType == ActionType.Single && !b.IsPinned).OrderBy(a => a.Title))
+                {
+                    <MudItem xs="4">
+                        <ActionTemplate CharacterAction="@action" FlipPinned="FlipPinned" />
+                    </MudItem>
+                }
+            </MudGrid>
+        </MudTabPanel>
+        <MudTabPanel Icon="@SVG.TwoAction" Text="Two Action">
+            <MudGrid>
+                @foreach (var action in availableActions.Where(b => b.ActionType == ActionType.Double).OrderBy(a => a.Title))
+                {
+                    <MudItem xs="4">
+                        <ActionTemplate CharacterAction="@action" />
+                    </MudItem>
+                }
+            </MudGrid>
+        </MudTabPanel>
+        <MudTabPanel Icon="@SVG.ThreeAction" Text="Three Action">
+            <MudGrid>
+                @foreach (var action in availableActions.Where(b => b.ActionType == ActionType.Triple).OrderBy(a => a.Title))
+                {
+                    <MudItem xs="4">
+                        <ActionTemplate CharacterAction="@action" />
+                    </MudItem>
+                }
+            </MudGrid>
+        </MudTabPanel>
+        <MudTabPanel Icon="@SVG.Reaction" Text="Reaction">
+            <MudGrid>
+                @foreach (var action in availableActions.Where(b => b.ActionType == ActionType.Triple).OrderBy(a => a.Title))
+                {
+                    <MudItem xs="4">
+                        <ActionTemplate CharacterAction="@action" />
+                    </MudItem>
+                }
+            </MudGrid>
+        </MudTabPanel>
+        <MudTabPanel Icon="@SVG.FreeAction" Text="Free Action">
+            <MudGrid>
+                @foreach (var action in availableActions.Where(b => b.ActionType == ActionType.Triple).OrderBy(a => a.Title))
+                {
+                    <MudItem xs="4">
+                        <ActionTemplate CharacterAction="@action" />
+                    </MudItem>
+                }
+            </MudGrid>
+        </MudTabPanel>
+    </MudTabs>
+</MudPaper>
+
+@code {
+    private List<CharacterAction> availableActions = new List<CharacterAction>();
+    protected override void OnInitialized()
+    {
+        availableActions.AddRange(DefaultActions.Basic);
+        base.OnInitialized();
+    }
+
+    private void FlipPinned(CharacterAction action)
+    {
+        availableActions.Remove(action);
+        action = action with { IsPinned = !action.IsPinned };
+        availableActions.Add(action);
+    }
+}
+ *@

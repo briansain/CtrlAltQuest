@@ -1,0 +1,15 @@
+﻿@rendermode InteractiveServer
+<Router AppAssembly="typeof(Routes).Assembly" AdditionalAssemblies="RoutingAssemblies.Assemblies" @rendermode="InteractiveServer">
+    <Found Context="routeData">
+        <RouteView RouteData="routeData" DefaultLayout="typeof(CtrlAltQuest.Common.UI.MainLayout)" />
+    </Found>
+</Router>
+
+@code
+{
+    protected override void OnInitialized()
+    {
+        Console.WriteLine("Hello World");
+        base.OnInitialized();
+    }
+}

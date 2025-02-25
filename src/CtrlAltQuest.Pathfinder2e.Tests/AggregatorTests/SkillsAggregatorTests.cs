@@ -24,7 +24,7 @@ namespace CtrlAltQuest.Pathfinder2e.Tests.AggregatorTests
         {
             /* Strength */
             Assert.Equal(2, SkillsAggregator.CalculateAthletics(_character));
-            
+
             /* Dexterity */
             Assert.Equal(3, SkillsAggregator.CalculateAcrobatics(_character));
             Assert.Equal(3, SkillsAggregator.CalculateStealth(_character));
@@ -102,7 +102,7 @@ namespace CtrlAltQuest.Pathfinder2e.Tests.AggregatorTests
             Assert.Equal(18, SkillsAggregator.CalculateSociety(character));
             Assert.Equal(12, SkillsAggregator.CalculateLore(character, Proficiency.Trained));
         }
-        
+
         /*
          * TODO: Add tests for magical items that boost specific skills
          * */

@@ -1,10 +1,12 @@
 using Akka.Hosting;
-using CtrlAltQuest.Blazor.Components;
-using CtrlAltQuest.Blazor.Components.Common;
-using CtrlAltQuest.Pathfinder2e.Startup;
+using CtrlAltQuest.Blazor;
+using CtrlAltQuest.Common.UI;
+using CtrlAltQuest.Pathfinder2e.Setup;
 using MudBlazor.Services;
 using Serilog;
 
+RoutingAssemblies.AddAssembly(typeof(CtrlAltQuest.Pathfinder2e.UI._Imports).Assembly);
+RoutingAssemblies.AddAssembly(typeof(CtrlAltQuest.Common._Imports).Assembly);
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration
     .ReadFrom.Configuration(hostingContext.Configuration)
@@ -34,11 +36,10 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseStaticFiles();
 app.UseAntiforgery();
-
 app.MapRazorComponents<App>()
+    .AddAdditionalAssemblies(RoutingAssemblies.Assemblies.ToArray())
     .AddInteractiveServerRenderMode();
 
 app.Run();

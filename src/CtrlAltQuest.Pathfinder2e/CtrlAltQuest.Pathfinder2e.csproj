@@ -1,28 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
+	
     <ItemGroup>
 	    <SupportedPlatform Include="browser" />
-        <PackageReference Include="Akka" Version="1.5.37" />
-        <PackageReference Include="Akka.Cluster" Version="1.5.37" />
-        <PackageReference Include="Akka.Cluster.Hosting" Version="1.5.37.2" />
-        <PackageReference Include="Akka.Hosting" Version="1.5.37.2" />
+        <PackageReference Include="Akka" Version="1.5.38" />
+        <PackageReference Include="Akka.Cluster" Version="1.5.38" />
+        <PackageReference Include="Akka.Cluster.Hosting" Version="1.5.38" />
+        <PackageReference Include="Akka.Hosting" Version="1.5.38" />
         <PackageReference Include="Akka.Logger.Serilog" Version="1.5.25" />
-        <PackageReference Include="Akka.Persistence" Version="1.5.37" />
-        <PackageReference Include="Akka.Persistence.Hosting" Version="1.5.37.2" />
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.1" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.10" />
+        <PackageReference Include="Akka.Persistence" Version="1.5.38" />
+        <PackageReference Include="Akka.Persistence.Hosting" Version="1.5.38" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.2" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.2" />
     </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\CtrlAltQuest.Common\CtrlAltQuest.Common.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="UI\" />
     </ItemGroup>
 </Project>

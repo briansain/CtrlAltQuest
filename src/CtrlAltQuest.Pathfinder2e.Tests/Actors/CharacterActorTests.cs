@@ -7,11 +7,10 @@ using CtrlAltQuest.Common.Actors;
 using CtrlAltQuest.Common.Repositories;
 using CtrlAltQuest.Pathfinder2e.Actors.Character;
 using CtrlAltQuest.Pathfinder2e.Repositories;
-using CtrlAltQuest.Pathfinder2e.Startup;
+using CtrlAltQuest.Pathfinder2e.Setup;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
 using Xunit;
 
 namespace CtrlAltQuest.Pathfinder2e.Tests.Actors
@@ -20,13 +19,13 @@ namespace CtrlAltQuest.Pathfinder2e.Tests.Actors
     {
         public CharacterActorTests() { }
 
-        
+
 
         [Fact]
         public void LoadCharacter_Success()
         {
             var characterId = CharacterId.GenerateId("bonesaw");
-            var characterActor = Sys.ActorOf(CharacterActor.PropsFor(characterId, DependencyResolver.For(Sys).Resolver), "testcharacter");
+            var characterActor = Sys.ActorOf(Pathfinder2eActor.PropsFor(characterId, DependencyResolver.For(Sys).Resolver), "testcharacter");
             characterActor.Tell(new GetCharacterState(characterId));
             var message = ExpectMsg<CharacterStateResponse>();
             Assert.NotNull(message);
@@ -37,7 +36,7 @@ namespace CtrlAltQuest.Pathfinder2e.Tests.Actors
         [Fact]
         public void LoadCharacter_AddPathfinder2eActors_Success()
         {
-            var manager = ActorRegistry.For(Sys).Get<ActorManager<CharacterActor>>();
+            var manager = ActorRegistry.For(Sys).Get<ActorManager<Pathfinder2eActor>>();
             var characterId = CharacterId.GenerateId("bonesaw");
             manager.Tell(new GetCharacterState(characterId));
             var message = ExpectMsg<CharacterStateResponse>();

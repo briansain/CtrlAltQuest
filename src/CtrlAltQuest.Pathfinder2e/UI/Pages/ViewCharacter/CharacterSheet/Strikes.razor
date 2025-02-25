@@ -1,0 +1,12 @@
+﻿
+<MudItem xs="12" md="6">
+    <MudButton Variant="Variant.Text"
+               StartIcon="@(_strikesExpanded ? Icons.Material.Filled.KeyboardArrowDown : @Icons.Material.Filled.KeyboardArrowRight)"
+               OnClick="@(_ => _strikesExpanded = !_strikesExpanded)">Melee</MudButton>
+    <MudCollapse Expanded="_strikesExpanded">
+
+    </MudCollapse>
+</MudItem>
+@code {
+    private bool _strikesExpanded = false;
+}

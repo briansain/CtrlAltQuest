@@ -1,0 +1,62 @@
+﻿@page "/pathfinder2e/character"
+@inject SessionProperties _sessionProperties;
+@inject ICharacterRepository<Pathfinder2eCharacter> characterRepository;
+@implements IDisposable
+<MudGrid>
+    <MudItem lg="6" xs="12">
+        <MudTabs Elevation="3" Rounded="true">
+            <MudTabPanel Text="Character Sheet">
+                @if(_state != null)
+                {
+                    <CharacterSheetIndex />
+                }
+            </MudTabPanel>
+            <MudTabPanel Text="Builder">
+                @* <BuilderIndex /> *@
+            </MudTabPanel>
+        </MudTabs>
+    </MudItem>
+    <MudItem lg="6">
+        <MudTabs Elevation="3" Rounded="true">
+            <MudTabPanel Text="Available Actions">
+                <AvailableActionsIndex />
+            </MudTabPanel>
+            <MudTabPanel Text="Notes">
+                <h1>NOTES</h1>
+            </MudTabPanel>
+        </MudTabs>
+    </MudItem>
+</MudGrid>
+
+@code
+{
+    public Pathfinder2eCharacter? _state;
+    protected async override Task OnInitializedAsync()
+    {
+        var fileRepo = new FileRepository();
+        // _state = await fileRepo.GetCharacter(null);
+        await base.OnInitializedAsync();
+        return;
+    }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender && _state != null)
+        {
+            // _sessionProperties.AdditionalTitle = $"{_state.Name}";
+            // _sessionProperties.TitleChanged();
+        }
+        base.OnAfterRender(firstRender);
+    }
+
+    public void Dispose()
+    {
+        // _sessionProperties.AdditionalTitle = string.Empty;
+        // _sessionProperties.TitleChanged();
+    }
+
+    private bool _open = false;
+    private void ToggleDrawer()
+    {
+        _open = !_open;
+    }
+}

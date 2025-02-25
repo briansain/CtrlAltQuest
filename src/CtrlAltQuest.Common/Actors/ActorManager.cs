@@ -1,6 +1,5 @@
 ﻿using Akka.Actor;
 using Akka.DependencyInjection;
-using System.Reflection;
 
 namespace CtrlAltQuest.Common.Actors
 {
@@ -11,9 +10,9 @@ namespace CtrlAltQuest.Common.Actors
         {
             if (MethodInfo == null)
             {
-                MethodInfo = (Func<CharacterId, IDependencyResolver, Props>)Delegate.CreateDelegate(typeof(Func<CharacterId, IDependencyResolver,Props>), typeof(TActor).GetMethod("PropsFor")!);
+                MethodInfo = (Func<CharacterId, IDependencyResolver, Props>)Delegate.CreateDelegate(typeof(Func<CharacterId, IDependencyResolver, Props>), typeof(TActor).GetMethod("PropsFor")!);
             }
-            
+
             Receive<ICharacterMessage>(msg =>
             {
                 var child = Context.Child(msg.CharacterId.ToString());

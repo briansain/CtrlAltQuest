@@ -1,13 +1,7 @@
 ﻿using CtrlAltQuest.Pathfinder2e.Actors.Character;
 using CtrlAltQuest.Pathfinder2e.Aggregators;
 using CtrlAltQuest.Pathfinder2e.SystemData;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
-using static Akka.Streams.Attributes;
 
 namespace CtrlAltQuest.Pathfinder2e.Tests.AggregatorTests
 {
@@ -41,7 +35,7 @@ namespace CtrlAltQuest.Pathfinder2e.Tests.AggregatorTests
                     {
                         Name = "EquippedShield",
                         IsEquipped = true,
-                        ItemCategory = ItemCategory.Shields                    
+                        ItemCategory = ItemCategory.Shields
                     },
                     new Shield()
                     {
@@ -75,7 +69,7 @@ namespace CtrlAltQuest.Pathfinder2e.Tests.AggregatorTests
                         ArmorBonus = 2,
                         ArmorCategory = ArmorCategory.Light
                     },
-                    new Armor() 
+                    new Armor()
                     {
                         Name = "NOTEquippedArmor",
                         IsEquipped = false,
