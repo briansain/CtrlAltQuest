@@ -233,3 +233,4 @@ launchSettings.json
 /[Nn][Dd]epend[Oo]ut
 .ionide/symbolCache.db
 **/data.mdb
+/src/CtrlAltQuest.Blazor/wwwroot/pathfinder2e

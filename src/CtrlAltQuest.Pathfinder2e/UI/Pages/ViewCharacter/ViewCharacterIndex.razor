@@ -34,7 +34,7 @@
     protected async override Task OnInitializedAsync()
     {
         var fileRepo = new FileRepository();
-        // _state = await fileRepo.GetCharacter(null);
+        _state = await fileRepo.GetCharacter(null);
         await base.OnInitializedAsync();
         return;
     }

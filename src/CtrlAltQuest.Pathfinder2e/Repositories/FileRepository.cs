@@ -8,29 +8,30 @@ namespace CtrlAltQuest.Pathfinder2e.Repositories
 {
     public class FileRepository : ICharacterRepository<Pathfinder2eCharacter>
     {
-        public async Task<Pathfinder2eCharacter> GetCharacter(CharacterId characterId)
+        public async Task<Pathfinder2eCharacter?> GetCharacter(CharacterId characterId)
         {
-            var directory = $"{Directory.GetCurrentDirectory()}\\_pf2e_data\\Testing";
-            var path = $"{directory}\\{characterId.ToString()}.json";
-            if (Directory.Exists(directory) && File.Exists(path))
-            {
-                var jsonOptions = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true,
-                    Converters = { new JsonStringEnumConverter() }
-                };
-                var jsonString = await File.ReadAllTextAsync(path);
-                var characters = JsonSerializer.Deserialize<Pathfinder2eCharacter>(jsonString, jsonOptions);
-                if (characters == null)
-                {
-                    throw new Exception("Could not deserialize JSON document");
-                }
-                return characters;
-            }
-            else
-            {
-                throw new Exception("File does not exist");
-            }
+            return null;
+            //var directory = $"{Directory.GetCurrentDirectory()}\\pathfinder2e\\Testing";
+            //var path = $"{directory}\\{characterId.ToString()}.json";
+            //if (Directory.Exists(directory) && File.Exists(path))
+            //{
+            //    var jsonOptions = new JsonSerializerOptions
+            //    {
+            //        PropertyNameCaseInsensitive = true,
+            //        Converters = { new JsonStringEnumConverter() }
+            //    };
+            //    var jsonString = await File.ReadAllTextAsync(path);
+            //    var characters = JsonSerializer.Deserialize<Pathfinder2eCharacter>(jsonString, jsonOptions);
+            //    if (characters == null)
+            //    {
+            //        throw new Exception("Could not deserialize JSON document");
+            //    }
+            //    return characters;
+            //}
+            //else
+            //{
+            //    throw new Exception("File does not exist");
+            //}
         }
     }
 }
