@@ -2,6 +2,7 @@ using Akka.Actor;
 using Akka.Actor.Internal;
 using Akka.DependencyInjection;
 using Akka.Event;
+using Akka.Util.Internal;
 using CtrlAltQuest.Common;
 using CtrlAltQuest.Common.Actors;
 using CtrlAltQuest.Common.Repositories;
@@ -14,6 +15,7 @@ public class Pathfinder2eActor : ReceiveActor, IWithUnboundedStash
     private Pathfinder2eCharacter _state;
     private ICharacterRepository<Pathfinder2eCharacter> _characterRepository;
     public IStash Stash { get; set; }
+    private HashSet<IActorRef> _subscribers = new HashSet<IActorRef>();
 
     public Pathfinder2eActor(CharacterId characterId, ICharacterRepository<Pathfinder2eCharacter> characterRepository)
     {
@@ -27,13 +29,27 @@ public class Pathfinder2eActor : ReceiveActor, IWithUnboundedStash
 
         Receive<LoadCharacter>(msg =>
         {
-            characterRepository.GetCharacter(_state.CharacterId).PipeTo(Self, Self, state => new CharacterLoaded(state), exception => throw new DataLoadFailedException($"Failed to load Character {_state.CharacterId}", exception));
+            _characterRepository.GetCharacter(_state.CharacterId)
+                .PipeTo(Self, Self, state => new CharacterLoaded(state), exception => throw new DataLoadFailedException($"Failed to load Character {_state.CharacterId}", exception));
         });
         Receive<CharacterLoaded>(msg =>
         {
             _state = msg.State;
+            _subscribers.ForEach(subscriber => subscriber.Tell(_state));
             Stash.UnstashAll();
             Become(ReadyToReceive);
+        });
+        Receive<SubscribeToStateChanges>(msg =>
+        {
+            _subscribers.Add(Sender);
+            Context.Watch(Sender);
+        });
+        Receive<Terminated>(msg =>
+        {
+            if (_subscribers.Contains(msg.ActorRef))
+            {
+                _subscribers.Remove(msg.ActorRef);
+            }
         });
         ReceiveAny(_ => Stash.Stash());
         Self.Tell(new LoadCharacter());
@@ -46,6 +62,19 @@ public class Pathfinder2eActor : ReceiveActor, IWithUnboundedStash
             _state = _state with { Name = msg.CharacterName };
         });
         Receive<GetCharacterState>(_ => Sender.Tell(new CharacterStateResponse(_state)));
+        Receive<SubscribeToStateChanges>(msg =>
+        {
+            _subscribers.Add(Sender);
+            Context.Watch(Sender);
+            Sender.Tell(_state);
+        });
+        Receive<Terminated>(msg =>
+        {
+            if (_subscribers.Contains(msg.ActorRef))
+            {
+                _subscribers.Remove(msg.ActorRef);
+            }
+        });
     }
 
     protected override bool AroundReceive(Receive receive, object message)
@@ -62,6 +91,7 @@ public class Pathfinder2eActor : ReceiveActor, IWithUnboundedStash
 
 public record CreateCharacter(CharacterId CharacterId, string CharacterName) : ICharacterMessage;
 public record GetCharacterState(CharacterId CharacterId) : ICharacterMessage;
+public record SubscribeToStateChanges(CharacterId CharacterId) : ICharacterMessage;
 public record CharacterStateResponse(Pathfinder2eCharacter State);
 public record LoadCharacter;
 public record CharacterLoaded(Pathfinder2eCharacter State);

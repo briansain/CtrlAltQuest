@@ -2,6 +2,6 @@
 {
     public record PathfinderSystemConfiguration
     {
-        public string DataDirectory { get; init; } = "_pf2e_data";
+        public string FileRootDirectory { get; init; } = "./wwwroot";
     }
 }

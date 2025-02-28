@@ -20,13 +20,13 @@
         {
             if (!string.IsNullOrEmpty(_sessProps.AdditionalTitle))
             {
-                Title = $"Ctrl Alt Quest - {_sessProps.AdditionalTitle}";
+                Title = $"Ctrl Alt Quest : {_sessProps.AdditionalTitle}";
             }
             else
             {
                 Title = "Ctrl Alt Quest";
             }
-            StateHasChanged();
+            this.InvokeAsync(StateHasChanged);
         };
         base.OnInitialized();
     }

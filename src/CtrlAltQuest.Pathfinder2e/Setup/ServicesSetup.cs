@@ -5,6 +5,7 @@ using CtrlAltQuest.Common.Actors;
 using CtrlAltQuest.Common.Repositories;
 using CtrlAltQuest.Pathfinder2e.Actors.Character;
 using CtrlAltQuest.Pathfinder2e.Repositories;
+using CtrlAltQuest.Pathfinder2e.UI;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text.Json;
@@ -16,7 +17,13 @@ public static class ServicesSetup
 {
     public static IServiceCollection AddPathfinder2eServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddScoped<ICharacterRepository<Pathfinder2eCharacter>>(_ => new FileRepository());
+        var config = new PathfinderSystemConfiguration()
+        {
+            FileRootDirectory = "./wwwroot"
+        };
+        services.AddSingleton(config);
+        services.AddTransient<ICharacterRepository<Pathfinder2eCharacter>, FileRepository>();
+        services.AddScoped<CharacterStateContainer>();
         services.Configure<JsonSerializerOptions>(options =>
         {
             options.PropertyNameCaseInsensitive = true;

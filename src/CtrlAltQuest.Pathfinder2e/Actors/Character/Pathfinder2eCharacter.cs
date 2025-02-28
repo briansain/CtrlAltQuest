@@ -1,10 +1,13 @@
 using CtrlAltQuest.Common;
 using CtrlAltQuest.Pathfinder2e.SystemData;
+using System.Text.Json.Serialization;
 
 namespace CtrlAltQuest.Pathfinder2e.Actors.Character;
 
 public record Pathfinder2eCharacter : ICharacter
 {
+    [JsonIgnore]
+    public static Pathfinder2eCharacter Empty => new Pathfinder2eCharacter() { CharacterId = new CharacterId(Guid.Empty) };
     public required CharacterId CharacterId { get; init; }
     public UserId UserId { get; init; }
     public string Name { get; init; } = string.Empty;

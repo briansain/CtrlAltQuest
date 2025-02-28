@@ -15,8 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="..\_data\**\*.json" 
-			 
+    <Content Update="..\_data\**\*.json"
              CopyToPublishDirectory="PreserveNewest"
              CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>

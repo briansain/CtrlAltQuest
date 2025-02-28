@@ -1,57 +1,70 @@
 ﻿@page "/pathfinder2e/character"
+@using Akka.Streams
+@using Akka.Streams.Dsl
 @inject SessionProperties _sessionProperties;
-@inject ICharacterRepository<Pathfinder2eCharacter> characterRepository;
+@inject IRequiredActor<Pathfinder2eActor> requiredActor;
+@inject ActorSystem _actorSystem;
 @implements IDisposable
 <MudGrid>
-    <MudItem lg="6" xs="12">
-        <MudTabs Elevation="3" Rounded="true">
-            <MudTabPanel Text="Character Sheet">
-                @if(_state != null)
-                {
+    @if (hasLoaded)
+    {
+        <MudItem lg="6" xs="12">
+            <MudTabs Elevation="3" Rounded="true">
+                <MudTabPanel Text="Character Sheet">
                     <CharacterSheetIndex />
-                }
-            </MudTabPanel>
-            <MudTabPanel Text="Builder">
-                @* <BuilderIndex /> *@
-            </MudTabPanel>
-        </MudTabs>
-    </MudItem>
-    <MudItem lg="6">
-        <MudTabs Elevation="3" Rounded="true">
-            <MudTabPanel Text="Available Actions">
-                <AvailableActionsIndex />
-            </MudTabPanel>
-            <MudTabPanel Text="Notes">
-                <h1>NOTES</h1>
-            </MudTabPanel>
-        </MudTabs>
-    </MudItem>
+                </MudTabPanel>
+                <MudTabPanel Text="Builder">
+                    @* <BuilderIndex /> *@
+                </MudTabPanel>
+            </MudTabs>
+        </MudItem>
+        <MudItem lg="6">
+            <MudTabs Elevation="3" Rounded="true">
+                <MudTabPanel Text="Available Actions">
+                    <AvailableActionsIndex />
+                </MudTabPanel>
+                <MudTabPanel Text="Notes">
+                    <h1>NOTES</h1>
+                </MudTabPanel>
+            </MudTabs>
+        </MudItem>
+
+    }
+    else
+    {
+        <MudItem xs="12">
+            <MudPaper>
+                <MudOverlay Visible="!hasLoaded" DarkBackground="true" Absolute="true">
+                    <MudProgressCircular Color="Color.Secondary" Indeterminate="true" />
+                </MudOverlay>
+            </MudPaper>
+        </MudItem>
+    }
 </MudGrid>
 
 @code
 {
-    public Pathfinder2eCharacter? _state;
+    [Inject] public required CharacterStateContainer CharacterStateContainer { get; set; }
+    private bool hasLoaded = false;
     protected async override Task OnInitializedAsync()
     {
-        var fileRepo = new FileRepository();
-        _state = await fileRepo.GetCharacter(null);
+        CharacterStateContainer.StateChanged += () => this.InvokeAsync(() => {
+            hasLoaded = true;
+            StateHasChanged();
+        });
+        CharacterStateContainer.Initialize(new CharacterId("characterid-889400f6-03a7-42b4-a95c-4e717b02257c"));
         await base.OnInitializedAsync();
         return;
     }
     protected override void OnAfterRender(bool firstRender)
     {
-        if (firstRender && _state != null)
-        {
-            // _sessionProperties.AdditionalTitle = $"{_state.Name}";
-            // _sessionProperties.TitleChanged();
-        }
         base.OnAfterRender(firstRender);
     }
 
     public void Dispose()
     {
-        // _sessionProperties.AdditionalTitle = string.Empty;
-        // _sessionProperties.TitleChanged();
+        _sessionProperties.AdditionalTitle = string.Empty;
+        _sessionProperties.TitleChanged();
     }
 
     private bool _open = false;

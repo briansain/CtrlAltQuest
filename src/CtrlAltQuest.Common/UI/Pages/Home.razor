@@ -13,12 +13,4 @@
     </MudPaper>
 </div>
 @code {
-    protected async override Task OnInitializedAsync()
-    {
-        var x = new HttpClient();
-        x.BaseAddress = new Uri("https://localhost:7027/");
-        var y = await x.GetStringAsync("pathfinder2e/traits.json");
-        
-        base.OnInitialized();
-    }
 }

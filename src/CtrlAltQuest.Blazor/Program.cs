@@ -1,4 +1,5 @@
 using Akka.Hosting;
+using Akka.Logger.Serilog;
 using CtrlAltQuest.Blazor;
 using CtrlAltQuest.Common.UI;
 using CtrlAltQuest.Pathfinder2e.Setup;
@@ -22,6 +23,11 @@ builder.Host.ConfigureServices((context, services) =>
 
     services.AddAkka("ctrlaltquest", builder =>
     {
+        builder.ConfigureLoggers(config =>
+        {
+            config.ClearLoggers();
+            config.AddLogger<SerilogLogger>();
+        });
         builder.AddPathfinder2eActors(context.Configuration);
     });
     services.AddScoped<SessionProperties>();
