@@ -4,6 +4,7 @@ using CommandLine;
 using CtrlAltQuest.Common;
 using CtrlAltQuest.Pathfinder2e.Actors.Character;
 using CtrlAltQuest.Pathfinder2e.Repositories;
+using CtrlAltQuest.Pathfinder2e.Setup;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
@@ -21,7 +22,7 @@ internal class Program
                 Console.WriteLine($"Starting to load data from {o.FileLocation}");
                 //var loadData = new LoadData(o.FileLocation, o.UploadType);
                 //loadData.Start().Wait();
-                var character = await new FileRepository().GetCharacter(CharacterId.GenerateId("hello-world"));
+                var character = await new FileRepository(new PathfinderSystemConfiguration()).GetCharacter(CharacterId.GenerateId("hello-world"));
             }
             else if (o.CreateCharacter)
             {

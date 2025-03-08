@@ -2,6 +2,7 @@
 {
     public record PathfinderSystemConfiguration
     {
-        public string FileRootDirectory { get; init; } = "./wwwroot";
+        public string TestingFileRootDirectory { get; init; } = "./wwwroot/Pathfinder2e/Testing";
+        public string DataFilesRootDirectory { get; init; } = "./wwwroot/Pathfinder2e";
     }
 }

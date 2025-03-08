@@ -5,6 +5,7 @@ using CtrlAltQuest.Common.Actors;
 using CtrlAltQuest.Common.Repositories;
 using CtrlAltQuest.Pathfinder2e.Actors.Character;
 using CtrlAltQuest.Pathfinder2e.Repositories;
+using CtrlAltQuest.Pathfinder2e.SystemData;
 using CtrlAltQuest.Pathfinder2e.UI;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,12 +16,14 @@ namespace CtrlAltQuest.Pathfinder2e.Setup;
 
 public static class ServicesSetup
 {
-    public static IServiceCollection AddPathfinder2eServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddPathfinder2eServices(this IServiceCollection services, IConfiguration configuration)  
     {
         var config = new PathfinderSystemConfiguration()
         {
-            FileRootDirectory = "./wwwroot"
+            TestingFileRootDirectory = "./wwwroot/pathfinder2e/testing",
+            DataFilesRootDirectory = "./wwwroot/pathfinder2e"
         };
+        Pathfinder2eData.SetConfig(config);
         services.AddSingleton(config);
         services.AddTransient<ICharacterRepository<Pathfinder2eCharacter>, FileRepository>();
         services.AddScoped<CharacterStateContainer>();

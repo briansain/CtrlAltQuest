@@ -20,7 +20,7 @@ namespace CtrlAltQuest.Common
             ReadOnlySpan<char> guidSpan = value.AsSpan(TypeName.Length + 1);
 
             if (!Guid.TryParse(guidSpan, out var id))
-                throw new ArgumentException(@$"Invalid format; expected "" {TypeName} -{{guid}}""", nameof(value));
+                throw new ArgumentException(@$"Invalid format; expected ""{TypeName}-{{guid}}""", nameof(value));
 
             Value = id;
         }

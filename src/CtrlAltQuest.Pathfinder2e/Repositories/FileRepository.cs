@@ -16,7 +16,7 @@ namespace CtrlAltQuest.Pathfinder2e.Repositories
         }
         public async Task<Pathfinder2eCharacter> GetCharacter(CharacterId characterId)
         {
-            var directory = $"{_config.FileRootDirectory}/pathfinder2e/Testing";
+            var directory = $"{_config.TestingFileRootDirectory}";
             var path = $"{directory}/{characterId.ToString()}.json";
             if (Directory.Exists(directory) && File.Exists(path))
             {
