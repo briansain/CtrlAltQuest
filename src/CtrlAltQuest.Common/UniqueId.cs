@@ -46,9 +46,79 @@ namespace CtrlAltQuest.Common
             var guid = Deterministic.Create(TypedNamespaceGuid!.Value, value);
             return Activator.CreateInstance(typeof(T), guid) as T ?? throw new ArgumentException($"Failed to create {TypeName} in GenerateId method");
         }
-    }
 
-    public class UniqueIdConverter<T> : JsonConverterFactory where T : UniqueId<T>
+		// ChatGPT helped with this :)
+		public string ToBase64()
+		{
+			// Create a span for the byte array representing the GUID
+			Span<byte> guidBytes = stackalloc byte[16];
+			Value.TryWriteBytes(guidBytes);
+
+			// Create a span for the Base64 character array (24 chars for 16 bytes)
+			Span<char> base64Chars = stackalloc char[24];
+
+			// Convert the bytes into Base64 characters
+			Convert.TryToBase64Chars(guidBytes, base64Chars, out _);
+
+			// Replace URL-unsafe Base64 characters with URL-safe ones
+			for (int i = 0; i < base64Chars.Length; i++)
+			{
+                base64Chars[i] = base64Chars[i] switch
+                {
+                    '/' => '_',
+                    '+' => '-',
+                    var c => c
+                };
+			}
+
+			// Remove padding characters '=' by slicing the span before '='
+			int paddingIndex = base64Chars.IndexOf('=');
+			if (paddingIndex == -1)
+			{
+				// If no padding is needed, just return the string
+				return new string(base64Chars);
+			}
+
+			// Return the Base64 string without the padding
+			return new string(base64Chars.Slice(0, paddingIndex));
+		}
+
+
+		// ChatGPT helped with this :)
+		public static T FromBase64(string base64)
+		{
+            if (base64 == null) throw new ArgumentNullException(nameof(base64));
+
+			// Ensure we have enough space for padding
+			int missingPadding = (4 - (base64.Length % 4)) % 4;
+			Span<char> buffer = stackalloc char[base64.Length + missingPadding];
+
+			// Copy base64 input and replace URL-safe characters
+			for (int i = 0; i < base64.Length; i++)
+			{
+				buffer[i] = base64[i] switch
+				{
+					'_' => '/',
+					'-' => '+',
+					var c => c
+				};
+			}
+
+			// Append necessary padding
+			for (int i = 0; i < missingPadding; i++)
+			{
+				buffer[base64.Length + i] = '=';
+			}
+
+			// Decode Base64 and create a GUID
+			byte[] converted = Convert.FromBase64CharArray(buffer.ToArray(), 0, buffer.Length);
+			return Activator.CreateInstance(typeof(T), new Guid(converted)) as T
+				?? throw new ArgumentException($"Unable to convert {base64} to type {typeof(T)}");
+		}
+
+	}
+
+	public class UniqueIdConverter<T> : JsonConverterFactory where T : UniqueId<T>
     {
         private static readonly Lazy<Func<JsonConverter>> ConverterFunc = new(() => Activator.CreateInstance<UniqueIdConverterInner<T>>, LazyThreadSafetyMode.ExecutionAndPublication);
         public override bool CanConvert(Type typeToConvert)

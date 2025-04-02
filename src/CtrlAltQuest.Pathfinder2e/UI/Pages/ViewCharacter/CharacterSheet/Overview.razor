@@ -1,0 +1,41 @@
+﻿@inject CharacterStateContainer _state;
+
+<MudGrid Class="ma-6">
+    <MudItem xs="6" sm="3">
+        <MudText Typo="Typo.overline">Name</MudText>
+        <MudText Typo="Typo.h5">@_state.Character.Name</MudText>
+    </MudItem>
+    <MudItem xs="6" sm="3">
+        <MudText Typo="Typo.overline">Ancestry</MudText>
+        <MudText Typo="Typo.h5">@_state.Character.AncestryName</MudText>
+    </MudItem>
+    <MudItem xs="6" sm="3">
+        <MudText Typo="Typo.overline">Background</MudText>
+        <MudText Typo="Typo.h5">@_state.Character.BackgroundName</MudText>
+    </MudItem>
+    <MudItem xs="6" sm="3">
+        <MudText Typo="Typo.overline">Class</MudText>
+        <MudText Typo="Typo.h5">@_state.Character.ClassName</MudText>
+    </MudItem>
+
+    <MudItem xs="6" sm="3">
+        <MudText Typo="Typo.overline">Level</MudText>
+        <MudText Typo="Typo.h5">@_state.Character.Level</MudText>
+    </MudItem>
+    <MudItem xs="6" sm="3">
+        <MudText Typo="Typo.overline">Speed</MudText>
+        <MudText Typo="Typo.h5">@_state.Character.Speed</MudText>
+    </MudItem>
+    <MudItem xs="6" sm="3">
+        <MudText Typo="Typo.overline">Size</MudText>
+        <MudText Typo="Typo.h5">@Enum.GetName(typeof(Pathfinder2e.SystemData.Size), _state.Character.Size)</MudText>
+    </MudItem>
+    <MudItem xs="6" sm="3">
+        <MudText Typo="Typo.overline">Class DC</MudText>
+        <MudText Typo="Typo.h5">17</MudText>
+    </MudItem>
+    @*XP*@
+    @*Hero Points*@
+    @*Heritage and Traits*@
+    @*Speed (fly/swim/climb)*@
+</MudGrid>

@@ -3,7 +3,8 @@
 
 <MudAppBar>
     <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-    <MudLink Href="/" Typo="Typo.h6" Color="Color.Inherit" Underline="Underline.None">@Title</MudLink>
+    <a href="/"><MudImage Src="CtrlAltQuest Logo - Horizontal.png" Alt="Ctrl Alt Quest Logo" Elevation="25" Height="42" Class="mr-2" Style="box-shadow: none"/></a>
+    <MudText Typo="Typo.h6">@Title</MudText>
 </MudAppBar>
 <MudDrawer @bind-Open="@_drawerOpen" Elevation="2">
     <MudNavMenu>
@@ -20,18 +21,18 @@
         {
             if (!string.IsNullOrEmpty(_sessProps.AdditionalTitle))
             {
-                Title = $"Ctrl Alt Quest : {_sessProps.AdditionalTitle}";
+                Title = $"| {_sessProps.AdditionalTitle}";
             }
             else
             {
-                Title = "Ctrl Alt Quest";
+                Title = "";
             }
             this.InvokeAsync(StateHasChanged);
         };
         base.OnInitialized();
     }
 
-    private string Title { get; set; } = "Ctrl Alt Quest";
+    private string Title { get; set; } = "";
     bool _drawerOpen = true;
 
     public void DrawerToggle()

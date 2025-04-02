@@ -1,30 +1,31 @@
-@* @inherits CharacterSheetIndex;
+@using CtrlAltQuest.Common.UI.SVGs
+@inject CharacterStateContainer _state;
 
-<MudGrid>
+<MudGrid Class="ma-6">
     <MudItem xs="4" sm="2">
         <MudText Typo="Typo.overline" Class="svg-stat-heading">Strength</MudText>
-        <Box1_SVG Value="@GetModifier(_state.Strength)" />
+        <Box1_SVG Value="@GetModifier(_state.Character.Strength)" />
     </MudItem>
     <MudItem xs="4" sm="2">
         <MudText Typo="Typo.overline" Class="svg-stat-heading">Dexterity</MudText>
-        <Box1_SVG Value="@GetModifier(_state.Dexterity)" />
+        <Box1_SVG Value="@GetModifier(_state.Character.Dexterity)" />
     </MudItem>
     <MudItem xs="4" sm="2">
         <MudText Typo="Typo.overline" Class="svg-stat-heading">Constitution</MudText>
-        <Box1_SVG Value="@GetModifier(_state.Constitution)" />
+        <Box1_SVG Value="@GetModifier(_state.Character.Constitution)" />
     </MudItem>
 
     <MudItem xs="4" sm="2">
         <MudText Typo="Typo.overline" Class="svg-stat-heading">Intelligence</MudText>
-        <Box1_SVG Value="@GetModifier(_state.Intelligence)" />
+        <Box1_SVG Value="@GetModifier(_state.Character.Intelligence)" />
     </MudItem>
     <MudItem xs="4" sm="2">
         <MudText Typo="Typo.overline" Class="svg-stat-heading">Wisdom</MudText>
-        <Box1_SVG Value="@GetModifier(_state.Wisdom)" />
+        <Box1_SVG Value="@GetModifier(_state.Character.Wisdom)" />
     </MudItem>
     <MudItem xs="4" sm="2">
         <MudText Typo="Typo.overline" Class="svg-stat-heading">Charisma</MudText>
-        <Box1_SVG Value="@GetModifier(_state.Charisma)" />
+        <Box1_SVG Value="@GetModifier(_state.Character.Charisma)" />
     </MudItem>
 </MudGrid>
 @code {
@@ -32,4 +33,4 @@
     {
         return $"{(attributeModifier >= 0 ? "+" : "-")} {attributeModifier}";
     }
-} *@
+}

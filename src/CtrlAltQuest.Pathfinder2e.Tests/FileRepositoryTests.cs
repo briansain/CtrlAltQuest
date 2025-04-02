@@ -10,6 +10,7 @@ namespace CtrlAltQuest.Pathfinder2e.Tests
         [Fact]
         public async Task FileRepository_Success()
         {
+            var x = new CharacterId("characterid-fe56784f-8dd5-5697-97c5-d292c4759bf3").ToBase64();
             var fileRepository = new FileRepository(new PathfinderSystemConfiguration() {  TestingFileRootDirectory = "./_data" });
             var character = await fileRepository.GetCharacter(new CharacterId("characterid-fe56784f-8dd5-5697-97c5-d292c4759bf3"));
             Assert.NotNull(character);

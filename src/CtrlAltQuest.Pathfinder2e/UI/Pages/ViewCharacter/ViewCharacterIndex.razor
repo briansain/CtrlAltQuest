@@ -1,4 +1,4 @@
-﻿@page "/pathfinder2e/character"
+﻿@page "/pathfinder2e/character/{base64CharacterId}"
 @using Akka.Streams
 @using Akka.Streams.Dsl
 @inject SessionProperties _sessionProperties;
@@ -18,7 +18,7 @@
                 </MudTabPanel>
             </MudTabs>
         </MudItem>
-        <MudItem lg="6">
+        <MudItem lg="6" xs="12">
             <MudTabs Elevation="3" Rounded="true">
                 <MudTabPanel Text="Available Actions">
                     <AvailableActionsIndex />
@@ -45,17 +45,22 @@
 @code
 {
     [Inject] public required CharacterStateContainer CharacterStateContainer { get; set; }
+    [Parameter] public required string Base64CharacterId { get; set; }
+    public CharacterId CharacterId { get; private set; } = CharacterId.Empty;
     private bool hasLoaded = false;
-    protected async override Task OnInitializedAsync()
+    private bool initialLoad = true;
+
+    protected override void OnInitialized()
     {
-        CharacterStateContainer.StateChanged += () => this.InvokeAsync(() => {
-            hasLoaded = true;
-            StateHasChanged();
-        });
-        CharacterStateContainer.Initialize(new CharacterId("characterid-fe56784f-8dd5-5697-97c5-d292c4759bf3"));
-        await base.OnInitializedAsync();
-        return;
+        if (!string.IsNullOrEmpty(Base64CharacterId))
+        {
+            CharacterId = CharacterId.FromBase64(Base64CharacterId);
+            CharacterStateContainer.StateChanged += async () => await this.InvokeAsync(StateChangedHandler);
+            CharacterStateContainer.Initialize(CharacterId);
+        }
+        base.OnInitialized();
     }
+
     protected override void OnAfterRender(bool firstRender)
     {
         base.OnAfterRender(firstRender);
@@ -63,13 +68,15 @@
 
     public void Dispose()
     {
+        //this is causing a problem when moving tabs
         _sessionProperties.AdditionalTitle = string.Empty;
         _sessionProperties.TitleChanged();
+        CharacterStateContainer.Dispose();
     }
 
-    private bool _open = false;
-    private void ToggleDrawer()
+    private void StateChangedHandler()
     {
-        _open = !_open;
+        hasLoaded = true;
+        StateHasChanged();
     }
 }
