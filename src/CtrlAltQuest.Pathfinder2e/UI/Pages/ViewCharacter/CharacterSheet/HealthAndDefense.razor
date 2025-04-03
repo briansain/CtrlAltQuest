@@ -1,0 +1,19 @@
+﻿@using CtrlAltQuest.Pathfinder2e.UI.Components;
+@inject CharacterStateContainer _state;
+
+<style>
+    svg#temp-health path {
+        stroke-dasharray: 2;
+    } 
+</style>
+
+<MudGrid Class="ma-1">
+    <CharacterStat Label="HP" Stat="@_state.Character.CurrentHitPoints" SVG="Heart" />
+    <CharacterStat Label="Temp HP" Stat="@_state.Character.TemporaryHitPoints" SVG="DashedHeart" />
+    <CharacterStat Label="Dying" Stat="1" Class="svg-stat skull alive" SVG="Dying" />
+    <CharacterStat Label="Wounded" Stat="1" Class="svg-stat skull alive" SVG="Wounded" />
+</MudGrid>
+
+@code {
+
+}

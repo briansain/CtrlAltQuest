@@ -15,4 +15,9 @@
     <PackageReference Include="MudBlazor.ThemeManager" Version="3.0.0" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="UI\Components\" />
+  </ItemGroup>
+
 </Project>

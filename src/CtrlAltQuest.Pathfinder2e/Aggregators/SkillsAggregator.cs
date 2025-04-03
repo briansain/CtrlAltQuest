@@ -45,6 +45,10 @@ namespace CtrlAltQuest.Pathfinder2e.Aggregators
         {
             return CalculateProficiency(characterState.SkillProficiencies.Occultism, characterState.Level) + characterState.Intelligence;
         }
+        public static int CalculatePerception(Pathfinder2eCharacter characterState)
+        {
+            return CalculateProficiency(characterState.SkillProficiencies.Perception, characterState.Level) + characterState.Wisdom;
+        }
         public static int CalculatePerformance(Pathfinder2eCharacter characterState)
         {
             return CalculateProficiency(characterState.SkillProficiencies.Performance, characterState.Level) + characterState.Charisma;

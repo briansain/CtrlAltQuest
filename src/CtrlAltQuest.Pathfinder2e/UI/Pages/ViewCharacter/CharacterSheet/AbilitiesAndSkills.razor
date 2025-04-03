@@ -1,0 +1,41 @@
+@using CtrlAltQuest.Common.UI.SVGs
+@using CtrlAltQuest.Pathfinder2e.Aggregators
+@using CtrlAltQuest.Pathfinder2e.UI.Components
+@inject CharacterStateContainer _state;
+
+<MudGrid Class="ma-1">
+    <CharacterStat Label="Strength" Stat="GetModifier(_state.Character.Strength)" SVG="Box1" OverrideXS="6" OverrideSM="2" />
+    <CharacterStat Label="Dexterity" Stat="GetModifier(_state.Character.Dexterity)" SVG="Box1" OverrideXS="6" OverrideSM="2" />
+    <CharacterStat Label="Constitution" Stat="GetModifier(_state.Character.Constitution)" SVG="Box1" OverrideXS="6" OverrideSM="2" />
+    <CharacterStat Label="Intelligence" Stat="GetModifier(_state.Character.Intelligence)" SVG="Box1" OverrideXS="6" OverrideSM="2" />
+    <CharacterStat Label="Wisdom" Stat="GetModifier(_state.Character.Wisdom)" SVG="Box1" OverrideXS="6" OverrideSM="2" />
+    <CharacterStat Label="Charisma" Stat="GetModifier(_state.Character.Charisma)" SVG="Box1" OverrideXS="6" OverrideSM="2" />
+    <CharacterStat Label="Acrobatics" Stat="SkillsAggregator.CalculateAcrobatics(_state.Character)" SVG="PolarStar" />
+    <CharacterStat Label="Arcana" Stat="SkillsAggregator.CalculateArcana(_state.Character)" SVG="PolarStar" />
+    <CharacterStat Label="Athletics" Stat="SkillsAggregator.CalculateAthletics(_state.Character)" SVG="PolarStar" />
+    <CharacterStat Label="Crafting" Stat="SkillsAggregator.CalculateCrafting(_state.Character)" SVG="PolarStar" />
+    <CharacterStat Label="Deception" Stat="SkillsAggregator.CalculateDeception(_state.Character)" SVG="PolarStar" />
+    <CharacterStat Label="Diplomacy" Stat="SkillsAggregator.CalculateDiplomacy(_state.Character)" SVG="PolarStar" />
+    <CharacterStat Label="Intimidation" Stat="SkillsAggregator.CalculateIntimidation(_state.Character)" SVG="PolarStar" />
+    <CharacterStat Label="Medicine" Stat="SkillsAggregator.CalculateMedicine(_state.Character)" SVG="PolarStar" />
+    <CharacterStat Label="Nature" Stat="SkillsAggregator.CalculateNature(_state.Character)" SVG="PolarStar" />
+    <CharacterStat Label="Occultism" Stat="SkillsAggregator.CalculateOccultism(_state.Character)" SVG="PolarStar" />
+    <CharacterStat Label="Perception" Stat="SkillsAggregator.CalculatePerception(_state.Character)" SVG="PolarStar" />
+    <CharacterStat Label="Performance" Stat="SkillsAggregator.CalculatePerformance(_state.Character)" SVG="PolarStar" />
+    <CharacterStat Label="Religion" Stat="SkillsAggregator.CalculateReligion(_state.Character)" SVG="PolarStar" />
+    <CharacterStat Label="Society" Stat="SkillsAggregator.CalculateSociety(_state.Character)" SVG="PolarStar" />
+    <CharacterStat Label="Stealth" Stat="SkillsAggregator.CalculateStealth(_state.Character)" SVG="PolarStar" />
+    <CharacterStat Label="Survival" Stat="SkillsAggregator.CalculateSurvival(_state.Character)" SVG="PolarStar" />
+    <CharacterStat Label="Thievery" Stat="SkillsAggregator.CalculateThievery(_state.Character)" SVG="PolarStar" />
+    @foreach (var l in _state.Character.SkillProficiencies.Lore)
+    {
+        <CharacterStat Label="@($"{l.Key} Lore")" Stat="SkillsAggregator.CalculateLore(_state.Character, l.Value)" SVG="PolarStar" />
+    }
+
+</MudGrid>
+@code {
+    private string GetModifier(int attributeModifier)
+    {
+        return $"{(attributeModifier >= 0 ? "+" : "-")} {attributeModifier}";
+    }
+}

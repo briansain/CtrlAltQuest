@@ -1,41 +1,24 @@
-﻿@inject CharacterStateContainer _state;
+﻿@using CtrlAltQuest.Pathfinder2e.Aggregators
+@using CtrlAltQuest.Pathfinder2e.UI.Components
+@inject CharacterStateContainer _state;
 
-<MudGrid Class="ma-6">
-    <MudItem xs="6" sm="3">
-        <MudText Typo="Typo.overline">Name</MudText>
-        <MudText Typo="Typo.h5">@_state.Character.Name</MudText>
-    </MudItem>
-    <MudItem xs="6" sm="3">
-        <MudText Typo="Typo.overline">Ancestry</MudText>
-        <MudText Typo="Typo.h5">@_state.Character.AncestryName</MudText>
-    </MudItem>
-    <MudItem xs="6" sm="3">
-        <MudText Typo="Typo.overline">Background</MudText>
-        <MudText Typo="Typo.h5">@_state.Character.BackgroundName</MudText>
-    </MudItem>
-    <MudItem xs="6" sm="3">
-        <MudText Typo="Typo.overline">Class</MudText>
-        <MudText Typo="Typo.h5">@_state.Character.ClassName</MudText>
-    </MudItem>
-
-    <MudItem xs="6" sm="3">
-        <MudText Typo="Typo.overline">Level</MudText>
-        <MudText Typo="Typo.h5">@_state.Character.Level</MudText>
-    </MudItem>
-    <MudItem xs="6" sm="3">
-        <MudText Typo="Typo.overline">Speed</MudText>
-        <MudText Typo="Typo.h5">@_state.Character.Speed</MudText>
-    </MudItem>
-    <MudItem xs="6" sm="3">
-        <MudText Typo="Typo.overline">Size</MudText>
-        <MudText Typo="Typo.h5">@Enum.GetName(typeof(Pathfinder2e.SystemData.Size), _state.Character.Size)</MudText>
-    </MudItem>
-    <MudItem xs="6" sm="3">
-        <MudText Typo="Typo.overline">Class DC</MudText>
-        <MudText Typo="Typo.h5">17</MudText>
-    </MudItem>
-    @*XP*@
-    @*Hero Points*@
-    @*Heritage and Traits*@
-    @*Speed (fly/swim/climb)*@
+<MudGrid Class="ma-1" Spacing="5">
+    <CharacterStat Label="Name" Stat="@_state.Character.Name" />
+    <CharacterStat Label="Level" Stat="@_state.Character.Level" />
+    <CharacterStat Label="XP" Stat="1000" />
+    <CharacterStat Label="Hero Points" Stat="3" />
+    <CharacterStat Label="Ancestry" Stat="@_state.Character.AncestryName" />
+    <CharacterStat Label="Heritage" Stat="Heritage" />
+    <CharacterStat Label="Background" Stat="@_state.Character.BackgroundName" />
+    <CharacterStat Label="Class" Stat="@_state.Character.ClassName" />
+    <CharacterStat Label="Perception" Stat="@SkillsAggregator.CalculatePerception(@_state.Character)" />
+    @*Need to figure out Climb, Fly, Swim*@
+    <CharacterStat Label="Speed" Stat="@_state.Character.Speed" />
+    <CharacterStat Label="Size" Stat="@Enum.GetName(typeof(Pathfinder2e.SystemData.Size), _state.Character.Size)" />
+    <CharacterStat Label="Class DC" Stat="17" />
+    <CharacterStat Label="Languages" Stat="@string.Join(", ", @_state.Character.Languages)" OverrideXS="12" OverrideSM="12" />
+    @code {
+        private string Heritage = "Gladiator";
+    }
+    
 </MudGrid>
