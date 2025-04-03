@@ -1,19 +1,104 @@
-﻿@using CtrlAltQuest.Pathfinder2e.UI.Components;
+﻿@using CtrlAltQuest.Common.UI.SVGs
+@using CtrlAltQuest.Pathfinder2e.Aggregators
+@using CtrlAltQuest.Pathfinder2e.SystemData
+@using CtrlAltQuest.Pathfinder2e.UI.Components;
 @inject CharacterStateContainer _state;
 
 <style>
     svg#temp-health path {
-        stroke-dasharray: 2;
-    } 
+    stroke-dasharray: 2;
+    }
+
+    svg.alive path {
+    stroke: var(--mud-palette-text-primary);
+    }
+
+    svg.dying path {
+    stroke: var(--mudcolors-red-default);
+    }
 </style>
 
 <MudGrid Class="ma-1">
-    <CharacterStat Label="HP" Stat="@_state.Character.CurrentHitPoints" SVG="Heart" />
-    <CharacterStat Label="Temp HP" Stat="@_state.Character.TemporaryHitPoints" SVG="DashedHeart" />
-    <CharacterStat Label="Dying" Stat="1" Class="svg-stat skull alive" SVG="Dying" />
-    <CharacterStat Label="Wounded" Stat="1" Class="svg-stat skull alive" SVG="Wounded" />
+    <CharacterStat Label="Armor Class" Stat="MartialAggregator.GetArmorBonus(_state.Character)" SVG="Armor" OverrideSM="2" />
+    <CharacterStat Label="Shield" Stat="@($"+{EquippedShield?.ShieldBonus ?? 0}")" OverrideSM="2" SVG="Shield" />
+    <CharacterStat Label="HP" Stat="@_state.Character.CurrentHitPoints" OverrideSM="2" SVG="Heart" />
+    <CharacterStat Label="Temp HP" Stat="@_state.Character.TemporaryHitPoints" OverrideSM="2" SVG="DashedHeart" />
+    <MudItem xs="12" sm="3">
+        <div class="d-flex">
+            <MudText Style="text-decoration:underline" Typo="Typo.overline">Conditions</MudText>
+        </div>
+    </MudItem>
+    <MudItem xs="6" sm="4">
+        <div class="d-flex">
+            <MudText style="text-decoration:underline" Typo="Typo.overline">Dying</MudText>
+        </div>
+        <div class="d-flex">
+            <Skull_SVG Class="@(Dying >= 1 ? dyingClass : aliveClass)" />
+            <Skull_SVG Class="@(Dying >= 2 ? dyingClass : aliveClass)" />
+            <Skull_SVG Class="@(Dying >= 3 ? dyingClass : aliveClass)" />
+            <Skull_SVG Class="@(Dying >= 4 ? dyingClass : aliveClass)" />
+        </div>
+    </MudItem>
+    <MudItem xs="6" sm="4">
+        <div class="d-flex">
+            <MudText style="text-decoration:underline" Typo="Typo.overline">Wounded</MudText>
+        </div>
+        <div class="d-flex">
+            <Wounded_SVG Class="@(Wounded >= 1 ? dyingClass : aliveClass)" />
+            <Wounded_SVG Class="@(Wounded >= 2 ? dyingClass : aliveClass)" />
+            <Wounded_SVG Class="@(Wounded >= 3 ? dyingClass : aliveClass)" />
+            <Wounded_SVG Class="@(Wounded >= 4 ? dyingClass : aliveClass)" />
+        </div>
+    </MudItem>
+    <MudItem xs="12" sm="4">
+        <div class="d-flex">
+            <MudText Style="text-decoration:underline" Typo="Typo.overline">Resistance/Immunities</MudText>
+        </div>
+    </MudItem>
+
+    @*Shield Details*@
+    <MudItem xs="12" sm="12">
+        <MudButton Variant="Variant.Text"
+        StartIcon="@(_shieldDetailsExpanded ? Icons.Material.Filled.KeyboardArrowDown : @Icons.Material.Filled.KeyboardArrowRight)"
+        OnClick="@(_ => _shieldDetailsExpanded = !_shieldDetailsExpanded)">Shield Details</MudButton>
+        <MudCollapse Expanded="_shieldDetailsExpanded">
+            <MudGrid>
+                <CharacterStat Label="Hardness" Stat="EquippedShield?.Hardness" />
+                <CharacterStat Label="Max HP" Stat="EquippedShield?.MaxHealthPoints" />
+                <CharacterStat Label="HP" Stat="EquippedShield?.HealthPoints" />
+                <CharacterStat Label="Break Threshold" Stat="EquippedShield?.BreakThreshold" />
+            </MudGrid>
+
+        </MudCollapse>
+    </MudItem>
+    @*Armor Proficiencies*@
+    <MudItem xs="12" sm="12">
+        <MudButton Variant="Variant.Text"
+        StartIcon="@(_armorProficienciesExpanded ? Icons.Material.Filled.KeyboardArrowDown : @Icons.Material.Filled.KeyboardArrowRight)"
+        OnClick="@(_ => _armorProficienciesExpanded = !_armorProficienciesExpanded)">Armor Proficiencies</MudButton>
+        <MudCollapse Expanded="_armorProficienciesExpanded">
+            <MudGrid>
+                <CharacterStat Label="Unarmored" Stat="Enum.GetName<Proficiency>(_state.Character.MartialProficiencies.Unarmored)" />
+                <CharacterStat Label="Light" Stat="Enum.GetName<Proficiency>(_state.Character.MartialProficiencies.LightArmor)" />
+                <CharacterStat Label="Medium" Stat="Enum.GetName<Proficiency>(_state.Character.MartialProficiencies.MediumArmor)" />
+                <CharacterStat Label="Heavy" Stat="Enum.GetName<Proficiency>(_state.Character.MartialProficiencies.HeavyArmor)" />
+            </MudGrid>
+        </MudCollapse>
+    </MudItem>
 </MudGrid>
 
 @code {
+    private Shield? EquippedShield;
+    private string dyingClass = "svg-stat skull dying";
+    private string aliveClass = "svg-stat skull alive";
+    private int Dying { get; set; } = 2;
+    private int Wounded { get; set; } = 1;
+    private bool _shieldDetailsExpanded = false;
+    private bool _armorProficienciesExpanded = false;
+
+    protected override void OnInitialized()
+    {
+        EquippedShield = EquipmentAggregator.GetEquippedShield(_state.Character);
+    }
 
 }

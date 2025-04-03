@@ -37,5 +37,5 @@ namespace CtrlAltQuest.Pathfinder2e.Aggregators
                     return CalculateProficiency(Proficiency.Untrained, character.Level);
             }
         }
-    }
+	}
 }
