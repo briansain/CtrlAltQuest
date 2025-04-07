@@ -1,12 +1,48 @@
-﻿
-<MudItem xs="12" md="6">
-    <MudButton Variant="Variant.Text"
-               StartIcon="@(_strikesExpanded ? Icons.Material.Filled.KeyboardArrowDown : @Icons.Material.Filled.KeyboardArrowRight)"
-               OnClick="@(_ => _strikesExpanded = !_strikesExpanded)">Melee</MudButton>
-    <MudCollapse Expanded="_strikesExpanded">
+﻿@using CtrlAltQuest.Pathfinder2e.Aggregators
+@using CtrlAltQuest.Pathfinder2e.SystemData
+@using CtrlAltQuest.Pathfinder2e.UI.Components
+@using static CtrlAltQuest.Pathfinder2e.Aggregators.MartialAggregator
+@inject CharacterStateContainer _state;
+<MudGrid Class="ma-6">
+    @foreach (var attack in Attacks)
+    {
+        <MudItem xs="12" sm="6" md="4">
+            <MudCard Outlined="true" Class="" >
+                <MudCardHeader Class="pb-1 d-flex">
+                    <CardHeaderContent>
+                        <div class="d-flex">
+                            <MudText Typo="Typo.h6" Class="flex-grow-1">@attack.Name</MudText>
+                            <MudText Typo="Typo.body1" Class="align-content-end">@attack.WeaponType</MudText>
+                        </div>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent Class="pt-1 pb-1">
+                    <MudGrid>
+                        <CharacterStat Label="Attack Bonus" Stat="@attack.AttackBonus" OverrideSM="6"/>
+                        <CharacterStat Label="Damage" Stat="@attack.Damage" OverrideSM="6"/>
+                        @if(!string.IsNullOrWhiteSpace(attack.Range))
+                        {
+                            <CharacterStat Label="Range" Stat="@attack.Range" OverrideXS="6" OverrideSM="6"/>
+                            <CharacterStat Label="Reload" Stat="@attack.Reload" OverrideXS="6" OverrideSM="6" />
+                        }
+                        <CharacterStat Label="Traits" Stat="attack.Traits" OverrideSM="12"/>
+                    </MudGrid>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Variant="Variant.Text" Color="Color.Primary">Roll</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    }
+</MudGrid>
 
-    </MudCollapse>
-</MudItem>
+
 @code {
-    private bool _strikesExpanded = false;
+    private List<Attack> Attacks = [];
+
+    protected override void OnInitialized()
+    {
+        Attacks = MartialAggregator.GetAttacks(_state.Character);
+        base.OnInitialized();
+    }
 }

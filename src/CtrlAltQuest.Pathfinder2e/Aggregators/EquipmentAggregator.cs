@@ -12,11 +12,11 @@ namespace CtrlAltQuest.Pathfinder2e.Aggregators
 
         public static Shield? GetEquippedShield(Pathfinder2eCharacter character)
         {
-            return (Shield?)character.Equipment.FirstOrDefault(e => e.ItemCategory == ItemCategory.Shields && e.IsEquipped);
+            return (Shield?)character.Equipment.FirstOrDefault(e => e.ItemCategory == ItemCategory.Shield && e.IsEquipped);
         }
         public static List<Weapon>? GetEquippedWeapons(Pathfinder2eCharacter character)
         {
-            return character.Equipment?.Where(e => e.ItemCategory == ItemCategory.Weapons && e.IsEquipped)?.Cast<Weapon>().ToList() ?? new List<Weapon>();
+            return character.Equipment?.Where(e => e.ItemCategory == ItemCategory.Weapon && e.IsEquipped)?.Cast<Weapon>().ToList() ?? new List<Weapon>();
         }
     }
 }
