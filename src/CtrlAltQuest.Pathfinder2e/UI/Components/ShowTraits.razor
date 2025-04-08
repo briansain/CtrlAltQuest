@@ -1,0 +1,12 @@
+﻿<MudItem xs="12">
+<MudChipSet T="string" ReadOnly="true" Size="Size.Small">
+    @foreach(var trait in Traits)
+    {
+
+        <MudChip T="string" Color="Color.Primary">@trait</MudChip>
+    }
+</MudChipSet>
+</MudItem>
+@code {
+    [Parameter] public required List<string> Traits { get; set; }
+}

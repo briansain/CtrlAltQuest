@@ -35,13 +35,13 @@ namespace CtrlAltQuest.Pathfinder2e.Tests.AggregatorTests
                     {
                         Name = "EquippedShield",
                         IsEquipped = true,
-                        ItemCategory = ItemCategory.Shields
+                        ItemCategory = ItemCategory.Shield
                     },
                     new Shield()
                     {
                         Name = "NOTEquippedShield",
                         IsEquipped = false,
-                        ItemCategory = ItemCategory.Shields
+                        ItemCategory = ItemCategory.Shield
                     }]
             };
             var armor = EquipmentAggregator.GetEquippedArmor(character);
@@ -99,13 +99,13 @@ namespace CtrlAltQuest.Pathfinder2e.Tests.AggregatorTests
                     {
                         Name = "EquippedWeapon",
                         IsEquipped = true,
-                        ItemCategory = ItemCategory.Weapons
+                        ItemCategory = ItemCategory.Weapon
                     },
                     new Weapon()
                     {
                         Name = "NOTEquippedWeapon",
                         IsEquipped = false,
-                        ItemCategory = ItemCategory.Weapons
+                        ItemCategory = ItemCategory.Weapon
                     }]
             };
             var armor = EquipmentAggregator.GetEquippedArmor(character);

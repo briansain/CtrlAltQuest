@@ -1,0 +1,118 @@
+﻿@using CtrlAltQuest.Pathfinder2e.Aggregators
+@using CtrlAltQuest.Pathfinder2e.SystemData
+@using CtrlAltQuest.Pathfinder2e.UI.Components
+@using static CtrlAltQuest.Pathfinder2e.Aggregators.MartialAggregator
+@inject CharacterStateContainer _state;
+
+<MudGrid Class="ma-6">
+    @foreach (var spell in CharacterSpells)
+    {
+        <MudItem xs="12" sm="6" md="4">
+            <MudCard Outlined="true" Style="height:100%">
+                <MudCardHeader Class="pb-1 d-flex">
+                    <CardHeaderContent>
+                        <div class="d-flex">
+                            <MudText Typo="Typo.h6" Class="flex-grow-1">@spell.Name</MudText>
+                            <MudText Typo="Typo.body1" Class="align-content-end">@($"{(spell.IsCantrip ? "Cantrip": "Spell")} {spell.Level}")</MudText>
+                        </div>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent Class="pt-1 pb-1">
+                    <MudGrid>
+                        <ShowTraits Traits="GetSpellTraits(spell)" />
+                        @if (!string.IsNullOrWhiteSpace(spell.Range))
+                        {
+                            <CharacterStat Label="Range" Stat="@spell.Range" OverrideSM="6" />
+                        }
+                        @if (!string.IsNullOrWhiteSpace(spell.Targets))
+                        {
+                            <CharacterStat Label="Targets" Stat="@spell.Targets" OverrideSM="6" />
+                        }
+                        @if (!string.IsNullOrWhiteSpace(spell.Duration))
+                        {
+                            <CharacterStat Label="Duration" Stat="@spell.Duration" OverrideSM="6" />
+                        }
+                    </MudGrid>
+                </MudCardContent>
+                <MudCardActions>
+                    @if (spell.IsRollable)
+                    {
+                        <MudButton Variant="Variant.Text" Color="Color.Primary">Roll</MudButton>
+                    }
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    }
+</MudGrid>
+
+
+@code {
+    private List<Spell> CharacterSpells = [];
+
+    private List<string> GetSpellTraits(Spell spell)
+    {
+        var traits = spell.SpellTraits?.Select(s => Enum.GetName(s) ?? string.Empty).ToList() ?? [];
+        traits.Sort();
+        return traits;
+    }
+
+    private string GetSpellTraditions(Spell spell)
+    {
+        return string.Join(", ", spell.Traditions.Select(s => Enum.GetName(s)));
+    }
+
+    protected override void OnInitialized()
+    {
+        CharacterSpells = [
+            new Spell()
+            {
+                Name = "Message",
+                Actions = 1,
+                Level = 1,
+                IsCantrip = true,
+                Traditions = [MagicTraditions.Arcane, MagicTraditions.Divine, MagicTraditions.Occult],
+                SpellTraits = [SpellTrait.Auditory, SpellTrait.Cantrip, SpellTrait.Concentrate, SpellTrait.Illusion, SpellTrait.Linguistic, SpellTrait.Mental, SpellTrait.Subtle],
+                Range = "120 ft.",
+                Targets = "1 creature",
+                Duration = "see spell",
+                Description = "You mouth words quietly, but instead of coming out of your mouth, they’re transferred directly to the ears of he target. While others can’t hear your words any better than if you normally mouthed them, the target can hear your words as if they were standing next to you. The target can give a brief response as a reaction, or as a free action on their next turn if they wish, but they must be able to see you and be within range to do so. If they respond, their response is delivered directly to your ear, just like the original message.",
+                Heightened = "(3rd) the spell's range increases to 500 feet."
+            }
+        ];
+        base.OnInitialized();
+    }
+
+    public class Spell
+    {
+        public bool IsCantrip { get; set; } = false;
+        public required int Level { get; set; }
+        public required string Name { get; set; }
+        public int? Actions { get; set; }
+        public List<MagicTraditions> Traditions { get; set; } = [];
+        public string? Range { get; set; }
+        public string? Targets { get; set; }
+        public string? Duration { get; set; }
+        public required string Description { get; set; }
+        public string? CastRequirements { get; set; }
+        public string? Area { get; set; }
+        public string? Defense { get; set; }
+        public string? Success { get; set; }
+        public string? CriticalSuccess { get; set; }
+        public string? Failure { get; set;}
+        public string? CriticalFailure { get; set; }
+        public string? Heightened { get; set; }
+        public int? NumDamageDice { get; set; }
+        public Dice? DamageDice { get; set; }
+        public List<SpellTrait> SpellTraits { get; set; } = [];
+        public bool IsRollable { get; set; } = false;
+    }
+    public enum MagicTraditions
+    {
+        Arcane, Divine, Occult
+    }
+
+    public enum SpellTrait
+    {
+        Auditory, Cantrip, Concentrate, Illusion, Linguistic, Mental, Subtle
+    }
+}
