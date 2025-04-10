@@ -7,32 +7,40 @@
 <MudThemeProvider Theme="primaryTheme" IsDarkMode="true" />
 <MudDrawer @bind-Open="_drawerOpen" ClipMode="_themeManager.DrawerClipMode" Elevation="_themeManager.DrawerElevation" />
 @code{
-static MudTheme primaryTheme = new MudTheme()
-{
-    PaletteDark = new PaletteDark()
+    static MudTheme primaryTheme = new MudTheme()
     {
-                Primary = "#a190bfff",
-        PrimaryLighten = Colors.Blue.Default,
-        PrimaryDarken = Colors.Blue.Darken2,
+        PaletteDark = new PaletteDark()
+        {
+            Primary = "#a190bfff",
+            PrimaryLighten = Colors.Blue.Default,
+            PrimaryDarken = Colors.Blue.Darken2,
 
-        Secondary = Colors.Amber.Darken1,
-        SecondaryLighten = Colors.Amber.Default,
-        SecondaryDarken = Colors.Amber.Darken2,
+            Secondary = Colors.Amber.Darken1,
+            SecondaryLighten = Colors.Amber.Default,
+            SecondaryDarken = Colors.Amber.Darken2,
 
-        Info = Colors.LightGreen.Default,
-        Success = Colors.Blue.Default,
+            Info = Colors.LightGreen.Default,
+            Success = Colors.Blue.Default,
 
-                AppbarBackground = "#594ae2ff",
-        Background = "#303030",
-                DrawerBackground = "#3b3b3bff"
-    },
+            AppbarBackground = "#594ae2ff",
+            Background = "#303030",
+            DrawerBackground = "#3b3b3bff"
+        },
 
-    LayoutProperties = new LayoutProperties()
-    {
-        DrawerWidthLeft = "260px",
-        DrawerWidthRight = "260px"
-    }
-};
+        Typography = new Typography()
+        {
+            Body2 = new Body2Typography()
+            {
+                FontSize = "1.33em"
+            }
+        },
+
+        LayoutProperties = new LayoutProperties()
+        {
+            DrawerWidthLeft = "260px",
+            DrawerWidthRight = "260px"
+        }
+    };
 }
 <MudPopoverProvider />
 <MudDialogProvider />

@@ -72,10 +72,10 @@ namespace CtrlAltQuest.Pathfinder2e.Aggregators
 
 			return attacks;
 		}
-		private static string GetTraitStrings(List<WeaponTrait> weaponTraits)
+		private static List<string> GetTraitStrings(List<WeaponTrait> weaponTraits)
 		{
-			var output = weaponTraits.Select(w => Enum.GetName(w));
-			return output.Count() > 0 ? string.Join(", ", output).Replace("_", " ") : string.Empty;
+			var output = weaponTraits.Select(w => Enum.GetName(w).Replace("_", " "));
+			return output.ToList();
 		}
 
 		private static int GetAttackBonus(Pathfinder2eCharacter character, Weapon weapon)
@@ -144,7 +144,7 @@ namespace CtrlAltQuest.Pathfinder2e.Aggregators
 			public string Name { get; set; } = string.Empty;
 			public string AttackBonus { get; set; }
 			public string Damage { get; set; } = string.Empty;
-			public string Traits { get; set; } = string.Empty;
+			public List<string> Traits { get; set; } = [];
 			public string Range { get; set; } = string.Empty;
 			public int? Reload { get; set; }
 			public string WeaponType { get; set; } = string.Empty;

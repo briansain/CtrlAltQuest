@@ -1,0 +1,107 @@
+﻿@using CtrlAltQuest.Common.UI.Components
+@using MudBlazor
+<MudPaper Elevation="3" Class="ma-3 pa-12">
+    <MudGrid>
+        <MudItem xs="12">
+            <MudText Typo="Typo.h3">@Character.Name</MudText>
+            <MudText Typo="Typo.h5">@Character.Subtitle</MudText>
+        </MudItem>
+
+        <CharacterStat Label="Resolve" Stat="Character.Resolve" SVG="PolarStar" OverrideSM="4" />
+        <CharacterStat Label="Grace" Stat="Character.Grace" SVG="PolarStar" OverrideSM="4" />
+        <CharacterStat Label="Wits" Stat="Character.Wits" SVG="PolarStar" OverrideSM="4" />
+
+        <CharacterStat Label="Fairy Godmother" Stat="GetEnum<FairyGodmother>(Character.FairyGodmother)" OverrideSM="6"/>
+        <CharacterStat Label="Gift" Stat="GetGift()" OverrideSM="6"/>
+        <CharacterStat Label="Armor" Stat="Character.Armor" SVG="Armor" />
+        <CharacterStat Label="Health" Stat="Character.Health" SVG="Heart" />
+        <CharacterStat Label="Max Health" Stat="Character.MaxHealth" />
+    </MudGrid>
+</MudPaper>
+
+@code {
+    public PrincessCharacter Character = new PrincessCharacter()
+    {
+        Name = "Princess Talia",
+        Subtitle = "of Misty Springs",
+        FairyGodmother = FairyGodmother.Mist,
+        Level = 2,
+        Gift = Gift.Elemental_Connection,
+        SubGift = "Water",
+        Resolve = 9,
+        Grace = 11,
+        Wits = 13,
+        Armor = 1,
+        Health = 8,
+        MaxHealth = 8
+    };
+
+    private string GetEnum<TEnum>(TEnum @enum) where TEnum : struct, Enum
+    {
+        return Enum.GetName<TEnum>(@enum)?.Replace("_", " ") ?? string.Empty;
+    }
+
+    private string GetGift()
+    {
+        return $"{GetEnum<Gift>(Character.Gift)}{(!string.IsNullOrWhiteSpace(Character.SubGift) ? $" ({Character.SubGift})" : string.Empty)}";
+    }
+
+    public record PrincessCharacter
+    {
+        public string Name { get; init; } = string.Empty;
+        public int Level { get; init; } = 0;
+        public string Subtitle { get; init; } = string.Empty;
+        public FairyGodmother FairyGodmother { get; init; } = FairyGodmother.Unspecified;
+        public string? SubGift { get; init; }
+        public Gift Gift { get; init; } = Gift.Unspecified;
+        public List<string> Items { get; init; } = [];
+        public List<Talent> Talents { get; init; } = [];
+        public List<InnateAbility> InateAbilities { get; init; } = [];
+        public List<SpecialAbility> SpecialAbilities { get; init; } = [];
+        public int Resolve { get; init; }
+        public int Grace { get; init; }
+        public int Wits { get; init; }
+        public int Armor { get; init; }
+        public int Health { get; set; }
+        public int MaxHealth { get; set; }
+    }
+    public enum FairyGodmother
+    {
+        Unspecified,
+        Old_Woman,
+        Fairy_Queen,
+        Shape_Changer,
+        Mist,
+        Ancestor,
+        Crone,
+        The_Moon,
+        Spirit_Of_The_Forest
+    }
+    public enum Gift
+    {
+        Unspecified,
+        Elemental_Connection,
+        Wild_Heart,
+        Enchanting_Voice,
+        Spritely_Agility,
+        Kitchen_Magic,
+        Healing_Touch,
+        Powerful_Friendship,
+        Sage_Intellect
+    }
+    public enum Talent
+    {
+        Hunting,
+        Fishing,
+        Wayfinding
+    }
+    public enum InnateAbility
+    {
+        Whisperer,
+        Natural_Climber
+    }
+    public enum SpecialAbility
+    {
+        
+    }
+}

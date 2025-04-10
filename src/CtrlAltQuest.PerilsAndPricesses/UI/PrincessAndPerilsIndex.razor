@@ -1,0 +1,22 @@
+﻿@page "/princessandperils";
+@using CtrlAltQuest.PerilsAndPricesses.UI.CharacterSheet
+@using MudBlazor;
+
+<MudGrid>
+    <MudItem xs="12" sm="6">
+        <MudTabs Elevation="3" Rounded="true">
+            <MudTabPanel Text="Character Sheet">
+                <CharacterSheet_Index />
+            </MudTabPanel>
+            <MudTabPanel Text="Builder">
+
+            </MudTabPanel>
+        </MudTabs>
+    </MudItem>
+    <MudItem xs="12" sm="6">
+        <MudTabs Elevation="3" Rounded="true">
+            <MudTabPanel Text="Codex">
+            </MudTabPanel>
+        </MudTabs>
+    </MudItem>
+</MudGrid>

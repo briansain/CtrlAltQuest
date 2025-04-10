@@ -47,7 +47,7 @@ body {
 }
 
 .svg-stat {
-    width: 75px;
+/*    width: 75px;*/
     fill-opacity: 0;
     stroke-opacity: 1;
     stroke-width: 1.5%;

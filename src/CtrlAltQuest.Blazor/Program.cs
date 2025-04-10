@@ -8,6 +8,7 @@ using Serilog;
 
 RoutingAssemblies.AddAssembly(typeof(CtrlAltQuest.Pathfinder2e.UI._Imports).Assembly);
 RoutingAssemblies.AddAssembly(typeof(CtrlAltQuest.Common._Imports).Assembly);
+RoutingAssemblies.AddAssembly(typeof(CtrlAltQuest.PerilsAndPricesses._Imports).Assembly);
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration
     .ReadFrom.Configuration(hostingContext.Configuration)

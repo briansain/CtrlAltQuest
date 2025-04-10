@@ -1,16 +1,31 @@
 ﻿@page "/"
 
 <PageTitle>Home</PageTitle>
-<div class="d-flex flex-column">
-    <MudText Typo="Typo.h2" class="ma-12 text-center">Welcome to Ctrl Alt Quest!</MudText>
-    <MudText Typo="Typo.body1" class="ma-12">
-        Your loyal companion for managing tabletop adventures and building unforgettable characters. Like the trusty healer or resourceful rogue in your party, we’re here to support your quest, track your progress, and keep things running smoother than a bard's silver tongue.
 
-        Adventure is calling—let’s answer it together.
-    </MudText>
-    <MudPaper Elevation="2" class="ma-12 pa-8">
-        <MudButton Href="/pathfinder2e/character/T3hW_tWNl1aXxdKSxHWb8w">Character</MudButton>
-    </MudPaper>
-</div>
-@code {
-}
+<MudGrid>
+    <MudItem xs="12" lg="6">
+        <MudPaper Elevation="3" Class="ma-6 pa-12">
+            <MudText Typo="Typo.h2" Class="mb-6">Welcome to CtrlAltQuest!</MudText>
+
+            <MudText Typo="Typo.body1">
+                CtrlAltQuest (CAQ) is an open-source platform designed to bring tabletop RPG systems into the digital age. Whether you're a player tracking your next character or a creator building something entirely new, CAQ is here to make your experience easier, more accessible, and more connected. Our goal is to digitize the open rules of TTRPG systems while giving creators control over how their worlds are shared. The platform is free to use, with premium features planned to support the project — but the core rules and tools will always remain free.
+            </MudText>
+            <MudText Typo="Typo.h4" Class="my-6">For Creators</MudText>
+            <MudText Typo="Typo.body1">
+                CtrlAltQuest makes it easy to bring your system online. Open rules are digitized into a usable format, while your lore, setting, and original content stay private by default. You choose what, if anything, to share. In the future, creators will be able to publish optional content through a built-in marketplace — whether free or paid — giving you a new way to connect with players and grow your world. Community creators can also build on top of existing systems, offering their own adventures, tools, and ideas. You won’t have to manage this content — just decide what you want to contribute.
+            </MudText>
+            <MudText Typo="Typo.h4" Class="my-6">
+                For Players
+            </MudText>
+            <MudText Typo="Typo.body1">
+                Build characters. Track abilities. Explore mechanics. CAQ is built to make playing and preparing for games smoother, faster, and more fun — no matter what system you use. As new systems are added, you’ll have the tools to jump right into the rules, create and manage characters, and connect with community-made content designed for your favorite games. More features are on the way, including optional premium tools for those who want to take their experience even further — but the core platform will always remain free.
+            </MudText>
+        </MudPaper>
+    </MudItem>
+    <MudItem sm="6">
+        <MudPaper Elevation="3" Class="ma-6 pa-12">
+            <MudButton Href="/pathfinder2e/character/T3hW_tWNl1aXxdKSxHWb8w">View Bonesaw Character</MudButton>
+            <MudButton Href="/princessandperils">View Perils And Princess</MudButton>
+        </MudPaper>
+    </MudItem>
+</MudGrid>

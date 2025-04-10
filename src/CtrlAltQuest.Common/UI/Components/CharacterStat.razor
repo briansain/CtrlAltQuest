@@ -1,0 +1,49 @@
+﻿@using CtrlAltQuest.Common.UI.SVGs
+<MudItem xs="@(OverrideXS ?? 6)" sm="@(OverrideSM ?? 3)">
+
+    @if (string.IsNullOrEmpty(SVG))
+    {
+        <MudText style="text-decoration:underline" Typo="Typo.overline">@Label</MudText>
+        <MudText Class="@Class" Typo="Typo.body2">@Stat</MudText>
+    }
+    else
+    {
+        <MudText Class="svg-stat-heading" style="text-decoration:underline" Typo="Typo.overline">@Label</MudText>
+
+        switch (SVG)
+        {
+            case "Box1":
+                <Box1_SVG Value="@Stat.ToString()" />
+                break;
+            case "PolarStar":
+                <PolarStar_SVG Class=@Class Value="@Stat.ToString()" />
+                break;
+            case "Heart":
+                <Heart_SVG Value="@Stat.ToString()" />
+                break;
+            case "DashedHeart":
+                <Heart_SVG Value="@Stat.ToString()" Id="temp-health" />
+                break;
+            case "Dying":
+                <Skull_SVG Class="@Class" />
+                break;
+            case "Wounded":
+                <Wounded_SVG Class="@Class" />
+                break;
+            case "Armor":
+                <Armor_SVG Value="@Stat.ToString()" />
+                break;
+            case "Shield":
+                <Shield_SVG Value="@Stat.ToString()" />
+                break;
+        }
+    }
+</MudItem>
+@code {
+    [Parameter] public required string Label { get; set; }
+    [Parameter] public required object Stat { get; set; }
+    [Parameter] public int? OverrideXS { get; set; }
+    [Parameter] public int? OverrideSM { get; set; }
+    [Parameter] public string SVG { get; set; } = string.Empty;
+    [Parameter] public string Class { get; set; } = string.Empty;
+}

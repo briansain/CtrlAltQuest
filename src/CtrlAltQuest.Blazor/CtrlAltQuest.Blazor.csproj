@@ -12,12 +12,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CtrlAltQuest.Pathfinder2e\CtrlAltQuest.Pathfinder2e.csproj" />
+    <ProjectReference Include="..\CtrlAltQuest.PerilsAndPricesses\CtrlAltQuest.PerilsAndPricesses.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="..\_data\**\*.json"
-             CopyToPublishDirectory="PreserveNewest"
-             CopyToOutputDirectory="PreserveNewest" />
+    <Content Update="..\_data\**\*.json" CopyToPublishDirectory="PreserveNewest" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>
