@@ -1,4 +1,6 @@
-﻿namespace CtrlAltQuest.Pathfinder2e.SystemData
+﻿using CtrlAltQuest.Common.Models;
+
+namespace CtrlAltQuest.Pathfinder2e.SystemData
 {
     public record Armor : Equipment
     {
@@ -32,18 +34,7 @@
         public WeaponType WeaponType { get; init; } = WeaponType.Melee;
     }
 
-    public enum Dice
-    {
-        d2,
-        d3,
-        d4,
-        d6,
-        d8,
-        d10,
-        d12,
-        d20,
-        d100
-    }
+    
 
     public enum WeaponTrait
     {

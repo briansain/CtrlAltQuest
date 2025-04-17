@@ -1,21 +1,30 @@
-﻿@using CtrlAltQuest.Common.UI.Components
+﻿@using CtrlAltQuest.Common.Models
+@using CtrlAltQuest.Common.UI.Components
+@using CtrlAltQuest.PerilsAndPricesses.UI.Components
 @using MudBlazor
 <MudPaper Elevation="3" Class="ma-3 pa-12">
     <MudGrid>
         <MudItem xs="12">
-            <MudText Typo="Typo.h3">@Character.Name</MudText>
-            <MudText Typo="Typo.h5">@Character.Subtitle</MudText>
+            <MudText Typo="Typo.h3" Style="display:inline">@Character.Name</MudText>
+            <MudText Typo="Typo.h5" Style="display:inline" Class="pl-4">@Character.Subtitle</MudText>
         </MudItem>
 
-        <CharacterStat Label="Resolve" Stat="Character.Resolve" SVG="PolarStar" OverrideSM="4" />
-        <CharacterStat Label="Grace" Stat="Character.Grace" SVG="PolarStar" OverrideSM="4" />
-        <CharacterStat Label="Wits" Stat="Character.Wits" SVG="PolarStar" OverrideSM="4" />
+        <CharacterStat Label="Resolve" Stat="Character.Resolve" SVG="PolarStar" OverrideSM="2" />
+        <CharacterStat Label="Grace" Stat="Character.Grace" SVG="PolarStar" OverrideSM="2" />
+        <CharacterStat Label="Wits" Stat="Character.Wits" SVG="PolarStar" OverrideSM="2" />
+        <CharacterStat Label="Armor" Stat="Character.Armor" SVG="Armor" OverrideSM="2" />
+        <CharacterStat Label="Health" Stat="Character.Health" SVG="Heart" OverrideSM="2" />
+        @* <CharacterStat Label="Max Health" Stat="Character.MaxHealth" OverrideSM="2" /> *@
 
         <CharacterStat Label="Fairy Godmother" Stat="GetEnum<FairyGodmother>(Character.FairyGodmother)" OverrideSM="6"/>
         <CharacterStat Label="Gift" Stat="GetGift()" OverrideSM="6"/>
-        <CharacterStat Label="Armor" Stat="Character.Armor" SVG="Armor" />
-        <CharacterStat Label="Health" Stat="Character.Health" SVG="Heart" />
-        <CharacterStat Label="Max Health" Stat="Character.MaxHealth" />
+        <CharacterStat Label="Talents" Stat="@string.Join(", ", Character.Talents)" OverrideSM="12" />
+        <MudItem xs="6">
+            <EquipmentView Equipment="Character.Equipment" />
+        </MudItem>
+        <MudItem xs="6">
+            <WeaponView Weapon="Character.Weapons" />
+        </MudItem>
     </MudGrid>
 </MudPaper>
 
@@ -33,7 +42,74 @@
         Wits = 13,
         Armor = 1,
         Health = 8,
-        MaxHealth = 8
+        MaxHealth = 8,
+        Talents = ["Alchemy", "Astronomy","Swimming","Fortune Telling"],
+        Equipment =
+        [
+            new Equipment
+            {
+                Name = "Torches", 
+                Quantity = 4,
+                Encumbrance = 1
+            },
+            new Equipment
+            {
+                Name = "Light Armor",
+                Encumbrance = 1,
+                Description = "Stitched layers of cloth reinforced with leather or heavy canvas.",
+            },
+            new Equipment
+            {
+                Name = "Trapping net",
+                Encumbrance = 1
+            },
+            new Equipment
+            {
+                Name = "Brass jar of incense"
+            },
+            new Equipment
+            {
+                Name = "Trail food",
+                Quantity = 6,
+                Encumbrance = 1
+            },
+            new Equipment
+            {
+                Name = "Fortune-telling cards"
+            },
+            new Equipment
+            {
+                Name = "Iridescent seashell"
+            },
+            new Equipment
+            {
+                Name = "A bedrool for sleeping",
+                Encumbrance = 1
+            },
+            new Equipment
+            {
+                Name = "Knapsack, tinderbox, waterskin"
+            }
+        ],
+        Weapons =
+        [
+            new Weapon
+            {
+                Name = "Dagger",
+                Description = "Easily concealed. Can test GRACE instead of RESOLVE when attacking.",
+                NumOfDamageDice = 1,
+                DamageDice = Dice.d6,
+                Encumbrance = 1
+            },
+            new Weapon
+            {
+                Name = "Sling",
+                Description = "Make sure you pick up rocks to shoot.",
+                Range = "Over Yonder",
+                NumOfDamageDice = 1,
+                DamageDice = Dice.d4
+            }
+        ]
     };
 
     private string GetEnum<TEnum>(TEnum @enum) where TEnum : struct, Enum
@@ -55,7 +131,7 @@
         public string? SubGift { get; init; }
         public Gift Gift { get; init; } = Gift.Unspecified;
         public List<string> Items { get; init; } = [];
-        public List<Talent> Talents { get; init; } = [];
+        public List<string> Talents { get; init; } = [];
         public List<InnateAbility> InateAbilities { get; init; } = [];
         public List<SpecialAbility> SpecialAbilities { get; init; } = [];
         public int Resolve { get; init; }
@@ -64,6 +140,8 @@
         public int Armor { get; init; }
         public int Health { get; set; }
         public int MaxHealth { get; set; }
+        public List<Equipment> Equipment { get; set; } = [];
+        public List<Weapon> Weapons { get; init; } = [];
     }
     public enum FairyGodmother
     {
@@ -89,12 +167,6 @@
         Powerful_Friendship,
         Sage_Intellect
     }
-    public enum Talent
-    {
-        Hunting,
-        Fishing,
-        Wayfinding
-    }
     public enum InnateAbility
     {
         Whisperer,
@@ -102,6 +174,26 @@
     }
     public enum SpecialAbility
     {
-        
+
+    }
+    public record Equipment
+    {
+        /*
+        In the following lists, items that count toward your
+    carrying total are marked with a (1) and Bulky
+    items are marked with a (2). You can mark the
+    circles on your character sheet to track how
+    much you're carrying.
+        */
+    public required string Name { get; init; }
+        public string Description { get; init; } = string.Empty;
+        public int Encumbrance { get; init; } = 0;
+        public int? Quantity { get; init; } = null;
+    }
+    public record Weapon : Equipment
+    {
+        public Dice DamageDice { get; init; }
+        public int NumOfDamageDice { get; init; }
+        public string? Range { get; init; }
     }
 }

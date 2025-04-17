@@ -1,0 +1,27 @@
+﻿@using MudBlazor
+@using static CtrlAltQuest.PerilsAndPricesses.UI.CharacterSheet.CharacterSheet_Index
+
+<MudSimpleTable Elevation="0" Dense="true" Hover="false" Bordered="true" Striped="true">
+    <theader>
+        <tr>
+            <th><MudText Typo="Typo.overline">Items</MudText></th>
+            </tr>
+    </theader>
+    <tbody>
+        @foreach(var item in Equipment)
+        {
+            <tr>
+                <td><MudText Typo="Typo.body2">@GetItemName(item)</MudText></td>
+            </tr>
+        }
+    </tbody>
+</MudSimpleTable>
+
+@code {
+    [Parameter] public List<Equipment> Equipment { get; set; } = [];
+
+    private string GetItemName(Equipment item)
+    {
+        return item.Name + (item.Quantity != null ? $"({item.Quantity})" : string.Empty);
+    }
+}
