@@ -81,3 +81,6 @@ svg.svg-secondary path {
 svg.heart path {
     stroke: var(--mudcolors-red-default);
 }
+.underline {
+    text-decoration: underline;
+}
