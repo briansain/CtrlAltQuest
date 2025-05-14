@@ -1,0 +1,23 @@
+﻿@page "/login"
+@using CtrlAltQuest.Common.Auth
+@using Microsoft.AspNetCore.Http
+@using Microsoft.Extensions.Logging
+@inject IEnumerable<IAuthService> AuthServices
+@inject ILogger<Login> _logger
+<h3>Login</h3>
+<MudButton OnClick="NoOpLogin">Login</MudButton>
+<MudButton>Google</MudButton>
+
+@code {
+    private async void NoOpLogin()
+    {
+        var authService = AuthServices.SingleOrDefault(a => a is NoOpAuthService);
+        if (authService is null)
+        {
+            _logger.LogInformation("Could not find NoOpAuthService");
+        }
+
+        var authToken = await authService!.Login(new NoOpAuthRequest());
+        
+    }
+}
