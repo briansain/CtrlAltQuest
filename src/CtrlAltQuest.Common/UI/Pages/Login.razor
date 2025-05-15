@@ -5,9 +5,9 @@
 @inject IEnumerable<IAuthService> AuthServices
 @inject ILogger<Login> _logger
 <h3>Login</h3>
-<MudButton OnClick="NoOpLogin">Login</MudButton>
-<MudButton>Google</MudButton>
-
+<MudPaper>
+    <MudButton OnClick="NoOpLogin">Login</MudButton>
+</MudPaper>
 @code {
     private async void NoOpLogin()
     {

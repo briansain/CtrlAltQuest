@@ -1,8 +1,4 @@
-﻿@using MudBlazor
-@using MudBlazor.ThemeManager
-@using MudBlazor.Utilities
-@inherits LayoutComponentBase
-
+﻿@inherits LayoutComponentBase
 @inject IJSRuntime JSRuntime
 <MudThemeProvider Theme="primaryTheme" IsDarkMode="true" />
 <MudDrawer @bind-Open="_drawerOpen" ClipMode="_themeManager.DrawerClipMode" Elevation="_themeManager.DrawerElevation" />
@@ -46,8 +42,6 @@
 <MudDialogProvider />
 <MudSnackbarProvider />
 <MudLayout>
-    @* <MudThemeManagerButton OnClick="@((e) => OpenThemeManager(true))" /> *@
-    @* <MudThemeManager Open="_themeManagerOpen" OpenChanged="OpenThemeManager" Theme="_themeManager" ThemeChanged="UpdateTheme" IsDarkMode="true" /> *@
     <NavMenu />
     <MudMainContent Style="height:100vh">
         @Body

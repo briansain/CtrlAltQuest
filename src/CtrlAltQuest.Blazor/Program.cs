@@ -78,7 +78,7 @@ void SetupAuthentication(IServiceCollection services, IConfiguration config)
 
     services.AddSingleton(authConfig);
     services.AddAuthorizationCore();
-	services.AddScoped<AuthenticationStateProvider, AuthStateProvider>();
+	services.AddScoped<AuthStateProvider>();
 	services.AddScoped<IAuthStorage, AuthStorage>();
 	//services.AddServerSideBlazor();
 	//services.AddHttpContextAccessor();

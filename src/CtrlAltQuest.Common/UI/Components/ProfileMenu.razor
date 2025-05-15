@@ -1,0 +1,53 @@
+﻿@using CtrlAltQuest.Common.Auth
+@using System.Security.Claims
+@inject AuthStateProvider AuthStateProvider
+
+<MudMenu Icon="@icon" AriaLabel="Open profile menu">
+    @if(User.Identity!.IsAuthenticated)
+    {
+        <MudMenuItem Label="Home" Href="\" />
+        <MudMenuItem Label="Logout" OnClick="LogoutAsync" />
+    }
+    else
+    {
+        <MudMenuItem Label="Login" Href="\login" />
+    }
+</MudMenu>
+
+@code {
+    private const string LOGGED_IN_LOGO = Icons.Material.Filled.Home;
+    private const string LOGGED_OUT_LOGO = Icons.Material.Outlined.Home;
+    private string icon = LOGGED_OUT_LOGO;
+    private ClaimsPrincipal User = new ClaimsPrincipal(new ClaimsIdentity());
+
+    protected override void OnInitialized()
+    {
+        AuthStateProvider.AuthenticationStateChanged += async stateChanged =>
+        {
+            var result = await stateChanged;
+            SetUser(result.User);
+        };
+        base.OnInitialized();
+    }
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var user = await AuthStateProvider.GetAuthenticationStateAsync();
+            SetUser(user?.User ?? User);
+        }
+    }
+
+    private void SetUser(ClaimsPrincipal user)
+    {
+        User = user;
+        icon = User.Identity!.IsAuthenticated ? LOGGED_IN_LOGO : LOGGED_OUT_LOGO;
+        StateHasChanged();
+    }
+
+    private async Task LogoutAsync()
+    {
+        await AuthStateProvider.Logout();
+    }
+}

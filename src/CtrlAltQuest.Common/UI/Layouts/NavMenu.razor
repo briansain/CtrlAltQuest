@@ -1,10 +1,13 @@
-﻿@rendermode InteractiveServer
+﻿@using CtrlAltQuest.Common.UI.Components
+@rendermode InteractiveServer
 @inject SessionProperties _sessProps;
 
 <MudAppBar>
     <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
     <a href="/"><MudImage Src="CtrlAltQuest Logo - Horizontal.png" Alt="Ctrl Alt Quest Logo" Elevation="25" Height="42" Class="mr-2" Style="box-shadow: none"/></a>
     <MudText Typo="Typo.h6">@Title</MudText>
+    <MudSpacer />
+    <ProfileMenu />
 </MudAppBar>
 <MudDrawer @bind-Open="@_drawerOpen" Elevation="2">
     <MudNavMenu>

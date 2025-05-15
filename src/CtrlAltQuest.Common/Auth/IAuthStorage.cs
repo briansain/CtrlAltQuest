@@ -12,5 +12,6 @@ namespace CtrlAltQuest.Common.Auth
         Task SetTokenAsync(ClaimsIdentity identity);
         Task<ClaimsIdentity?> GetTokenAsync();
         Task RemoveTokenAsync();
+        event EventHandler<ClaimsIdentity> AuthenticationChanged;
     }
 }

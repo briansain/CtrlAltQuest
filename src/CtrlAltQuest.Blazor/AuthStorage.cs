@@ -1,5 +1,6 @@
 ﻿using CtrlAltQuest.Common.Auth;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -15,6 +16,9 @@ namespace CtrlAltQuest.Blazor
 		private ProtectedLocalStorage _protectedStorage;
 		private SymmetricSecurityKey symmetricSecurityKey;
 		private const string AUTH_TOKEN_KEY = "AuthTokenKey";
+
+		public event EventHandler<ClaimsIdentity>? AuthenticationChanged;
+
 		public AuthStorage(AuthConfig authConfig, ProtectedLocalStorage protectedStorage)
 		{
 			_authConfig = authConfig;
@@ -49,12 +53,15 @@ namespace CtrlAltQuest.Blazor
 				// throw new Exception("Failed to validate token");
 				return null;
 			}
+
+			AuthenticationChanged?.Invoke(this, validationResult.ClaimsIdentity);
 			return validationResult.ClaimsIdentity;
 		}
 
 		public async Task RemoveTokenAsync()
 		{
 			await _protectedStorage.DeleteAsync(AUTH_TOKEN_KEY);
+			AuthenticationChanged?.Invoke(this, new ClaimsIdentity());
 			return;
 		}
 
