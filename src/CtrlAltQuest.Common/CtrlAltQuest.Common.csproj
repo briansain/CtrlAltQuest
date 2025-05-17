@@ -8,14 +8,15 @@
 
 
   <ItemGroup>
-    <PackageReference Include="Akka" Version="1.5.38" />
-    <PackageReference Include="Akka.Hosting" Version="1.5.38" />
-    <PackageReference Include="Be.Vlaanderen.Basisregisters.Generators.Guid.Deterministic" Version="4.0.0" />
+    <PackageReference Include="Akka" Version="1.5.41" />
+    <PackageReference Include="Akka.Hosting" Version="1.5.40" />
+    <PackageReference Include="Be.Vlaanderen.Basisregisters.Generators.Guid.Deterministic" Version="5.0.0" />
+    <PackageReference Include="Marten" Version="7.40.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.3.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="9.0.4" />
-    <PackageReference Include="MudBlazor" Version="8.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="9.0.5" />
+    <PackageReference Include="MudBlazor" Version="8.6.0" />
     <PackageReference Include="MudBlazor.ThemeManager" Version="3.0.0" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.9.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.10.0" />
   </ItemGroup>
 
 </Project>

@@ -7,15 +7,15 @@
     </PropertyGroup>
     <ItemGroup>
 	    <SupportedPlatform Include="browser" />
-        <PackageReference Include="Akka" Version="1.5.38" />
-        <PackageReference Include="Akka.Cluster" Version="1.5.38" />
-        <PackageReference Include="Akka.Cluster.Hosting" Version="1.5.38" />
-        <PackageReference Include="Akka.Hosting" Version="1.5.38" />
+        <PackageReference Include="Akka" Version="1.5.41" />
+        <PackageReference Include="Akka.Cluster" Version="1.5.41" />
+        <PackageReference Include="Akka.Cluster.Hosting" Version="1.5.40" />
+        <PackageReference Include="Akka.Hosting" Version="1.5.40" />
         <PackageReference Include="Akka.Logger.Serilog" Version="1.5.25" />
-        <PackageReference Include="Akka.Persistence" Version="1.5.38" />
-        <PackageReference Include="Akka.Persistence.Hosting" Version="1.5.38" />
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.2" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.2" />
+        <PackageReference Include="Akka.Persistence" Version="1.5.41" />
+        <PackageReference Include="Akka.Persistence.Hosting" Version="1.5.40" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.5" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.5" />
     </ItemGroup>
 
     <ItemGroup>
